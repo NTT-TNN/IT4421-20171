@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+</head>
+<body>
+
+    <button type="submit" onclick="send()"> Click me</button>
+    <div id="result"></div>
+</body>
+
+<script type="text/javascript">
+
+   function send() {
+
+        var order_detail = {
+            name: "thao",
+            address:"Hanoi",
+            phone:"0983451175"
+        }
+        $.ajax({
+            url: '/order/order',
+{#            type: 'post',#}
+            dataType: 'json',
+            success: function (data) {
+                $('#result').html(data);
+                console.log(data);
+            },
+            data: person
+        });
+    };
+
+</script>
+
+<script>
+  var socket = new io.connect("/order");
+{#        socket.connect();#}
+        socket.on('connect', function() {
+            console.log("connect");
+        });
+        socket.on('order', function (msg) {
+            console.log("nhan order:");
+            console.log(msg);
+        });
+
+        function send_order() {
+            socket.emit("order","hihi");
+            console.log("send order");
+
+        }
+</script>
+</html>
