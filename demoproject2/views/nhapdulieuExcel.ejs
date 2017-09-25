@@ -1,0 +1,160 @@
+<% include partials/head %>
+
+    <h2>Danh sách các lớp trong kỳ này là</h2>
+
+    <table class="table table-condensed table-striped">
+      <tr class="">
+        <td class="">
+          STT
+        </td>
+        <td class="">
+          Mã học phần
+        </td>
+        <td class="">
+          Tên lớp học phần
+        </td>
+        <td class="">
+          Số lượng
+        </td>
+        <td class="">
+          SốTC
+        </td>
+        <td class="">
+          Phòng học
+        </td>
+        <td class="">
+          Giảng viên
+        </td>
+        <td class="">
+          Cơ quan công tác
+        </td>
+        <td class="">
+          Điện thoại liên hệ
+        </td>
+        <td class="">
+          Khóa
+        </td>
+        <td class="">
+          Ghi chú
+        </td>
+      </tr>
+      <span id="dataId"></span>
+
+    <% for(i=0;i<gv.length;++i) { %>
+          <tr class="">
+            <td class="">
+              <%= gv[i].STT %>
+            </td>
+            <td class="">
+              <%= gv[i].Mãhọcphần %>
+            </td>
+            <td class="">
+              <%= gv[i].Tênlớphọcphần %>
+            </td>
+            <td class="">
+              <%= gv[i].Sốlượng %>
+            </td>
+            <td class="">
+              <%= gv[i].SốTC %>
+            </td>
+            <td class="">
+              <%= gv[i].Phònghọc %>
+            </td>
+            <td class="">
+              <%= gv[i].Giảngviên %>
+            </td>
+            <td class="">
+              <%= gv[i].Cơquancôngtác %>
+            </td>
+            <td class="">
+              <%= gv[i].Điệnthoạiliênhệ %>
+            </td>
+            <td class="">
+              <%= gv[i].Khóa %>
+            </td>
+            <td class="">
+              <%= gv[i].Ghichú %>
+            </td>
+          </tr>
+    <% } %>
+
+  </table>
+      <% include partials/sign-in-up.ejs %>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script>
+      angular
+        .module('myApp',['ngMaterial'])
+        .config(function($mdThemingProvider) {
+
+          // Configure a dark theme with primary foreground yellow
+
+          $mdThemingProvider.theme('docs-dark', 'default')
+            .primaryPalette('blue')
+            // .dark();
+            .accentPalette('green');
+
+        })
+        .run(function(){
+          console.log("My app is active");
+        })
+        .controller('AppCtrl', AppCtrl);
+        function AppCtrl($scope,$mdDialog) {
+          $scope.showlogin=false;
+          $scope.currentNavItem = 'nhapdulieu';
+          $scope.showLogin = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'login.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+            $scope.showSignup = function(ev) {
+              $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'signup.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+              })
+              .then(function(answer) {
+                $scope.status = 'You said the information was "' + answer + '".';
+              }, function() {
+                $scope.status = 'You cancelled the dialog.';
+              });
+            };
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+              $mdDialog.hide();
+            };
+
+            $scope.cancel = function() {
+              $mdDialog.cancel();
+            };
+
+            $scope.answer = function(answer) {
+              $mdDialog.hide(answer);
+            };
+          }
+        }
+
+    </script>
+  </body>
+
+
+</html>
