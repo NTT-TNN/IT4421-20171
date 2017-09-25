@@ -26,7 +26,22 @@ var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
 var Dt = require('./models/giangvien');
+var mysql = require('mysql');
 
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "thao123",
+  database: "test_it4421"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  con.query("SELECT * FROM Customers", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
 
 require('./config/passport')(passport);
 
