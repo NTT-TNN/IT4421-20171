@@ -2,7 +2,7 @@
 
 ## Install
 
-  ```sh
+  ```ssh
   git clone https://github.com/NTT-TNN/IT4421-20171.git
   cd IT4421-20171/demoproject2
   npm install
