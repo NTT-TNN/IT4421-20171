@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>A+ Coffee</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css" media="screen" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/style-portfolio.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link rel="icon" href="favicon-1.ico" type="image/x-icon">
+
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.flexslider.min.js"></script>
+        <script type="text/javascript">
+            $(window).load(function() {
+                $('.flexslider').flexslider({
+                 animation: "slide",
+                 controlsContainer: ".flexslider-container"
+                });
+            });
+        </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script>
+            function initialize() {
+                var mapCanvas = document.getElementById('map-canvas');
+                var mapOptions = {
+                    center: new google.maps.LatLng(24.909439, 91.833800),
+                    zoom: 16,
+                    scrollwheel: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(mapCanvas, mapOptions)
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(24.909439, 91.833800),
+                    title:"Mamma's Kitchen Restaurant"
+                });
+
+                // To add the marker to the map, call setMap();
+                marker.setMap(map);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
+    </head>
+
+    <body>
+        <!-- ============ Navbar Section  ============= -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="row">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Coffee</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav main-nav  clear navbar-right ">
+                            <li><a class="navactive color_animation" href="#top">WELCOME</a></li>
+                            <!-- <li><a class="color_animation" href="#story">ABOUT</a></li> -->
+                            <li><a class="color_animation" href="#order">ORDER</a></li>
+                            <!-- <li><a class="color_animation" href="#beer">COFFEE</a></li>
+                            <li><a class="color_animation" href="#bread">PORRIDGE</a></li>
+                            <li><a class="color_animation" href="#featured">FEATURED</a></li>
+ -->                        <!-- <li><a class="color_animation" href="#reservation">RESERVATION</a></li> -->
+                            <li><a class="color_animation" href="#contact">LOGIN</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div>
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div id="top" class="starter_container bg">
+            <div class="follow_container">
+                <div class="col-md-6 col-md-offset-3">
+                    <h2 class="top-title"> A+ Coffee</h2>
+                    <h2 class="white second-title">" Best in the Hust"</h2>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ Order Section  ============= -->
+            <section id="order" class="order">
+            <div id="w">
+                <div class="order-filter">
+                    <div class="order-filter-wrapper">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="section-header">
+                                        <h2 class="order-title">Favorable Order</h2>
+                                        <ul id="filter-list" class="clearfix">
+                                            <li class="filter" data-filter="all">All</li>
+                                            <li class="filter" data-filter=".arabica">Arabica</li>
+                                            <li class="filter" data-filter=".robusta">Robusta</li>
+                                            <li class="filter" data-filter=".pro">Pro</li>
+                                            <li class="filter" data-filter=".special">Special</li>
+                                        </ul><!-- @end #filter-list -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">  
+                        <div class="col-md-10 col-md-offset-1">
+                            <ul id="menu-order" class="menu-order">
+                                <li class="item robusta">
+
+                                    <a href="#">
+                                        <img src="images/coffee1.jpg" class="img-responsive" alt="Coffee" >
+                                        <div class="menu-desc text-center">
+                                            <span>
+                                                <h3>Black Coffee</h3>
+                                                Natalie &amp; Justin Cleaning by Justin Younger
+                                            </span>
+                                        </div>
+                                    </a>
+                                        
+                                    <h2 class="white">$20</h2>
+                                </li>
+                                <li class="item arabica">
+
+                                    <a href="#">
+                                        <img src="images/coffee2.jpg" class="img-responsive" alt="Coffee" >
+                                        <div class="menu-desc text-center">
+                                            <span>
+                                                <h3>Coffee</h3>
+                                                Natalie &amp; Justin Cleaning by Justin Younger
+                                            </span>
+                                        </div>
+                                    </a>
+                                        
+                                    <h2 class="white">$20</h2>
+                                </li>
+                                <li class="item arabica">
+
+                                    <a href="#">
+                                        <img src="images/coffee3.jpg" class="img-responsive" alt="Coffee" >
+                                        <div class="menu-desc text-center">
+                                            <span>
+                                                <h3>Capucino</h3>
+                                                Natalie &amp; Justin Cleaning by Justin Younger
+                                            </span>
+                                        </div>
+                                    </a>
+                                        
+                                    <h2 class="white">$20</h2>
+                                </li>
+                            </ul>
+                        </div>   
+                    </div>
+                </div>
+
+
+            </div> 
+        </section>
+
+        <!-- ============ Footer Section  ============= -->
+
+        <footer class="sub_footer">
+            <div class="container">
+                <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+                <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p>
+                </div>
+                <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+            </div>
+        </footer>
+
+
+        <script type="text/javascript" src="js/jquery-1.10.2.min.js"> </script>
+        <script type="text/javascript" src="js/bootstrap.min.js" ></script>
+        <script type="text/javascript" src="js/jquery-1.10.2.js"></script>     
+        <script type="text/javascript" src="js/jquery.mixitup.min.js" ></script>
+        <script type="text/javascript" src="js/main.js" ></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/jquery.validate.js"></script>
+        <script type="text/javascript" src="js/jquery.hoverdir.js"></script>
+        <script type="text/javascript" src="js/jQuery.scrollSpeed.js"></script>
+        <script src="js/script.js"></script>
+    </body>
+</html>
