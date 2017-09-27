@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>giao dien ban hang</title>
+    <script src = "/socket.io/socket.io.js"></script>
+    <script src = "jquery-3.2.1.min.js"></script>
+    <script>
+        var socket = io('http://localhost:8000');
+        socket.on('connect', function() {
+          socket.emit('name', {name: 'banhang'});
+        })
+        socket.on("du_lieu",function(data){
+          console.log('data: ', data);
+          var noidung = data.cafe + " " + data.suachua;
+          alert(noidung);
+        });
+    </script>
+  </head>
+  <body>
+    <div id="noidung">Noi dung</div>
+  </body>
+</html>
