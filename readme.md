@@ -1,4 +1,4 @@
-# Demo pinterest
+# Demoproject2
 
 ## Install
 
