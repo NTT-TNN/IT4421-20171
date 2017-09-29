@@ -13,6 +13,7 @@ app.get("/",function (req,res) {
 app.get("/banhang",function(req,res){
   res.render("banhang");
 });
+
 var order = [];
 var banhang = [];
 io.on("connection",function (socket){
