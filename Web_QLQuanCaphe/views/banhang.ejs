@@ -12,8 +12,10 @@
         })
         socket.on("du_lieu",function(data){
           console.log('data: ', data);
-          var noidung = data.cafe + " " + data.suachua;
-          alert(noidung);
+
+          document.getElementById("noidung").innerHTML = JSON.stringify(data);
+
+
         });
     </script>
   </head>
