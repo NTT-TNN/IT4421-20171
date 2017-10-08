@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>A+ Coffee</title>
+  <script src = "/socket.io/socket.io.js"></script>
+  <script src = "jquery-3.2.1.min.js"></script>
   <link rel="stylesheet" href="css/bootstrap-grid.css">
   <link rel="stylesheet" href="css/bootstrap-grid.css.map">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
@@ -70,55 +72,26 @@ onmouseout="style.color='white'">LOG OUT</a>
                 </div>
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%">
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="123">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <% for(var i=0; i<products.length; i++) {%>
 
                     <div class="col-md-4">
                       <div class="gall_block">
                         <div class="maxheight" style="height: 487px;">
                           <div class="box_inner">
                             <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
+                              <img src="<%= products[i].Url_images %>" width="100%">
                             </a>
                             <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
+                              <div  class="text1" id="cafe01"><a href="#"><%= products[i].ProductName %></a></div>
+                              <p><%= products[i].Description %>  </p>
+                              <%= products[i].Price %>
                               <br>
                             </div>
                           </div>
                           <div id="button" class="container">
                             <div class="row">
                               <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
+                                <button onclick="send(<%= i %>)"> Send  </button>
                               </div>
                               <div class="col-md-6">
                                 <div class="input-group" style="z-index: 1;">
@@ -133,250 +106,14 @@ onmouseout="style.color='white'">LOG OUT</a>
                         </div>
                       </div>
                     </div>
-
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <%}%>
+                    <% if(i%3==0) { %>
+                      <div class="clear sep__1"></div>
+                      <%}%>
                   </div>
 
                 </div>
 
-                <div class="clear sep__1"></div>
-
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div>
-                                  Test
-                                </div>
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="clear sep__1"></div>
-
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              sadsadsad
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="gall_block">
-                        <div class="maxheight" style="height: 487px;">
-                          <div class="box_inner">
-                            <a href="#">
-                              <img src="images/coffee1.jpg" width="100%" >
-                            </a>
-                            <div class="gall_bot">
-                              <div class="text1"><a href="#">Vivamus at magna non nunc </a></div>
-                              amasmdns san dlsaf  fsa  saf as f sa fsa f sa f sa fs a sakkndksanf  sf anfnsa wsafsafas fsafsafaf
-                              <br>
-                            </div>
-                          </div>
-                          <div id="button" class="container">
-                            <div class="row">
-                              <div class="col-md-6">
-                                <a href="#" class="btn" >more</a>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="input-group" style="z-index: 1;">
-                                  <input class="form-control" type="text">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">+</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="clear sep__1 end" ></div>
               </div>
             </div>
 
@@ -1010,7 +747,6 @@ onmouseout="style.color='white'">LOG OUT</a>
               </div>
             </div>
 
-
           </div>
         </div>
         <div class="clear">
@@ -1033,12 +769,12 @@ onmouseout="style.color='white'">LOG OUT</a>
     </footer>
 
 
-
-
-
-
   </div>
 
+  <script type='text/javascript'>
+      var rows =<%-JSON.stringify(products)%>
+      console.log(rows);
+  </script>
   <!-- ============ Script  ============= -->
   <script src="js/bootstrap.js"> </script>
   <script src="js/bootstrap.min.js" ></script>
@@ -1055,12 +791,23 @@ onmouseout="style.color='white'">LOG OUT</a>
   <script src="js/script.js"></script>
   <script type="text/javascript" src="js/main.js" ></script>
   <script src="js/wow.min.js"></script>
+
   <script>
-  $(document).ready(function(){
-    $("#123").click(function(){
+    var socket = io("http://localhost:8000");
+    socket.on('connect', function() {
+      console.log('hello');
+      socket.emit('name', {name: 'order'});
+    })
+
+    function send(i){
+      console.log(i);
+      console.log("send thanh cong");
       socket.emit("id_ban",{cafe:"den da" , suachua :"sua chua mit"});
-    });
-  });
+    };
+
+  </script>
+
+  <script>
   function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
