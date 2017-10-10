@@ -1,58 +1,58 @@
-
-/*=================================
-||          Owl Carousel
-==================================*/
-    $("#header-slider").owlCarousel({
-
-        navigation : true, // Show next and prev buttons
-        slideSpeed : 100,
-        paginationSpeed : 400,
-        singleItem: true,
-        autoPlay: true,
-        pagination: false,
-
-        // "singleItem:true" is a shortcut for:
-        // items : 1, 
-        // itemsDesktop : false,
-        // itemsDesktopSmall : false,
-        // itemsTablet: false,
-        // itemsMobile : false
-
-    });
-
-/*=================================
-||          WOW
-==================================*/
-wow = new WOW(
-    {
-      boxClass:     'wow',      // default
-      animateClass: 'animated', // default
-      offset:       0,          // default
-      mobile:       true,       // default
-      live:         true        // default
-    }
-  )
-wow.init();
-
-/*=================================
-||          Smooth Scrooling
-==================================*/
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: (target.offset().top - 9)//top navigation height
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-
-    
+// 
+// /*=================================
+// ||          Owl Carousel
+// ==================================*/
+//     $("#header-slider").owlCarousel({
+//
+//         navigation : true, // Show next and prev buttons
+//         slideSpeed : 100,
+//         paginationSpeed : 400,
+//         singleItem: true,
+//         autoPlay: true,
+//         pagination: false,
+//
+//         // "singleItem:true" is a shortcut for:
+//         // items : 1,
+//         // itemsDesktop : false,
+//         // itemsDesktopSmall : false,
+//         // itemsTablet: false,
+//         // itemsMobile : false
+//
+//     });
+//
+// /*=================================
+// ||          WOW
+// ==================================*/
+// wow = new WOW(
+//     {
+//       boxClass:     'wow',      // default
+//       animateClass: 'animated', // default
+//       offset:       0,          // default
+//       mobile:       true,       // default
+//       live:         true        // default
+//     }
+//   )
+// wow.init();
+//
+// /*=================================
+// ||          Smooth Scrooling
+// ==================================*/
+//     $(function() {
+//         $('a[href*=#]:not([href=#])').click(function() {
+//             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+//                 var target = $(this.hash);
+//                 target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+//                 if (target.length) {
+//                     $('html,body').animate({
+//                         scrollTop: (target.offset().top - 9)//top navigation height
+//                     }, 1000);
+//                     return false;
+//                 }
+//             }
+//         });
+//     });
+//
+//
 /*====================================================================
             Navbar shrink script
 ======================================================================*/
@@ -60,7 +60,7 @@ $(document).ready(function() {
     $(window).scroll(function() {
         if ($(document).scrollTop() > 50) {
             $('nav').addClass('shrink');
-        } 
+        }
         else {
             $('nav').removeClass('shrink');
         }
@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 $(document).ready(function () {
     $("#loadMenuContent").click(function(event) {
-        
+
         $.get("php/ajax_menu.html", function(data){
             $('#moreMenuContent').append(data);
         });
@@ -122,6 +122,6 @@ $('.iconified').on('keyup', function() {
                 Scroll  Speed
 =======================================================*/
 
-$(function() {  
+$(function() {
     jQuery.scrollSpeed(100, 1000);
 });
