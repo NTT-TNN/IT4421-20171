@@ -66,7 +66,7 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header" style="background-color:#2196F3">
             <h4 class="modal-title">Order details</h4>
           </div>
           <div class="modal-body">
@@ -75,7 +75,7 @@
                   <div class="col-md-1 center-margin">
                     <h6>TABLE</h6>
                   </div>
-                  <div class="col-md-6 center-margin">
+                  <div class="col-md-4 center-margin">
                     PRODUCT
                   </div>
                   <div class="col-md-2 center-margin">
@@ -83,6 +83,9 @@
                   </div>
                   <div class="col-md-2 center-margin">
                     <h6>PRICE</h6>
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>TOTAL</h6>
                   </div>
                   <div class="col-md-1 center-margin">
                     <br>
@@ -94,7 +97,12 @@
               </div>
           </div>
           <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+            <div class="container-fluid text-center">
+              <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Edit Order</button>
+              <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()">Send order</button>
+            </div>
+          </div>
+
           </div>
         </div>
 
@@ -151,7 +159,7 @@
                         <div class="clear sep__1"></div>
                         <%}%>
                     </div>
-                    <button type="button" name="button" onclick="send()">Send order</button>
+
                   </div>
 
                 </div>
@@ -181,37 +189,14 @@
 
     </div>
 
-
-    <!-- ============ Script  ============= -->
-
-    <script src="js/bootstrap.min.js" ></script>
-    <script src="js/jquery-1.11.2.min.js"> </script>
-    <script src="js/jquery.flexslider.min.js"></script>
-    <script  src="js/jquery.hoverdir.js"></script>
-    <script  src="js/jquery.mixitup.min.js" ></script>
-    <script  src="js/jQuery.scrollSpeed.js"></script>
-    <script src="js/jquery.validate.js"></script>
-    <script  src="js/jssor.core.js"> </script>
-    <script  src="js/jssor.slider.js"> </script>
-    <script  src="js/jssor.utils.js"> </script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/script.js"></script>
-    <!-- <script type="text/javascript" src="js/main.js" ></script> -->
-    <script src="js/wow.min.js"></script>
-
     <script>
-      order=[];
+      orders=[];
       html="";
       var socket = io("http://localhost:8000");
       socket.on('connect', function() {
         console.log('hello');
         socket.emit('name', {name: 'order'});
       })
-
-
-
-
-
 
       function add(i){
         var products = JSON.parse('<%-JSON.stringify(products)%>');
@@ -229,43 +214,65 @@
           ProductUrl:ProductUrl,
           ProductPrice:ProductPrice
         }
-        console.log(order);
-        if(order.length==0){
-          order.push(product);
+        console.log(orders);
+        if(orders.length==0){
+          orders.push(product);
         }else{
-          for(var j=0;j<order.length;++j){
-            if(order[j].ProductID==ProductID){
-              order[j].number+=number;
-            }else{
-              order.push(product);
+          var flag=true;
+          for(var j=0;j<orders.length;++j){
+
+            if(orders[j].ProductID==ProductID){
+              orders[j].number+=number;
+              flag=false;
             }
           }
+          if(flag==true){
+            orders.push(product);
+          }
         }
-        for(var j=0;j<order.length;++j){
+        html="";
+        total=0;
+        for(var j=0;j<orders.length;++j){
+          total+=orders[j].ProductPrice*orders[j].number;
           html+=`<div class="row">
              <div class="col-md-1 center-margin">
                1
              </div>
-             <div class="col-md-6 center-margin">` + order[j].ProductName +
+             <div class="col-md-4 center-margin">` + orders[j].ProductName +
              `</div>
-             <div class="col-md-2 center-margin">` + order[j].number +
+             <div class="col-md-2 center-margin">` + orders[j].number +
             `</div>
-             <div class="col-md-2 center-margin">` + order[j].ProductPrice+
-            `</div>
+             <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
+            `.000</div>
+            <div class="col-md-2 center-margin">
+              <h6></h6>
+            </div>
              <div class="col-md-1 center-margin">
                <br>
              </div>
            </div>`;
         }
+        html+=`<div class="row">
+           <div class="col-md-1 center-margin"></div>
+           <div class="col-md-4 center-margin"></div>
+           <div class="col-md-2 center-margin"></div>
+           <div class="col-md-2 center-margin"></div>
+          <div class="col-md-2 center-margin">
+            <h6>`+total+ `.000</h6>
+          </div>
+           <div class="col-md-1 center-margin">
+             <br>
+           </div>
+         </div>`;
         document.getElementById("order_products").innerHTML = html;
       };
 
       function send(){
-        if(order.length!=0){
-          console.log(order);
-          socket.emit("id_ban",order);
+        if(orders.length!=0){
+          console.log(orders);
+          socket.emit("id_ban",orders);
           console.log("send thanh cong");
-          order=[];
+          orders=[];
         }else {
           console.log("Order rỗng");
         }
@@ -291,6 +298,19 @@
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
     </script>
-
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/jquery-1.11.2.min.js"> </script>
+    <script src="js/jquery.flexslider.min.js"></script>
+    <script  src="js/jquery.hoverdir.js"></script>
+    <script  src="js/jquery.mixitup.min.js" ></script>
+    <script  src="js/jQuery.scrollSpeed.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script  src="js/jssor.core.js"> </script>
+    <script  src="js/jssor.slider.js"> </script>
+    <script  src="js/jssor.utils.js"> </script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- <script type="text/javascript" src="js/main.js" ></script> -->
+    <script src="js/wow.min.js"></script>
   </body>
   </html>
