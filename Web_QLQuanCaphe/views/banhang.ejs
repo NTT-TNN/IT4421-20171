@@ -19,8 +19,8 @@
         var $order, $orders, i, x;
         $orders = $(".orders");
         $order = `<div class="note">
-                      <div class="note-inner" style="height:` + height + `px" data-toggle="modal" data-target="#Order_detail`
-                      +orders.length+`">
+                      <div class="note-inner" style="height:` + height + `px;width:`+height+`px" data-toggle="modal" data-target="#Order_detail`
+                      +orders.length+`"><span style="font-size:50px;">`+order[0].tableID+`</span>
                       </div>
                    </div>`;
           $orders.append($order);
@@ -60,7 +60,7 @@
                       </div>
                     </div>
                     <div id="order_products`+orders.length+`">`;
-                    for (var j = 0; j < order.length; j++) {
+                    for (var j = 1; j < order.length; j++) {
                       total=0;
                       total+=order[j].ProductPrice*order[j].number;
                       console.log(total);

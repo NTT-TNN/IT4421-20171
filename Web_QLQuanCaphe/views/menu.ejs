@@ -130,6 +130,10 @@
 
     <script>
       orders=[];
+      var table={
+        tableID:1
+      }
+      orders.push(table);
       html="";
       var socket = io("http://localhost:8000");
       socket.on('connect', function() {
@@ -171,7 +175,8 @@
         }
         html="";
         total=0;
-        for(var j=0;j<orders.length;++j){
+        for(var j=1;j<orders.length;++j){
+
           total+=orders[j].ProductPrice*orders[j].number;
           html+=`<div class="row">
              <div class="col-md-1 center-margin">
@@ -212,6 +217,7 @@
           socket.emit("id_ban",orders);
           console.log("send thanh cong");
           orders=[];
+          orders.push(table);
         }else {
           console.log("Order rỗng");
         }
