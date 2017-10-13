@@ -1,10 +1,13 @@
-# Demoproject2
+# IT4421
 
-## Install
+## Import database
+
+Sử dụng mysql workbench để import database
+
+## Install Webserver
 
   ```ssh
   git clone https://github.com/NTT-TNN/IT4421-20171.git
-  cd IT4421-20171/demoproject2
   npm install
   node app.js
   ```
@@ -13,16 +16,8 @@
 
 ## Requirement
 
-Installed Nodejs, npm
+Installed Nodejs, npm ,mysql, workbench
 
-
-# WEB shop
-
-## Install
-
-```ssh
-git clone https://github.com/NTT-TNN/IT4421-20171.git
-cd IT4421-20171/Web_QLQuanCaphe
-npm install
-nodemon nodeserver
-```
+## Chú ý:
+Việc cài đặt ứng dụng được khuyến khích thực hiện trên ubuntu 16.04 LTS để tránh gặp lỗi.
+Ngoài ubuntu chương trình hoàn toàn cỏ thể chạy trên windows 10(đã test) và mac OS(trên lý thuyết chưa test)
