@@ -2,7 +2,7 @@
 
 ## Import database
 
-Sử dụng mysql workbench để import database
+Sử dụng mysql workbench để import database 
 
 ## Install Webserver
 
