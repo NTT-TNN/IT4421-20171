@@ -10,16 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.7",
-<<<<<<< HEAD:Web_QLQuanCaphe/package.json
-    "express": "^4.15.5",
-    "node-persist": "0.0.6"
-=======
     "express": "^4.16.0",
     "isotope-layout": "^3.0.4",
     "mysql": "^2.15.0",
     "node-persist": "0.0.6",
     "socket.io": "^2.0.3",
     "sql": "^0.78.0"
->>>>>>> thao-nt:package.json
+
   }
 }
