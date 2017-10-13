@@ -2,7 +2,7 @@
 
 ## Import database
 
-Sử dụng mysql workbench để import database 
+Sử dụng mysql workbench để import [database])https://github.com/NTT-TNN/IT4421-20171/tree/thao-nt/database/dumps)
 
 ## Install Webserver
 
