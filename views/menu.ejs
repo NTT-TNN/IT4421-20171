@@ -1,5 +1,10 @@
 <%- include head.ejs %>
-
+    <div id="messageSuccess" class="alert alert-success hidden">
+      <strong>Success!</strong> This alert box could indicate a successful or positive action.
+    </div>
+    <div id="messageError" class="alert alert-danger hidden">
+      <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+    </div>
     <div class="modal fade" id="Order_detail" role="dialog">
       <div class="modal-dialog">
 
@@ -212,37 +217,37 @@
       };
 
       function send(){
-        if(orders.length!=0){
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-left",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "3000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        if(orders.length>1){
           console.log(orders);
           socket.emit("id_ban",orders);
-          console.log("send thanh cong");
           orders=[];
           orders.push(table);
+          toastr.success('Gửi đơn hàng thành công');
+
         }else {
-          console.log("Order rỗng");
+          toastr.error('Đơn hàng rỗng',{timeOut: 10000});
         }
 
       }
     </script>
 
-    <script>
-    function openCity(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-    </script>
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/jquery-1.11.2.min.js"> </script>
     <script src="js/jquery.flexslider.min.js"></script>
