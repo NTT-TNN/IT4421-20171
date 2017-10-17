@@ -134,6 +134,23 @@
     </div>
 
     <script>
+      toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-left",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
       orders=[];
       var table={
         tableID:1
@@ -214,35 +231,23 @@
            </div>
          </div>`;
         document.getElementById("order_products").innerHTML = html;
+        html="";
+        return true
       };
 
       function send(){
-        toastr.options = {
-          "closeButton": false,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": false,
-          "positionClass": "toast-top-left",
-          "preventDuplicates": false,
-          "onclick": null,
-          "showDuration": "3000",
-          "hideDuration": "1000",
-          "timeOut": "5000",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-        }
+
         if(orders.length>1){
           console.log(orders);
           socket.emit("id_ban",orders);
           orders=[];
           orders.push(table);
-          toastr.success('Gửi đơn hàng thành công');
-
+          toastr.success('Gửi đơn hàng thành công','Success!');
+          document.getElementById("order_products").innerHTML = html;
+          return true;
         }else {
-          toastr.error('Đơn hàng rỗng',{timeOut: 10000});
+          toastr.error('Đơn hàng rỗng','Error!',{timeOut: 20000});
+          return false;
         }
 
       }
