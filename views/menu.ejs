@@ -43,7 +43,10 @@
           <div class="modal-footer">
             <div class="container-fluid text-center">
               <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Edit Order</button>
-              <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()">Send order</button>
+              <button type="button" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()"
+              data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                Send order
+              </button>
             </div>
           </div>
 
@@ -71,6 +74,8 @@
                   <div class="header-index" style="font-family: Times New Roman, Times, serif;">
                     Coffee
                   </div>
+
+                  <!-- hien thi danh sach do uong -->
                   <div class="container-fluid">
                     <div class="row" list-group>
                       <% for(var i=0; i<products.length; i++) {%>
@@ -81,7 +86,7 @@
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
                                   <p class="group inner list-group-item-text">
-                                    <%= products[i].Description %>
+                                      <%= products[i].Description %>
                                   </p>
                                   <div class="row">
                                       <div class="col-xs-12 col-md-6">
@@ -99,9 +104,6 @@
                       </div>
 
                       <%}%>
-                      <% if(i%3==0) { %>
-                        <div class="clear sep__1"></div>
-                        <%}%>
                     </div>
 
                   </div>
@@ -133,7 +135,44 @@
 
     </div>
 
+    <div class="modal fade" id="table_modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form>
+            <div class="modal-header" style="background-color:#2196F3">
+              <h4 class="modal-title">Nhập số bàn</h4>
+            </div>
+            <div class="modal-body">
+              <input type="number" class="form-control" id="table_number" min="1.0" max="100.0" step="1" placeholder="Số bàn">
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid text-center">
+                <button type="button" data-dismiss="modal" style="position:inherit" class="btn btn-primary mr-auto" onclick="addTable()">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+
+          </div>
+        </div>
+
+      </div>
     <script>
+
+      $( "#table_number" ).valid({});
+      table_number=0;
+      function addTable(){
+        table_number=document.getElementById("table_number").value;
+        // if(table_number>0){
+        //   $("#table_modal").modal({show: false});
+        // }
+        console.log(table_number);
+      }
+
+      if(table_number<1){
+        $("#table_modal").modal({show: true});
+      }
       toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -236,7 +275,6 @@
       };
 
       function send(){
-
         if(orders.length>1){
           console.log(orders);
           socket.emit("id_ban",orders);
@@ -249,7 +287,7 @@
           toastr.error('Đơn hàng rỗng','Error!',{timeOut: 20000});
           return false;
         }
-
+        $("#table_modal").modal({show: true});
       }
     </script>
 
@@ -267,5 +305,6 @@
     <script src="js/script.js"></script>
     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
     <script src="js/wow.min.js"></script>
+
   </body>
   </html>
