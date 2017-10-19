@@ -186,13 +186,23 @@
       //
       //     // }
       // });
-
+      tableNumber=0;
+      orders=[];
+      $('#table_modal').hide().on('hide', function() {
+          $('#table_modal').modal('show')
+      });
       function addTable(){
-        table_number=document.getElementById("table_number").value;
+        tableNumber=document.getElementById("table_number").value;
         // if(table_number>0){
         //   $("#table_modal").modal({show: false});
         // }
-        console.log(table_number);
+  
+        console.log(tableNumber);
+        var table={
+          tableID:tableNumber
+        }
+        console.log(table);
+        orders.push(table);
       }
 
 
@@ -214,11 +224,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-      orders=[];
-      var table={
-        tableID:1
-      }
-      orders.push(table);
+
       html="";
       var socket = io("http://localhost:8000");
       socket.on('connect', function() {
