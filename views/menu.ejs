@@ -89,15 +89,24 @@
                                       <%= products[i].Description %>
                                   </p>
                                   <div class="row">
-                                      <div class="col-xs-12 col-md-6">
+                                      <div class="col-md-4">
                                           <p class="lead">
                                               $<%= products[i].Price %></p>
                                       </div>
 
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
 
-                                      <div class="col-xs-6 col-md-3">
+                                      <div class="col-md-6">
                                           <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
                                       </div>
+
+                                    </form>
+
                                   </div>
                               </div>
                           </div>
@@ -113,9 +122,6 @@
 
             </div>
           </div>
-          <div class="clear">
-          </div>
-
         </div>
 
 
@@ -145,11 +151,11 @@
               <h4 class="modal-title">Nhập số bàn</h4>
             </div>
             <div class="modal-body">
-              <input type="number" class="form-control" id="table_number" min="1.0" max="100.0" step="1" placeholder="Số bàn">
+              <input type="number" class="form-control" id="table_number" min="1" max="100" step="1" placeholder="Số bàn">
             </div>
             <div class="modal-footer">
               <div class="container-fluid text-center">
-                <button type="button" data-dismiss="modal" style="position:inherit" class="btn btn-primary mr-auto" onclick="addTable()">Xác nhận</button>
+                <button type="button" id="jaha" data-dismiss="modal" style="position:inherit" class="btn btn-primary mr-auto" onclick="addTable()">Xác nhận</button>
               </div>
             </div>
           </form>
@@ -159,9 +165,28 @@
 
       </div>
     <script>
+      // $(document).ready(function() {
+      //   $("#table_number").validate({  // initialize plugin on the form
+      //        rules: {
+      //
+      //        }
+      //
+      //   });
+      //
+      //
+      // });
+      // $("#table_number").validate({});
+      // $("#soLuong").validate({});
+      // $('#table_modal').on('hidden.bs.modal', function () {
+      //     // if(table_number<1){
+      //       console.log("hidde");
+      //       $(window).load(function() {
+      //           $("#table_modal").modal({show:'true'});
+      //       });
+      //
+      //     // }
+      // });
 
-      $( "#table_number" ).valid({});
-      table_number=0;
       function addTable(){
         table_number=document.getElementById("table_number").value;
         // if(table_number>0){
@@ -170,9 +195,8 @@
         console.log(table_number);
       }
 
-      if(table_number<1){
-        $("#table_modal").modal({show: true});
-      }
+
+      $("#table_modal").modal({show: true});
       toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -209,8 +233,8 @@
         var ProductName= products[i].ProductName;
         var ProductUrl= products[i].Url_images;
         var ProductPrice=products[i].Price;
-        // var number= parseInt(document.getElementById(ProductID).value);
-        var number=1;
+        var number= parseInt(document.getElementById(ProductID).value);
+        // var number=1;
         product={
           ProductID: ProductID,
           number:number,
