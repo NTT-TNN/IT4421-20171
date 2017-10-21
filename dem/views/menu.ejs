@@ -1,0 +1,266 @@
+<%- include head.ejs %>
+    <div id="messageSuccess" class="alert alert-success hidden">
+      <strong>Success!</strong> This alert box could indicate a successful or positive action.
+    </div>
+    <div id="messageError" class="alert alert-danger hidden">
+      <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+    </div>
+    <div class="modal fade" id="Order_detail" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#2196F3">
+            <h4 class="modal-title">Order details</h4>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid" style="text-align: center;">
+                <div class="row">
+                  <div class="col-md-1 center-margin">
+                    <h6>TABLE</h6>
+                  </div>
+                  <div class="col-md-4 center-margin">
+                    PRODUCT
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>NUMBER</h6>
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>PRICE</h6>
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>TOTAL</h6>
+                  </div>
+                  <div class="col-md-1 center-margin">
+                    <br>
+                  </div>
+                </div>
+                <div id="order_products">
+                </div>
+
+              </div>
+          </div>
+          <div class="modal-footer">
+            <div class="container-fluid text-center">
+              <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Edit Order</button>
+              <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()">Send order</button>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="main">
+      <!-- ============ Menu Section  ============= -->
+      <div class="menu">
+        <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Coffee')" id="defaultOpen">Coffee</button>
+                <button class="tablinks" onclick="openCity(event, 'Cake')">Cake</button>
+                <button class="tablinks" onclick="openCity(event, 'Other')">Other</button>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div id="Coffee" class="tabcontent">
+                <!-- ============ Coffee Section  ============= -->
+                <div id="coffee">
+                  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                    Coffee
+                  </div>
+                  <div class="container-fluid">
+                    <div class="row" list-group>
+                      <% for(var i=0; i<products.length; i++) {%>
+                        <div class="item  col-xs-4 col-lg-4">
+                          <div class="thumbnail">
+                              <img width="400" height="250"class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe01">
+                                      <%= products[i].ProductName %></h4>
+                                  <p class="group inner list-group-item-text">
+                                    <%= products[i].Description %>
+                                  </p>
+                                  <div class="row">
+                                      <div class="col-xs-12 col-md-6">
+                                          <p class="lead">
+                                              $<%= products[i].Price %></p>
+                                      </div>
+
+
+                                      <div class="col-xs-6 col-md-3">
+                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <%}%>
+                      <% if(i%3==0) { %>
+                        <div class="clear sep__1"></div>
+                        <%}%>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="clear">
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <!-- ============ Footer Section  ============= -->
+      <footer class="sub_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+          </div>
+        </div>
+      </footer>
+
+
+    </div>
+
+    <script>
+      orders=[];
+      var table={
+        tableID:1
+      }
+      orders.push(table);
+      html="";
+      var socket = io("http://localhost:8000");
+      socket.on('connect', function() {
+        console.log('hello');
+        socket.emit('name', {name: 'order'});
+      })
+
+      function add(i){
+        var products = JSON.parse('<%-JSON.stringify(products)%>');
+
+        var ProductID= products[i].ProductID;
+        var ProductName= products[i].ProductName;
+        var ProductUrl= products[i].Url_images;
+        var ProductPrice=products[i].Price;
+        // var number= parseInt(document.getElementById(ProductID).value);
+        var number=1;
+        product={
+          ProductID: ProductID,
+          number:number,
+          ProductName:ProductName,
+          ProductUrl:ProductUrl,
+          ProductPrice:ProductPrice
+        }
+        console.log(orders);
+        if(orders.length==0){
+          orders.push(product);
+        }else{
+          var flag=true;
+          for(var j=0;j<orders.length;++j){
+
+            if(orders[j].ProductID==ProductID){
+              orders[j].number+=number;
+              flag=false;
+            }
+          }
+          if(flag==true){
+            orders.push(product);
+          }
+        }
+        html="";
+        total=0;
+        for(var j=1;j<orders.length;++j){
+
+          total+=orders[j].ProductPrice*orders[j].number;
+          html+=`<div class="row">
+             <div class="col-md-1 center-margin">
+               1
+             </div>
+             <div class="col-md-4 center-margin">` + orders[j].ProductName +
+             `</div>
+             <div class="col-md-2 center-margin">` + orders[j].number +
+            `</div>
+             <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
+            `.000</div>
+            <div class="col-md-2 center-margin">
+              <h6></h6>
+            </div>
+             <div class="col-md-1 center-margin">
+               <br>
+             </div>
+           </div>`;
+        }
+        html+=`<div class="row">
+           <div class="col-md-1 center-margin"></div>
+           <div class="col-md-4 center-margin"></div>
+           <div class="col-md-2 center-margin"></div>
+           <div class="col-md-2 center-margin"></div>
+          <div class="col-md-2 center-margin">
+            <h6>`+total+ `.000</h6>
+          </div>
+           <div class="col-md-1 center-margin">
+             <br>
+           </div>
+         </div>`;
+        document.getElementById("order_products").innerHTML = html;
+      };
+
+      function send(){
+        toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-left",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "3000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+        }
+        if(orders.length>1){
+          console.log(orders);
+          socket.emit("id_ban",orders);
+          orders=[];
+          orders.push(table);
+          toastr.success('Gửi đơn hàng thành công');
+
+        }else {
+          toastr.error('Đơn hàng rỗng',{timeOut: 10000});
+        }
+
+      }
+    </script>
+
+    <script src="js/bootstrap.min.js" ></script>
+    <script src="js/jquery-1.11.2.min.js"> </script>
+    <script src="js/jquery.flexslider.min.js"></script>
+    <script  src="js/jquery.hoverdir.js"></script>
+    <script  src="js/jquery.mixitup.min.js" ></script>
+    <script  src="js/jQuery.scrollSpeed.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script  src="js/jssor.core.js"> </script>
+    <script  src="js/jssor.slider.js"> </script>
+    <script  src="js/jssor.utils.js"> </script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/script.js"></script>
+    <!-- <script type="text/javascript" src="js/main.js" ></script> -->
+    <script src="js/wow.min.js"></script>
+  </body>
+  </html>
