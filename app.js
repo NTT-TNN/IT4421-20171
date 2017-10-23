@@ -1,41 +1,27 @@
 
 var express = require("express");
 var app = express();
-var mysql = require('mysql');
+
 app.use(express.static("public"));
 app.set("view engine","ejs");
 app.set("views","./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 var port= process.env.port | 8000;
+var index = require('./routes/index');
+var DK_BoiBan = require('./routes/DK_BoiBan.js');
+var DK_ThuNgan = require('./routes/DK_ThuNgan.js');
 
-var conn = mysql.createConnection({
-   host: "localhost",
-   user: "root",
-   password: "thao123",
-   database: "test_it4421"
- });
+app.use('/DK_BoiBan', DK_BoiBan);
+app.use('/DK_ThuNgan', DK_ThuNgan);
 
 server.listen(port,function(){
   console.log("App running at port",port);
 });
 
-conn.connect(function(err) {
-   if (err) throw err;
-   app.get("/",function (req,res) {
-       conn.query("SELECT * FROM Products", function (err, results, fields) {
-         if (err) throw err;
-         console.log(results);
-         res.render("menu",{products:results});
-       });
 
-   });
 
- });
 
-app.get("/banhang",function(req,res){
-  res.render("banhang");
-});
 
 var order = [];
 var banhang = [];

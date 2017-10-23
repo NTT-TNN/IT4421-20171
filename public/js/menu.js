@@ -1,42 +1,34 @@
-    // $(document).ready(function() {
-    //   $("#table_number").validate({  // initialize plugin on the form
-    //        rules: {
-    //
-    //        }
-    //
-    //   });
-    //
-    //
-    // });
-    // $("#table_number").validate({});
-    // $("#soLuong").validate({});
-    // $('#table_modal').on('hidden.bs.modal', function () {
-    //     // if(table_number<1){
-    //       console.log("hidde");
-    //       $(window).load(function() {
-    //           $("#table_modal").modal({show:'true'});
-    //       });
-    //
-    //     // }
-    // });
-
-class DK_BoiBan {
-  constructor() {
-
-  }
-}
+  // $(document).ready(function() {
+  //   $("#table_number").validate({  // initialize plugin on the form
+  //        rules: {
+  //
+  //        }
+  //
+  //   });
+  //
+  //
+  // });
+  // $("#table_number").validate({});
+  // $("#soLuong").validate({});
+  // $('#table_modal').on('hidden.bs.modal', function () {
+  //     // if(table_number<1){
+  //       console.log("hidde");
+  //       $(window).load(function() {
+  //           $("#table_modal").modal({show:'true'});
+  //       });
+  //
+  //     // }
+  // });
   tableNumber=0;
+  var table={};
   orders=[];
   $('#table_modal').hide().on('hide', function() {
       $('#table_modal').modal('show')
   });
   function addTable(){
     tableNumber=document.getElementById("table_number").value;
-    // if(table_number>0){
-    //   $("#table_modal").modal({show: false});
-    // }
     console.log(tableNumber);
-    var table={
+    table={
       tableID:tableNumber
     }
     console.log(table);
@@ -63,7 +55,6 @@ class DK_BoiBan {
     "hideMethod": "fadeOut"
   }
 
-
   html="";
   var socket = io("http://localhost:8000");
   socket.on('connect', function() {
@@ -72,7 +63,6 @@ class DK_BoiBan {
   })
 
   function add(i){
-
 
     var ProductID= products[i].ProductID;
     var ProductName= products[i].ProductName;
@@ -126,21 +116,21 @@ class DK_BoiBan {
          </div>
        </div>`;
     }
-    html+=`<div class="row">
-       <div class="col-md-1 center-margin"></div>
-       <div class="col-md-4 center-margin"></div>
-       <div class="col-md-2 center-margin"></div>
-       <div class="col-md-2 center-margin"></div>
-      <div class="col-md-2 center-margin">
-        <h6>`+total+ `.000</h6>
-      </div>
-       <div class="col-md-1 center-margin">
-         <br>
-       </div>
-     </div>`;
-    document.getElementById("order_products").innerHTML = html;
-    html="";
-    return true
+      html+=`<div class="row">
+         <div class="col-md-1 center-margin"></div>
+         <div class="col-md-4 center-margin"></div>
+         <div class="col-md-2 center-margin"></div>
+         <div class="col-md-2 center-margin"></div>
+        <div class="col-md-2 center-margin">
+          <h6>`+total+ `.000</h6>
+        </div>
+         <div class="col-md-1 center-margin">
+           <br>
+         </div>
+       </div>`;
+      document.getElementById("order_products").innerHTML = html;
+      html="";
+      return true
   };
 
   function send(){
