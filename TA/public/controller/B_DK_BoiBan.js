@@ -1,6 +1,6 @@
 
 tableNumber = 0;
-statusTable = 0;
+
 var table={};
 orders=[];
 $('#table_modal').hide().on('hide', function() {
@@ -11,7 +11,7 @@ function addTable(){
   console.log(tableNumber);
   table={
     tableID:tableNumber,
-    status:statusTable
+    status:0
   }
   console.log(table);
   orders.push(table);
