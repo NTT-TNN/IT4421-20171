@@ -93,7 +93,7 @@ socket.on("du_lieu",function(order){
                         </div>
                         <div class="modal-footer">
                           <div class="container-fluid text-center">
-                            <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                            <button onclick="`+ changeStt(order) +`" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
                           </div>
                         </div>
 
@@ -102,5 +102,4 @@ socket.on("du_lieu",function(order){
 
                     </div>`;
   document.getElementById("order_list_waitting").innerHTML = order_modal;
-
 });
