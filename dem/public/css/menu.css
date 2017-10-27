@@ -5,3 +5,18 @@
 .show{
    display:block;
 }
+@media screen and (min-width: 560px){
+
+}
+@media screen and (min-width: 816px){
+
+}
+@media screen and (min-width: 1072px){
+  .tabcontent{
+    min-height: 1000px;
+  }
+  .thumbnail img{
+    height: 190px;
+    width: 279px;
+  }
+}

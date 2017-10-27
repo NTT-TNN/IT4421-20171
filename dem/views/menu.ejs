@@ -43,7 +43,10 @@
           <div class="modal-footer">
             <div class="container-fluid text-center">
               <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Edit Order</button>
-              <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()">Send order</button>
+              <button type="button" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()"
+              data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                Send order
+              </button>
             </div>
           </div>
 
@@ -52,7 +55,7 @@
 
       </div>
     </div>
-    <div class="main">
+    <div class="main" >
       <!-- ============ Menu Section  ============= -->
       <div class="menu">
         <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
@@ -71,49 +74,166 @@
                   <div class="header-index" style="font-family: Times New Roman, Times, serif;">
                     Coffee
                   </div>
+
+                  <!-- hien thi danh sach do uong -->
                   <div class="container-fluid">
                     <div class="row" list-group>
                       <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID == 1 ){ %>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
-                              <img width="400" height="250"class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
                               <div class="caption">
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
                                   <p class="group inner list-group-item-text">
-                                    <%= products[i].Description %>
+                                      <%= products[i].Description %>
                                   </p>
                                   <div class="row">
-                                      <div class="col-xs-12 col-md-6">
+                                      <div class="col-md-4">
                                           <p class="lead">
                                               $<%= products[i].Price %></p>
                                       </div>
 
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
 
-                                      <div class="col-xs-6 col-md-3">
+                                      <div class="col-md-6">
                                           <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
                                       </div>
+
+                                    </form>
+
                                   </div>
                               </div>
                           </div>
                       </div>
 
-                      <%}%>
-                      <% if(i%3==0) { %>
-                        <div class="clear sep__1"></div>
-                        <%}%>
+                      <%}}%>
                     </div>
 
                   </div>
 
                 </div>
+
+              </div>
+
+              <div id="Cake" class="tabcontent">
+                <!-- ============ Cake Section  ============= -->
+                <div id="cake">
+                  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                    Cake
+                  </div>
+
+                  <!-- hien thi danh sach do uong -->
+                  <div class="container-fluid">
+                    <div class="row" list-group>
+                      <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID == 2 ){ %>
+                        <div class="item  col-xs-4 col-lg-4">
+                          <div class="thumbnail">
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe01">
+                                      <%= products[i].ProductName %></h4>
+                                  <p class="group inner list-group-item-text">
+                                      <%= products[i].Description %>
+                                  </p>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <p class="lead">
+                                              $<%= products[i].Price %></p>
+                                      </div>
+
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <%}}%>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div id="Other" class="tabcontent">
+                <!-- ============ Other Section  ============= -->
+                <div id="other">
+                  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                    Other
+                  </div>
+
+                  <!-- hien thi danh sach do uong -->
+                  <div class="container-fluid">
+                    <div class="row" list-group>
+                      <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID != 1 && products[i].Categories_CategoryID != 2 ){ %>
+                        <div class="item  col-xs-4 col-lg-4">
+                          <div class="thumbnail">
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe01">
+                                      <%= products[i].ProductName %></h4>
+                                  <p class="group inner list-group-item-text">
+                                      <%= products[i].Description %>
+                                  </p>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <p class="lead">
+                                              $<%= products[i].Price %></p>
+                                      </div>
+
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <%}}%>
+                    </div>
+
+                  </div>
+
+                </div>
+
               </div>
 
             </div>
           </div>
           <div class="clear">
           </div>
-
         </div>
 
 
@@ -133,121 +253,34 @@
 
     </div>
 
-    <script>
-      orders=[];
-      var table={
-        tableID:1
-      }
-      orders.push(table);
-      html="";
-      var socket = io("http://localhost:8000");
-      socket.on('connect', function() {
-        console.log('hello');
-        socket.emit('name', {name: 'order'});
-      })
+    <div class="modal fade" id="table_modal" role="dialog">
+      <div class="modal-dialog">
 
-      function add(i){
-        var products = JSON.parse('<%-JSON.stringify(products)%>');
-
-        var ProductID= products[i].ProductID;
-        var ProductName= products[i].ProductName;
-        var ProductUrl= products[i].Url_images;
-        var ProductPrice=products[i].Price;
-        // var number= parseInt(document.getElementById(ProductID).value);
-        var number=1;
-        product={
-          ProductID: ProductID,
-          number:number,
-          ProductName:ProductName,
-          ProductUrl:ProductUrl,
-          ProductPrice:ProductPrice
-        }
-        console.log(orders);
-        if(orders.length==0){
-          orders.push(product);
-        }else{
-          var flag=true;
-          for(var j=0;j<orders.length;++j){
-
-            if(orders[j].ProductID==ProductID){
-              orders[j].number+=number;
-              flag=false;
-            }
-          }
-          if(flag==true){
-            orders.push(product);
-          }
-        }
-        html="";
-        total=0;
-        for(var j=1;j<orders.length;++j){
-
-          total+=orders[j].ProductPrice*orders[j].number;
-          html+=`<div class="row">
-             <div class="col-md-1 center-margin">
-               1
-             </div>
-             <div class="col-md-4 center-margin">` + orders[j].ProductName +
-             `</div>
-             <div class="col-md-2 center-margin">` + orders[j].number +
-            `</div>
-             <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
-            `.000</div>
-            <div class="col-md-2 center-margin">
-              <h6></h6>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form>
+            <div class="modal-header" style="background-color:#2196F3">
+              <h4 class="modal-title">Nhập số bàn</h4>
             </div>
-             <div class="col-md-1 center-margin">
-               <br>
-             </div>
-           </div>`;
-        }
-        html+=`<div class="row">
-           <div class="col-md-1 center-margin"></div>
-           <div class="col-md-4 center-margin"></div>
-           <div class="col-md-2 center-margin"></div>
-           <div class="col-md-2 center-margin"></div>
-          <div class="col-md-2 center-margin">
-            <h6>`+total+ `.000</h6>
+            <div class="modal-body">
+              <input type="number" class="form-control" id="table_number" min="1" max="100" step="1" placeholder="Số bàn">
+            </div>
+            <div class="modal-footer">
+              <div class="container-fluid text-center">
+                <button type="button" id="jaha" data-dismiss="modal" style="position:inherit" class="btn btn-primary mr-auto" onclick="addTable()">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+
           </div>
-           <div class="col-md-1 center-margin">
-             <br>
-           </div>
-         </div>`;
-        document.getElementById("order_products").innerHTML = html;
-      };
+        </div>
 
-      function send(){
-        toastr.options = {
-          "closeButton": false,
-          "debug": false,
-          "newestOnTop": false,
-          "progressBar": false,
-          "positionClass": "toast-top-left",
-          "preventDuplicates": false,
-          "onclick": null,
-          "showDuration": "3000",
-          "hideDuration": "1000",
-          "timeOut": "5000",
-          "extendedTimeOut": "1000",
-          "showEasing": "swing",
-          "hideEasing": "linear",
-          "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
-        }
-        if(orders.length>1){
-          console.log(orders);
-          socket.emit("id_ban",orders);
-          orders=[];
-          orders.push(table);
-          toastr.success('Gửi đơn hàng thành công');
+      </div>
+    <script>
 
-        }else {
-          toastr.error('Đơn hàng rỗng',{timeOut: 10000});
-        }
-
-      }
+    var products = JSON.parse('<%-JSON.stringify(products)%>');
     </script>
-
+    <script src="controller/B_DK_BoiBan.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
     <script src="js/jquery-1.11.2.min.js"> </script>
     <script src="js/jquery.flexslider.min.js"></script>
@@ -262,5 +295,24 @@
     <script src="js/script.js"></script>
     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
     <script src="js/wow.min.js"></script>
+    <script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
+
   </body>
   </html>
