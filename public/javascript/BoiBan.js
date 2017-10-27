@@ -139,7 +139,7 @@ function send(){
     console.log(orders);
     socket.emit("id_ban",orders);
     orders=[];
-    orders.push(table);
+    // orders.push(table);
     toastr.success('Gửi đơn hàng thành công','Success!');
     document.getElementById("order_products").innerHTML = html;
     return true;

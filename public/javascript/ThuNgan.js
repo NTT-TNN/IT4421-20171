@@ -8,6 +8,7 @@ socket.on('connect', function() {
   socket.emit('name', {name: 'banhang'});
 })
 socket.on("du_lieu",function(order){
+  bien=order;
   console.log('data: ', order);
   orders.push(order);
 
@@ -93,7 +94,7 @@ socket.on("du_lieu",function(order){
                         </div>
                         <div class="modal-footer">
                           <div class="container-fluid text-center">
-                            <button type="button" data-dismiss="modal" onclick="changeSTT()"style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                            <button type="button" data-dismiss="modal" onclick="changeSTT('`+order+`')"style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
                           </div>
                         </div>
 
@@ -106,6 +107,6 @@ socket.on("du_lieu",function(order){
 });
 
 
-function changeSTT(){
-  console.log("hah");
+function changeSTT(bientruyen){
+  console.log(bientruyen);
 }
