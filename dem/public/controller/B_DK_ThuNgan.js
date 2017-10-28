@@ -1,44 +1,52 @@
-
-orders_list="";
-order_modal="";
-height=100,total=0;
-orders=[];
+orders_list = "";
+order_modal = "";
+height = 100, total = 0;
+orders = [];
 var socket = io('http://localhost:8000');
 socket.on('connect', function() {
-  socket.emit('name', {name: 'banhang'});
+  socket.emit('name', {
+    name: 'banhang'
+  });
 })
-socket.on("du_lieu",function(order){
-  console.log('data: ', order);
+socket.on("du_lieu", function(order) {
+  // console.log('data: ', order);
   orders.push(order);
   test();
 
 });
-var changeStt = function(order){
-  // order[0].status = 1;
-  console.log(order);
-  console.log(order[0].tableID);
-  // test();
+
+// ham nay su dung de xoa toan bo html da su dung truoc do
+var removeAllChiled = function() {
+  var myNode = document.getElementById("chuaxacnhan");
+  while (myNode.firstChild) {
+    myNode.removeChild(myNode.firstChild);
+  }
 }
-var test = function(){
-  console.log("bbc");
-  for (var k = 0; k < orders.length; k++) {
-    console.log(orders[k]);
-    if (orders[k][0].status ==0 ) {
-      console.log("orders_k");
-      console.log(orders[k]);
+
+var changeStt = function(bien) {
+  console.log("object gui sang");
+  console.log(bien);
+  bien[0].status = 1;
+  console.log(bien[0].status);
+  test();
+}
+var test = function() {
+  console.log("danh sach orders");
+  console.log(orders);
+  removeAllChiled();
+  for (k = 0; k < orders.length; k++) {
+    bien = orders[k];
+    if (orders[k][0].status == 0) {
       var $order, $orders, i, x;
       $orders = $(".orders");
       $order = `<div class="note">
-                    <div class="note-inner" style="height:` + height + `px;width:`+height+`px" data-toggle="modal" data-target="#Order_detail`
-                    +orders.length+`"><span style="font-size:50px;">`+orders[k][0].tableID+`</span>
+                    <div class="note-inner" style="height:` + height + `px;width:` + height + `px" data-toggle="modal" data-target="#Order_detail` +
+        orders.length + `"><span style="font-size:50px;">` + orders[k][0].tableID + `</span>
                     </div>
                  </div>`;
-        $orders.append($order);
-      // // return $('.notes').isotope({
-      // //   itemSelector: '.note',
-      // //   layoutMode: 'vertical'
-      // });
-        order_modal+=`<div class="modal fade" id="Order_detail`+orders.length+`" role="dialog">
+      $orders.append($order);
+
+      order_modal += `<div class="modal fade" id="Order_detail` + orders.length + `" role="dialog">
         <div class="modal-dialog">
 
           <!-- Modal content-->
@@ -68,21 +76,21 @@ var test = function(){
                       <br>
                     </div>
                   </div>
-                  <div id="order_products`+orders.length+`">`;
-                  for (var j = 1; j < orders[k].length; j++) {
-                    total=0;
-                    total+=orders[k][j].ProductPrice*orders[k][j].number;
-                    console.log(total);
-                    order_modal+=`<div class="row">
+                  <div id="order_products` + orders.length + `">`;
+      for (var j = 1; j < orders[k].length; j++) {
+        total = 0;
+        total += orders[k][j].ProductPrice * orders[k][j].number;
+        console.log(total);
+        order_modal += `<div class="row">
                        <div class="col-md-1 center-margin">
                          1
                        </div>
                        <div class="col-md-4 center-margin">` + orders[k][j].ProductName +
-                       `</div>
+          `</div>
                        <div class="col-md-2 center-margin">` + orders[k][j].number +
-                      `</div>
-                       <div class="col-md-2 center-margin">` + orders[k][j].ProductPrice+
-                      `.000</div>
+          `</div>
+                       <div class="col-md-2 center-margin">` + orders[k][j].ProductPrice +
+          `.000</div>
                       <div class="col-md-2 center-margin">
                         <h6></h6>
                       </div>
@@ -90,8 +98,8 @@ var test = function(){
                          <br>
                        </div>
                      </div>`;
-                  };
-                  order_modal+=`</div>
+      };
+      order_modal += `</div>
                                 </div>
                                 <div class="row">
                                    <div class="col-md-1 center-margin"></div>
@@ -99,7 +107,7 @@ var test = function(){
                                    <div class="col-md-2 center-margin"></div>
                                    <div class="col-md-2 center-margin"></div>
                                   <div class="col-md-2 center-margin">
-                                    <h6>`+total+ `.000</h6>
+                                    <h6>` + total + `.000</h6>
                                   </div>
                                    <div class="col-md-1 center-margin">
                                      <br>
@@ -108,20 +116,18 @@ var test = function(){
                             </div>
                             <div class="modal-footer">
                               <div class="container-fluid text-center">
-                                <button id ='abc' onclick ="changeStt('`+orders[k]+`')" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                                <button id ='abc' onclick ="changeStt(bien)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
                               </div>
                             </div>
-
                             </div>
                          </div>
-
                         </div>`;
 
 
       document.getElementById("order_list_waitting").innerHTML = order_modal;
 
-  }
     }
+  }
 
 
 
