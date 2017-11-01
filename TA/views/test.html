@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>A+ Coffee</title>
+  <script src = "/socket.io/socket.io.js"></script>
+  <script src = "jquery-3.2.1.min.js"></script>
+
+  <link rel="stylesheet" href="../public/css/bootstrap-grid.css">
+  <link rel="stylesheet" href="../public/css/bootstrap-grid.css.map">
+  <link rel="stylesheet" href="../public/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="../public/css/bootstrap-grid.min.css.map">
+  <link rel="stylesheet" href="../public/css/bootstrap-reboot.css">
+  <link rel="stylesheet" href="../public/css/bootstrap-reboot.css.map">
+  <link rel="stylesheet" href="../public/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="../public/css/bootstrap-reboot.min.css.map">
+  <link rel="stylesheet" href="../public/css/bootstrap.css">
+  <link rel="stylesheet" href="../public/css/bootstrap.css.map">
+  <!-- <link rel="stylesheet" href="../public/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="../public/css/bootstrap.min.css.map">
+  <link rel="stylesheet" href="../public/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../public/css/jquery-ui.css">
+  <link rel="stylesheet" href="../public/css/main.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="../public/css/normalize.css">
+  <link rel="stylesheet" href="../public/css/style-portfolio.css">
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../public/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon-1.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../public/css/bootstrap1.min.css">
+  <script src="../public/js/jquery1.min.js"></script>
+  <script src="../public/js/bootstrap1.min.js"></script>
+  <script src="../public/js/bootstrap.js"> </script>
+  <link href="../public/css/toastr.min.css" rel="stylesheet"/>
+  <script src="../public/js/toastr.min.js"></script>
+  <link rel="stylesheet" href="../public/css/banhang.css">
+  <link rel="stylesheet" href="../public/css/menu.css">
+  <script src="../public/js/jquery.validate.min.js"></script>
+</head>
+
+<body>
+  <div class="navbar ">
+    <div class="container hidden-xl-down hidden-xs-up">
+      <div class="col-md-4 hidden-xl-down hidden-xs-up">
+        <a class="navbar-brand" href="index.html" style="font-family:Playball" >A+ Coffee</a>
+      </div>
+      <div id="menu">
+        <a id="welcome" href="index.html" style="font-family: Times New Roman, Times, serif; "onmouseover="style.color='black'"
+onmouseout="style.color='white'">WELCOME</a>
+        <a id="new" href="#new-product" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+onmouseout="style.color='white'">NEW PRODUCT</a>
+        <a href="#" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+onmouseout="style.color='white'">ORDER</a>
+        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+onmouseout="style.color='white'">SCHEDULE</a>
+        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+onmouseout="style.color='white'">PROFILE</a>
+        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+onmouseout="style.color='white'">LOG OUT</a>
+        <button data-toggle="modal" data-target="#Order_detail">
+          <span>
+            <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 25px;"></i>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="Order_detail" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#2196F3">
+            <h4 class="modal-title">Order details</h4>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid" style="text-align: center;">
+                <div class="row">
+                  <div class="col-md-1 center-margin">
+                    <h6>TABLE</h6>
+                  </div>
+                  <div class="col-md-4 center-margin">
+                    PRODUCT
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>NUMBER</h6>
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>PRICE</h6>
+                  </div>
+                  <div class="col-md-2 center-margin">
+                    <h6>TOTAL</h6>
+                  </div>
+                  <div class="col-md-1 center-margin">
+                    <br>
+                  </div>
+                </div>
+                <div id="order_products">
+                </div>
+
+              </div>
+              <div class="row">
+                 <div class="col-md-1 center-margin">
+                   1
+                 </div>
+                 <div class="col-md-4 center-margin">Cafe</div>
+                 <div class="col-md-2 center-margin">1</div>
+                 <div class="col-md-2 center-margin">30$</div>
+                <div class="col-md-2 center-margin">
+                  <h6></h6>
+                </div>
+                 <div class="col-md-1 center-margin">
+                   <br>
+                 </div>
+               </div>
+          </div>
+          <div class="modal-footer">
+            <div class="container-fluid text-center">
+              <button type="button" style="position:inherit"class="btn btn-primary mr-auto"onclick=""
+              data-toggle="modal" href="#table_modal" data-dismiss="modal">
+              Xác nhận
+              </button>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="menu">
+      <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="tab">
+              <button class="tablinks" onclick="openCity(event, 'Orders')" id="defaultOpen">New Orders</button>
+              <button class="tablinks" onclick="openCity(event, 'Waiting_Order_List')">Waiting Order List</button>
+              <button class="tablinks" onclick="openCity(event, 'All')">All Orders</button>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div id="Orders" class="tabcontent">
+              <!-- ============ Oders Section  ============= -->
+              <div id="orders">
+                <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                  New Orders
+                </div>
+
+                <!-- hien thi danh sach order chua xac nhan-->
+                <div class="container-fluid">
+                  <div class="note">
+                                <div class="note-inner" style="height:150px;width:150px" data-toggle="modal" data-target="#Order_detail"><span style="font-size:50px;">1</span>
+                                </div>
+                             </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="Waiting_Order_List" class="tabcontent">
+              <!-- ============ Waiting_Order_List Section  ============= -->
+              <div id="waiting_order_list">
+                <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                  Waiting Order List
+                </div>
+
+                <!-- hien thi danh sach order cho xu li -->
+                <div class="container-fluid ">
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="All" class="tabcontent">
+              <!-- ============ Other Section  ============= -->
+              <div id="all">
+                <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                  All Orders
+                </div>
+
+                <!-- hien thi danh sach tat ca cac order -->
+                <div class="container-fluid">
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="clear">
+        </div>
+      </div>
+
+
+    </div>
+
+
+
+    <div id="order_list_waitting"></div>
+    <script src="controller/B_DK_ThuNgan.js" ></script>
+  </body>
+
+  <script>
+  function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+  }
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  </script>
+</html>

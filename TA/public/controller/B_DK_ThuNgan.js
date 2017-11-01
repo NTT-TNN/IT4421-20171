@@ -10,9 +10,7 @@ socket.on('connect', function() {
 socket.on("du_lieu",function(order){
   console.log('data: ', order);
   orders.push(order);
-  for(var i =0 ;i <4 ; i++){
     test();
-  }
 });
 changeStt = function(order){
   order[0].status = 1;
@@ -104,7 +102,7 @@ var test = function(){
                             </div>
                             <div class="modal-footer">
                               <div class="container-fluid text-center">
-                                <button id ='abc' type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                                <button type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
                               </div>
                             </div>
 
@@ -115,7 +113,7 @@ var test = function(){
 
 
       document.getElementById("order_list_waitting").innerHTML = order_modal;
-    
+
   }
     }
 
