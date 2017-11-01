@@ -6,7 +6,7 @@
           <div class="col-md-3">
             <div class="tab">
               <button class="tablinks" onclick="openCity(event, 'Orders')" id="defaultOpen">New Orders</button>
-              <button class="tablinks" onclick="openCity(event, 'Waiting_Order_List')">Waiting Order List</button>
+              <button class="tablinks" onclick="openCity(event, 'Unpaid_Bills_List')">Waiting Order List</button>
               <button class="tablinks" onclick="openCity(event, 'All')">All Orders</button>
             </div>
           </div>
@@ -19,7 +19,7 @@
                 </div>
 
                 <!-- hien thi danh sach order chua xac nhan-->
-                <div class="container-fluid orders order_list_waitting" id ="chuaxacnhan">
+                <div class="container-fluid orders" id ="chuaxacnhan">
                 </div>
 
               </div>
@@ -28,13 +28,13 @@
 
             <div id="Unpaid_Bills_List" class="tabcontent">
               <!-- ============ Waiting_Order_List Section  ============= -->
-              <div id="unpaid_bills_list">
+              <div>
                 <div class="header-index" style="font-family: Times New Roman, Times, serif;">
-                  Waiting Order List
+                  Unpaid Bills
                 </div>
 
                 <!-- hien thi danh sach order cho thanh toan -->
-                <div class="container-fluid unpaid_bills">
+                <div class="container-fluid bills" id="chuathanhtoan">
                 </div>
 
               </div>
@@ -43,13 +43,13 @@
 
             <div id="All" class="tabcontent">
               <!-- ============ Other Section  ============= -->
-              <div id="all">
+              <div>
                 <div class="header-index" style="font-family: Times New Roman, Times, serif;">
                   All Orders
                 </div>
 
                 <!-- hien thi danh sach tat ca cac order -->
-                <div class="container-fluid">
+                <div class="container-fluid all_bills" id="all">
 
                 </div>
 
@@ -62,13 +62,13 @@
         <div class="clear">
         </div>
       </div>
-
-
     </div>
 
-
-
     <div id="order_list_waitting"></div>
+    <div id="unpaid_bills"></div>
+    <div id="all_bills_modal">
+
+    </div>
     <script src="controller/B_DK_ThuNgan.js" ></script>
   </body>
 
