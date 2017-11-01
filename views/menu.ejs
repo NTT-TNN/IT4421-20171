@@ -55,7 +55,7 @@
 
       </div>
     </div>
-    <div class="main">
+    <div class="main" >
       <!-- ============ Menu Section  ============= -->
       <div class="menu">
         <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
@@ -79,9 +79,10 @@
                   <div class="container-fluid">
                     <div class="row" list-group>
                       <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID == 1 ){ %>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
-                              <img width="400" height="250"class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
                               <div class="caption">
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
@@ -112,15 +113,126 @@
                           </div>
                       </div>
 
-                      <%}%>
+                      <%}}%>
                     </div>
 
                   </div>
 
                 </div>
+
+              </div>
+
+              <div id="Cake" class="tabcontent">
+                <!-- ============ Cake Section  ============= -->
+                <div id="cake">
+                  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                    Cake
+                  </div>
+
+                  <!-- hien thi danh sach do uong -->
+                  <div class="container-fluid">
+                    <div class="row" list-group>
+                      <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID == 2 ){ %>
+                        <div class="item  col-xs-4 col-lg-4">
+                          <div class="thumbnail">
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe01">
+                                      <%= products[i].ProductName %></h4>
+                                  <p class="group inner list-group-item-text">
+                                      <%= products[i].Description %>
+                                  </p>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <p class="lead">
+                                              $<%= products[i].Price %></p>
+                                      </div>
+
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <%}}%>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div id="Other" class="tabcontent">
+                <!-- ============ Other Section  ============= -->
+                <div id="other">
+                  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                    Other
+                  </div>
+
+                  <!-- hien thi danh sach do uong -->
+                  <div class="container-fluid">
+                    <div class="row" list-group>
+                      <% for(var i=0; i<products.length; i++) {%>
+                        <% if( products[i].Categories_CategoryID != 1 && products[i].Categories_CategoryID != 2 ){ %>
+                        <div class="item  col-xs-4 col-lg-4">
+                          <div class="thumbnail">
+                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe01">
+                                      <%= products[i].ProductName %></h4>
+                                  <p class="group inner list-group-item-text">
+                                      <%= products[i].Description %>
+                                  </p>
+                                  <div class="row">
+                                      <div class="col-md-4">
+                                          <p class="lead">
+                                              $<%= products[i].Price %></p>
+                                      </div>
+
+                                  </div>
+                                  <div class="row">
+                                    <form>
+                                      <div class="col-md-6">
+                                          <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                      </div>
+
+                                    </form>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <%}}%>
+                    </div>
+
+                  </div>
+
+                </div>
+
               </div>
 
             </div>
+          </div>
+          <div class="clear">
           </div>
         </div>
 
@@ -183,6 +295,24 @@
     <script src="js/script.js"></script>
     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
     <script src="js/wow.min.js"></script>
+    <script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
 
   </body>
   </html>

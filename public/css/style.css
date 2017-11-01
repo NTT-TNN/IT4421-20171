@@ -148,6 +148,7 @@ div.tab button.active {
 .center-margin{
   margin: auto;
 }
+<<<<<<< HEAD:public/css/style.css
 /* fluid 5 columns */
 .grid-sizer,
 .grid-item {
@@ -155,3 +156,5 @@ div.tab button.active {
 }
 /* 2 columns */
 .grid-item--width2 { width: 40%; }
+=======
+>>>>>>> tuanAnh:A+ Coffee/css/style.css

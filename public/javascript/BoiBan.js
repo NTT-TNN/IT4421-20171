@@ -1,25 +1,6 @@
-// $(document).ready(function() {
-//   $("#table_number").validate({  // initialize plugin on the form
-//        rules: {
-//
-//        }
-//
-//   });
-//
-//
-// });
-// $("#table_number").validate({});
-// $("#soLuong").validate({});
-// $('#table_modal').on('hidden.bs.modal', function () {
-//     // if(table_number<1){
-//       console.log("hidde");
-//       $(window).load(function() {
-//           $("#table_modal").modal({show:'true'});
-//       });
-//
-//     // }
-// });
-tableNumber=0;
+
+tableNumber = 0;
+
 var table={};
 orders=[];
 $('#table_modal').hide().on('hide', function() {
@@ -29,7 +10,8 @@ function addTable(){
   tableNumber=document.getElementById("table_number").value;
   console.log(tableNumber);
   table={
-    tableID:tableNumber
+    tableID:tableNumber,
+    status:0
   }
   console.log(table);
   orders.push(table);

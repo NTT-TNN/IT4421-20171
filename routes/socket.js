@@ -15,7 +15,7 @@ module.exports = function(io) {
     socket.on("id_ban",function(data){
       // console.log(data.cafe +" " + data.suachua);
       // console.log('to id: ', banhang[0]);
-      io.emit("du_lieu",data);
+      io.emit("order",data);
     });
     //...
     socket.on('disconnect', function() {
