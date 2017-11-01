@@ -1,5 +1,6 @@
 orders_list = "";
 order_modal = "";
+unpaid_bills = "";
 height = 100, total = 0;
 orders = [];
 var socket = io('http://localhost:8000');
@@ -99,6 +100,7 @@ socket.on("du_lieu", function(order) {
                     </div>`;
 
   document.getElementById("order_list_waitting").innerHTML = order_modal;
+
 });
 
 // ham nay su dung de xoa toan bo html da su dung truoc do
@@ -111,10 +113,91 @@ var removeAllChiled = function() {
 }
 
 var changeStt = function(x) {
-  orders[x][0].status =1;
+  orders[x][0].status = 1;
   console.log(orders[x][0].status);
+  unpaid_bills += `<div class="modal fade" id="Order_detail` + orders[x].length + `" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="bacorders.lengthground-color:#2196F3">
+          <h4 class="modal-title">Order details</h4>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid" style="text-align: center;">
+              <div class="row">
+                <div class="col-md-1 center-margin">
+                  <h6>TABLE</h6>
+                </div>
+                <div class="col-md-4 center-margin">
+                  PRODUCT
+                </div>
+                <div class="col-md-2 center-margin">
+                  <h6>NUMBER</h6>
+                </div>
+                <div class="col-md-2 center-margin">
+                  <h6>PRICE</h6>
+                </div>
+                <div class="col-md-2 center-margin">
+                  <h6>TOTAL</h6>
+                </div>
+                <div class="col-md-1 center-margin">
+                  <br>
+                </div>
+              </div>
+              <div id="order_products` + orders[x].length + `">`;
+              for (var j = 1; j < orders[x].length; j++) {
+                total = 0;
+                total += orders[x][j].ProductPrice * orders[x][j].number;
+                console.log(total);
+                unpaid_bills += `<div class="row">
+                               <div class="col-md-1 center-margin">
+                                 1
+                               </div>
+                               <div class="col-md-4 center-margin">` + orders[x][j].ProductName +
+                  `</div>
+                               <div class="col-md-2 center-margin">` + orders[x][j].number +
+                  `</div>
+                               <div class="col-md-2 center-margin">` + orders[x][j].ProductPrice +
+                  `.000</div>
+                              <div class="col-md-2 center-margin">
+                                <h6></h6>
+                              </div>
+                               <div class="col-md-1 center-margin">
+                                 <br>
+                               </div>
+                             </div>`;
+              }
+              unpaid_bills += `</div>
+                                        </div>
+                                        <div class="row">
+                                           <div class="col-md-1 center-margin"></div>
+                                           <div class="col-md-4 center-margin"></div>
+                                           <div class="col-md-2 center-margin"></div>
+                                           <div class="col-md-2 center-margin"></div>
+                                          <div class="col-md-2 center-margin">
+                                            <h6>` + total + `.000</h6>
+                                          </div>
+                                           <div class="col-md-1 center-margin">
+                                             <br>
+                                           </div>
+                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <div class="container-fluid text-center">
+                                        <button onclick = "payment('`+ x +`')" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"> Xác Nhận </button>
+                                      </div>
+                                    </div>
+                                    </div>
+                                 </div>
+                                </div>`;
   test();
 }
+
+var payment = function(x){
+
+}
+
 var test = function() {
   console.log("danh sach orders");
   console.log(orders);
@@ -122,9 +205,9 @@ var test = function() {
   var length=0 ;
 
   for (var i = 0; i < orders.length; i++) {
+    length++;
     if (orders[i][0].status == 0) {
       // console.log(x);
-      length++;
       var $order, $orders;
       $orders = $(".orders");
       $order = `<div class="note">
