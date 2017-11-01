@@ -45,7 +45,7 @@ socket.on('connect', function() {
   socket.emit('name', {name: 'order'});
 })
 
-function add(i){
+function addDoUong(i){
 
   var ProductID= products[i].ProductID;
   var ProductName= products[i].ProductName;
@@ -116,7 +116,7 @@ function add(i){
     return true
 };
 
-function send(){
+function guiDonHang(){
   if(orders.length>1){
     console.log(orders);
     socket.emit("id_ban",orders);

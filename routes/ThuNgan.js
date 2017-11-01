@@ -7,4 +7,13 @@ router.get("/",function(req,res){
   res.render("banhang");
 });
 
+router.post("/thanhToan",function(req,res){
+  console.log('body: ' + JSON.stringify(req.body));
+  res.send({status:"Success"});
+});
+
+router.get("/thanhToan",function(req,res){
+  console.log('body: ' + JSON.stringify(req.body));
+  res.send({status:"Success"});
+});
 module.exports = router;
