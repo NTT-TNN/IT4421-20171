@@ -114,6 +114,7 @@ var changeStt = function(x) {
   orders[x][0].status =1;
   console.log(orders[x][0].status);
   test();
+
 }
 var test = function() {
   console.log("danh sach orders");
