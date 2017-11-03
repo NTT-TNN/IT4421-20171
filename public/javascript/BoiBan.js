@@ -1,6 +1,6 @@
 
 tableNumber = 0;
-
+flagEdit=false;
 var table={};
 orders=[];
 $('#table_modal').hide().on('hide', function() {
@@ -81,7 +81,7 @@ function addDoUong(i){
   for(var j=1;j<orders.length;++j){
 
     total+=orders[j].ProductPrice*orders[j].number;
-    html+=`<div class="row">
+    html+=`<div class="row" id="doUong`+j+`">
        <div class="col-md-1 center-margin">
          1
        </div>
@@ -91,7 +91,7 @@ function addDoUong(i){
        <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
       `.000</div>
       <div class="col-md-2 center-margin">
-       <img src="images/icon/error.png" alt="">
+       <img src="images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')">
       </div>
        <div class="col-md-1 center-margin">
 
@@ -117,6 +117,14 @@ function addDoUong(i){
 
 function guiDonHang(){
   if(orders.length>1){
+    if(flagEdit===true){
+      var x = $(".ordernumber");
+      x.attr("readonly", false).addClass("form-control");
+      x.each(function(i){
+        orders[i+1].number=this.value;
+      })
+      flagEdit=false;
+    }
     console.log(orders);
     socket.emit("order",orders);
     orders=[];
@@ -132,7 +140,14 @@ function guiDonHang(){
 }
 
 function editOrder(){
-  var x = $(".ordernumber").attr("readonly", false).addClass("form-control");
-
-  console.log("editOrder");
+  flagEdit=true;
+  var x = $(".ordernumber");
+  x.attr("readonly", false).addClass("form-control");
+  console.log(x);
 }
+
+  function removeDoUong(i){
+    orders.splice(i, 1);
+    console.log("sau remove");
+    console.log(orders);
+  }
