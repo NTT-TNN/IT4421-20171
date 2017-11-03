@@ -12,7 +12,8 @@ module.exports = function(io) {
         banhang.push(socket.id);
       }
     });
-    socket.on("id_ban",function(data){
+      
+    socket.on("order",function(data){
       // console.log(data.cafe +" " + data.suachua);
       // console.log('to id: ', banhang[0]);
       io.emit("order",data);

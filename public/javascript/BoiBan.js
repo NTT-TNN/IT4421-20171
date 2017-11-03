@@ -119,7 +119,7 @@ function addDoUong(i){
 function guiDonHang(){
   if(orders.length>1){
     console.log(orders);
-    socket.emit("id_ban",orders);
+    socket.emit("order",orders);
     orders=[];
     // orders.push(table);
     toastr.success('Gửi đơn hàng thành công','Success!');
