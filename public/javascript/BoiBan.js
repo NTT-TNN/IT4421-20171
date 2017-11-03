@@ -104,7 +104,7 @@ function addDoUong(i){
        <div class="col-md-2 center-margin"></div>
        <div class="col-md-2 center-margin"></div>
       <div class="col-md-2 center-margin">
-        <h6>`+total+ `.000</h6>
+        <h6 id="total">`+total+ `.000</h6>
       </div>
        <div class="col-md-1 center-margin">
          <br>
@@ -147,7 +147,13 @@ function editOrder(){
 }
 
   function removeDoUong(i){
+    total -= orders[i].number*orders[i].ProductPrice;
+    var htmlTotal=total+".000"
+    $("#total").html(htmlTotal);
     orders.splice(i, 1);
+    var doUongId="doUong"+i;
+    $("#doUong"+i).remove();
+    console.log(total);
     console.log("sau remove");
-    console.log(orders);
+
   }
