@@ -87,15 +87,14 @@ function addDoUong(i){
        </div>
        <div class="col-md-4 center-margin">` + orders[j].ProductName +
        `</div>
-       <div class="col-md-2 center-margin">` + orders[j].number +
-      `</div>
+       <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+orders[j].number+`'>
        <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
       `.000</div>
       <div class="col-md-2 center-margin">
-        <h6></h6>
+       <img src="images/icon/error.png" alt="">
       </div>
        <div class="col-md-1 center-margin">
-         <br>
+
        </div>
      </div>`;
   }
@@ -130,4 +129,10 @@ function guiDonHang(){
     return false;
   }
   $("#table_modal").modal({show: true});
+}
+
+function editOrder(){
+  var x = $(".ordernumber").attr("readonly", false).addClass("form-control");
+
+  console.log("editOrder");
 }
