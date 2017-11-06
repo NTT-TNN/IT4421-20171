@@ -111,7 +111,7 @@ var changeStt = function(x) {
     </div>
     <div class="modal-footer">
     <div class="container-fluid text-center">
-    <button onclick = "changeStt('`+ x +`')" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"> Thanh toán </button>
+    <button onclick = "thanhToan('`+ x +`')" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto"> Thanh toán </button>
     </div>
     </div>
     </div>
@@ -124,6 +124,20 @@ var changeStt = function(x) {
   }
 }
 
+function thanhToan(i){
+  var data=orders[i];
+  console.log(data);
+  $.ajax({
+  type: 'POST',
+  data: JSON.stringify(data),
+  contentType: 'application/json',
+  url: 'http://127.0.0.1:8000/ThuNgan/thanhToan',
+  success: function(data) {
+        console.log('success');
+        console.log(JSON.stringify(data));
+    }
+  });
+}
 var reload = function(id_list,list,id_modal,modal,button){
   var status;
   if(id_list == "chuaxacnhan"){
@@ -310,36 +324,3 @@ var display_all = function(){
 
   document.getElementById("all_bills_modal").innerHTML = all_bills;
 }
-
-$(function(){
-    $('#test').click(function(e){
-        e.preventDefault();
-        console.log('select_link clicked');
-
-         /*$.ajax({
-            dataType: 'jsonp',
-            data: "data=yeah",
-            jsonp: 'callback',
-            url: 'http://localhost:3000/endpoint?callback=?',
-            success: function(data) {
-                console.log('success');
-                console.log(JSON.stringify(data));
-            }
-        });*/
-        var data = {};
-        data.title = "title";
-        data.message = "message";
-
-        $.ajax({
-        type: 'POST',
-        data: JSON.stringify(data),
-            contentType: 'application/json',
-                    url: 'http://localhost:8000/ThuNgan/thanhToan',
-                    success: function(data) {
-                        console.log('success');
-                        console.log(JSON.stringify(data));
-                    }
-                });
-
-    });
-});

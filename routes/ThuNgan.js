@@ -12,8 +12,4 @@ router.post("/thanhToan",function(req,res){
   res.send({status:"Success"});
 });
 
-router.get("/thanhToan",function(req,res){
-  console.log('body: ' + JSON.stringify(req.body));
-  res.send({status:"Success"});
-});
 module.exports = router;

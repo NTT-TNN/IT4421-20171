@@ -1,6 +1,9 @@
 
 var express = require("express");
+var bodyParser = require('body-parser');
+
 var app = express();
+
 
 app.use(express.static("public"));
 app.set("view engine","ejs");
@@ -12,7 +15,8 @@ var index = require('./routes/index');
 var BoiBan = require('./routes/BoiBan.js');
 var ThuNgan = require('./routes/ThuNgan.js');
 require('./routes/socket.js')(io);
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/BoiBan', BoiBan);
 app.use('/ThuNgan', ThuNgan);
 
