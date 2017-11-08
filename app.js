@@ -14,11 +14,14 @@ var port= process.env.port | 8000;
 var index = require('./routes/index');
 var BoiBan = require('./routes/BoiBan.js');
 var ThuNgan = require('./routes/ThuNgan.js');
+var QuanLy = require('./routes/QuanLy.js');
+
 require('./routes/socket.js')(io);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/BoiBan', BoiBan);
 app.use('/ThuNgan', ThuNgan);
+app.use('/QuanLy', QuanLy);
 
 server.listen(port,function(){
   console.log("App running at port",port);

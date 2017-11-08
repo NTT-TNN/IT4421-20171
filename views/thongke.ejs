@@ -1,0 +1,30 @@
+<%- include head.ejs %>
+<div id="chart"></div>
+<!-- Load c3.css -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.18/c3.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.18/c3.min.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.min.js" charset="utf-8"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.18/c3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.18/c3.min.js"></script>
+
+<script>
+  var results = JSON.parse('<%-JSON.stringify(results)%>');
+  console.log(results);
+  var columns=[];
+  for(var i=0;i<results.length;++i){
+    var temp=[results[i].ProductID,results[i].number];
+    columns.push(temp);
+  }
+  console.log(columns);
+  var chart = c3.generate({
+      bindto: '#chart',
+      data: {
+        columns:columns,
+        type: 'bar'
+      }
+  });
+</script>
