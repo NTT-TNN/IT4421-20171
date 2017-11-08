@@ -7,7 +7,7 @@ app.set("view engine","ejs");
 app.set("views","./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-var port= process.env.port | 8000;
+var port= process.env.port | 9000;
 var index = require('./routes/index');
 var DK_BoiBan = require('./routes/DK_BoiBan.js');
 var DK_ThuNgan = require('./routes/DK_ThuNgan.js');

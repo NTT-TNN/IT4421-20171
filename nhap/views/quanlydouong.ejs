@@ -1,9 +1,85 @@
 <%- include head.ejs %>
-    <div id="messageSuccess" class="alert alert-success hidden">
-      <strong>Success!</strong> abc
+    <div class="modal fade" id="Add_Product" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form>
+            <div class="modal-header" style="background-color:#2196F3">
+              <h4 class="modal-title">Product Detail</h4>
+            </div>
+            <div class="modal-body">
+              <p> Name:
+                <input type="text" class="form-control" step="1" placeholder="Tên đồ uống">
+              </p>
+              <p> Description:
+                <input type="text" class="form-control" step="2" placeholder="Mô tả">
+              </p>
+              <p> Price:
+                <input type="number" class="form-control" id="table_number" min="1" max="100" step="10000" placeholder="Giá tiền">
+              </p>
+              <p> Time:
+                <input type="number" class="form-control" step="4" placeholder="Thời hạn sử dụng">
+              </p>
+              <p>
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Pictrue</button>
+              </p>
+           </div>
+            <div class="modal-footer">
+              <div class="container-fluid text-center">
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Cancel</button>
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()"
+                data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    <div id="messageError" class="alert alert-danger hidden">
-      <strong>Danger!</strong> cdf
+
+    <div class="modal fade" id="Edit_Product" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <form>
+            <div class="modal-header" style="background-color:#2196F3">
+              <h4 class="modal-title">Product Detail</h4>
+            </div>
+            <div class="modal-body">
+              <p> Name:
+                <input type="text" class="form-control" step="1" value="<%= products[0].ProductName %>">
+              </p>
+              <p> Description:
+                <input type="text" class="form-control" step="2" value="<%= products[0].Description %>">
+              </p>
+              <p> Price:
+                <input type="number" class="form-control" id="table_number" min="1" max="100" step="10000" value="<%= products[0].Price %>">
+              </p>
+              <p> Time:
+                <input type="number" class="form-control" step="4" value="Thời hạn sử dụng">
+              </p>
+              <p style="text-align: center;">
+                <img width="400" height="250" class="group list-group-image" src="<%= products[0].Url_images %> " alt="" />
+              </p>
+              <p style="text-align: center;">
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Change</button>
+              </p>
+           </div>
+            <div class="modal-footer">
+              <div class="container-fluid text-center">
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto">Cancel</button>
+                <button type="button" style="position:inherit"class="btn btn-primary mr-auto"onclick="send()"
+                data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="main">
@@ -29,6 +105,12 @@
                   <!-- hien thi danh sach do uong -->
                   <div class="container-fluid">
                     <div class="row" >
+                      <div>
+                              <button data-toggle="modal" data-target="#Add_Product">
+                              <span>
+                                <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 250px;"></i>
+                              </span>
+                      </div>
                       <% for(var i=0; i<products.length; i++) {%>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
@@ -44,23 +126,22 @@
                                           <p class="lead">
                                               $<%= products[i].Price %></p>
                                       </div>
-                                  </div>
-                                  
-                                  <div class="row">
-                                      
-                                      <div class="col-xs-6">
-                                        
-                                      </div>
-                                      <div class="col-xs-6">
-                                        <div class="col-md-3 .col-md-offset-3">
-                                          <a class="btn btn-success" >Edit</a>
+                                  </div> 
+                                  <form id="<%= products[i].ProductID %>">
+                                    <div class="row">
+                                        <div class="col-xs-6"> 
                                         </div>
-                                        <div class="col-md-3 .col-md-offset-3">
-                                          <a class="btn btn-success" >Delete</a>
+                                        <div class="col-xs-6">
+                                          <div class="col-md-3 .col-md-offset-3">
+                                            <a class="btn btn-success" data-toggle="modal" data-target="#Edit_Product" >Edit</a>
+                                          </div>
+                                          <div class="col-md-3 .col-md-offset-3">
+                                            <a onclick="delete(<%=i%>)" class="btn btn-success" >Delete</a>
+                                          </div>
                                         </div>
-                                      </div>
-                                  </br>
-                                  </div>
+                                    </br>
+                                    </div>
+                                  </form>
                               </div>
                           </div>
                       </div>
