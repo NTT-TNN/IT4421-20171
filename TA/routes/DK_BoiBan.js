@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require("../model/config.js");
+var db = require("../model/sql.js");
 
 
 var router = express.Router();
