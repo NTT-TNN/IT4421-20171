@@ -11,12 +11,10 @@ var port= process.env.port | 8000;
 var index = require('./routes/index');
 var DK_BoiBan = require('./routes/DK_BoiBan.js');
 var DK_ThuNgan = require('./routes/DK_ThuNgan.js');
-var info = require('./routes/info.js');
 require('./routes/socket.js')(io);
 
 app.use('/DK_BoiBan', DK_BoiBan);
 app.use('/DK_ThuNgan', DK_ThuNgan);
-app.use('/user_info',info);
 
 server.listen(port,function(){
   console.log("App running at port",port);
