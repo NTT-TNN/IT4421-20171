@@ -138,6 +138,7 @@ function thanhToan(i){
     }
   });
 }
+
 var reload = function(id_list,list,id_modal,modal,button){
   var status;
   if(id_list == "chuaxacnhan"){
