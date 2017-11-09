@@ -1,5 +1,12 @@
 <%- include head.ejs %>
 <div id="chart"></div>
+<select id="chartType">
+  <option value="pie">pie</option>
+  <option value="line">line</option>
+  <option value="bar">bar</option>
+
+</select>
+<br>
 <input id="startDate" type="date" name="" value="">
 <input id="stopDate" type="date" name="" value="">
 <button type="button" onclick="LoadChart()" name="button" class="btn btn-info"> Load</button>
@@ -17,6 +24,8 @@
 <script>
 
 function LoadChart(){
+  var chartType=$('#chartType :selected').text();
+  console.log(chartType);
   var  startDate= $('#startDate').val();
   var  stopDate=  $('#stopDate').val();
   var data={
@@ -28,9 +37,22 @@ function LoadChart(){
   data: JSON.stringify(data),
   contentType: 'application/json',
   url: 'http://127.0.0.1:8000/QuanLy/LoadChart',
-  success: function(data) {
+  success: function(results) {
         console.log('success');
-        console.log(JSON.stringify(data));
+        console.log(JSON.stringify(results));
+        var columns=[];
+        for(var i=0;i<results.length;++i){
+          var temp=[results[i].ProductName,results[i].number];
+          columns.push(temp);
+        }
+        console.log(chartType);
+        var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+              columns:columns,
+              type: chartType
+            }
+        });
     }
   });
 }

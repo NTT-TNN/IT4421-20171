@@ -21,7 +21,7 @@ router.post("/LoadChart",function (req,res) {
 
     console.log("hihi");
     console.log(results);
-    res.send({results:results});
+    res.send(results);
   });
   // res.render("thongKe",{});
 });
