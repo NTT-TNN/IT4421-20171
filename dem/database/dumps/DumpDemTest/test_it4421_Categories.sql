@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
--- Host: localhost    Database: test_it4421
+-- Host: 127.0.0.1    Database: test_it4421
 -- ------------------------------------------------------
 -- Server version	5.7.19-0ubuntu0.16.04.1
 
@@ -16,30 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `OrderDetails_has_Products`
+-- Table structure for table `Categories`
 --
 
-DROP TABLE IF EXISTS `OrderDetails_has_Products`;
+DROP TABLE IF EXISTS `Categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `OrderDetails_has_Products` (
-  `OrderDetails_OrderDetailID` int(11) NOT NULL,
-  `OrderDetails_Orders_OrderID` int(11) NOT NULL,
-  `Products_ProductID` int(11) NOT NULL,
-  PRIMARY KEY (`OrderDetails_OrderDetailID`,`OrderDetails_Orders_OrderID`,`Products_ProductID`),
-  KEY `fk_OrderDetails_has_Products_Products1` (`Products_ProductID`),
-  CONSTRAINT `fk_OrderDetails_has_Products_OrderDetails1` FOREIGN KEY (`OrderDetails_OrderDetailID`, `OrderDetails_Orders_OrderID`) REFERENCES `OrderDetails` (`OrderDetailID`, `Orders_OrderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_OrderDetails_has_Products_Products1` FOREIGN KEY (`Products_ProductID`) REFERENCES `Products` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `Categories` (
+  `CategoryID` int(11) NOT NULL,
+  `CategoryName` varchar(45) DEFAULT NULL,
+  `Description` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`CategoryID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `OrderDetails_has_Products`
+-- Dumping data for table `Categories`
 --
 
-LOCK TABLES `OrderDetails_has_Products` WRITE;
-/*!40000 ALTER TABLE `OrderDetails_has_Products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `OrderDetails_has_Products` ENABLE KEYS */;
+LOCK TABLES `Categories` WRITE;
+/*!40000 ALTER TABLE `Categories` DISABLE KEYS */;
+INSERT INTO `Categories` VALUES (1,'1','Danh mục cà phê');
+/*!40000 ALTER TABLE `Categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-13 21:55:03
+-- Dump completed on 2017-11-09 18:37:15
