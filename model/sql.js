@@ -60,8 +60,22 @@ var getNumberProducts = function(param1,param2,callback){
 
 }
 
+var getUSer = function(param1,param2,callback){
+  connection.query('SELECT * FROM user',function(error,result){
+      callback(null,result);
+  });
+}
+
+var updateUser = function (param1,param2,callback) {
+  connection.query("UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =1",function(error,result){
+      callback(null,result);
+  });
+}
+
  module.exports ={
     getProducts,
     insertDonHang,
-    getNumberProducts
+    getNumberProducts,
+    getUSer,
+    updateUser
  };
