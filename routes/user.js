@@ -3,8 +3,8 @@ var sql = require("../model/sql.js");
 
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
-
-router.get("/",function (req,res) {
+router.use(express.static("public"));
+router.get("/user_info",function (req,res) {
     sql.getUSer(null,null,function(err,results){
       console.log(results);
       res.render("user_info",{user:results});
@@ -14,7 +14,7 @@ router.get("/",function (req,res) {
 
 
 
-router.post('/', function(req, res) {
+router.post('/user_info', function(req, res) {
   // console.log(req.body);
   data = {
     fullname: req.body.name,

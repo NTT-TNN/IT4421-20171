@@ -1,8 +1,12 @@
 
 var express = require("express");
 var bodyParser = require('body-parser');
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
+var session = require('express-session');
 var app = express();
+// require('./config/passport')(passport);
 
 
 app.use(express.static("public"));
@@ -15,7 +19,7 @@ var index = require('./routes/index');
 var BoiBan = require('./routes/BoiBan.js');
 var ThuNgan = require('./routes/ThuNgan.js');
 var QuanLy = require('./routes/QuanLy.js');
-var user_info = require('./routes/User_info.js');
+var user = require('./routes/user.js');
 
 
 require('./routes/socket.js')(io);
@@ -24,7 +28,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/BoiBan', BoiBan);
 app.use('/ThuNgan', ThuNgan);
 app.use('/QuanLy', QuanLy);
-app.use('/user_info', user_info);
+app.use('/user', user);
+
+app.use(session({ secret: 'it4421',resave: true, saveUninitialized:true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 server.listen(port,function(){
   console.log("App running at port",port);

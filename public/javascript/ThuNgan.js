@@ -126,7 +126,6 @@ var changeStt = function(x) {
 
 function thanhToan(i){
   var data=orders[i];
-  console.log(data);
   $.ajax({
   type: 'POST',
   data: JSON.stringify(data),

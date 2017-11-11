@@ -1,12 +1,12 @@
 var express = require('express');
-var sql = require("../model/sql.js");
+var DoUong = require("../model/DoUong.js");
 
 
 var router = express.Router();
 
 
 router.get("/",function (req,res) {
-  sql.getProducts(null,null,function(err,results){
+  DoUong.getProducts(null,null,function(err,results){
     console.log(results);
     res.render("menu",{products:results});
   });

@@ -1,5 +1,5 @@
 var express = require('express');
-var sql = require("../model/sql.js");
+var DonHang = require("../model/DonHang.js");
 
 var router = express.Router()
 
@@ -8,7 +8,7 @@ router.get("/",function(req,res){
 });
 
 router.post("/thanhToan",function(req,res){
-  sql.insertDonHang(req.body,null,function (error,result) {
+  DonHang.insertDonHang(req.body,null,function (error,result) {
       res.send({status:"Success"});
   })
 

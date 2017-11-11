@@ -6,7 +6,6 @@ var path = require('path');
 var router = express.Router();
 router.use(express.static("public"));
 
-
 router.get("/thongKe",function (req,res) {
   sql.getNumberProducts(null,null,function(err,results){
     console.log(results);

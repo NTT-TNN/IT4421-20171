@@ -32,29 +32,31 @@ function LoadChart(){
     "startDate":startDate,
     "stopDate":stopDate
   };
-  $.ajax({
-  type: 'POST',
-  data: JSON.stringify(data),
-  contentType: 'application/json',
-  url: 'http://127.0.0.1:8000/QuanLy/LoadChart',
-  success: function(results) {
-        console.log('success');
-        console.log(JSON.stringify(results));
-        var columns=[];
-        for(var i=0;i<results.length;++i){
-          var temp=[results[i].ProductName,results[i].number];
-          columns.push(temp);
-        }
-        console.log(chartType);
-        var chart = c3.generate({
-            bindto: '#chart',
-            data: {
-              columns:columns,
-              type: chartType
-            }
-        });
-    }
-  });
+  if(startDate!=""&& stopDate!=""){
+    $.ajax({
+    type: 'POST',
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    url: 'http://127.0.0.1:8000/QuanLy/LoadChart',
+    success: function(results) {
+
+          var columns=[];
+          for(var i=0;i<results.length;++i){
+            var temp=[results[i].ProductName,results[i].number];
+            columns.push(temp);
+          }
+          console.log(columns);
+          var chart = c3.generate({
+              bindto: '#chart',
+              data: {
+                columns:columns,
+                type: chartType
+              }
+          });
+      }
+    });
+  }
+
 }
 
 
