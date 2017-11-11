@@ -1,0 +1,7 @@
+.hidden{
+   display:none;
+   position: sticky;
+}
+.show{
+   display:block;
+}
