@@ -1,4 +1,13 @@
 
+var mysql = require('mysql');
+var moment = require('moment');
+var connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "thao123",
+    database: "test_it4421"
+});
+
 var getNumberProducts = function(param1,param2,callback){
   if(param1==null){
     Command1="SELECT sum(Quantity) as number,ProductName from orderdetails,products where orderdetails.ProductID=products.ProductID group by orderdetails.ProductID;";

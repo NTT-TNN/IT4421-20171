@@ -34,3 +34,7 @@ var insertDonHang = function(param1,param2,callback){
   });
 
 }
+
+module.exports ={
+   insertDonHang
+};

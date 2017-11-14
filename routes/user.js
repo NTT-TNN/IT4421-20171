@@ -1,5 +1,6 @@
 var express = require('express');
 var sql = require("../model/sql.js");
+var passport=require('passport');
 
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
@@ -12,6 +13,11 @@ router.get("/user_info",function (req,res) {
 
 });
 
+router.post('/login',passport.authenticate('local-login',{
+  successRedirect: '/users/user_info',
+  failureRedirect: '/',
+  failureFlash: true,
+}))
 
 
 router.post('/user_info', function(req, res) {
@@ -31,7 +37,6 @@ router.post('/user_info', function(req, res) {
 
   // console.log(data);
   sql.getUSer(null,null,function(err,results){
-    console.log(results);
     res.render("user_info",{user:results});
   });
 });

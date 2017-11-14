@@ -1,55 +1,31 @@
-module.exports = function(sequelize, Sequelize) {
 
-    var User = sequelize.define('user', {
+var mysql = require('mysql');
+var moment = require('moment');
+var connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "thao123",
+    database: "test_it4421"
+});
 
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
-        },
-
-        firstname: {
-            type: Sequelize.STRING,
-            notEmpty: true
-        },
-
-        lastname: {
-            type: Sequelize.STRING,
-            notEmpty: true
-        },
-
-        username: {
-            type: Sequelize.TEXT
-        },
-
-        about: {
-            type: Sequelize.TEXT
-        },
-
-        email: {
-            type: Sequelize.STRING,
-            validate: {
-                isEmail: true
-            }
-        },
-
-        password: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-
-        last_login: {
-            type: Sequelize.DATE
-        },
-
-        status: {
-            type: Sequelize.ENUM('active', 'inactive'),
-            defaultValue: 'active'
-        }
-
-
+var password;
+var findUser=function(param1,param2,callback){
+  var findUserCommand="SELECT * FROM user where username='"+param1+"' and password='"+param2+"';";
+    connection.query(findUserCommand,function(error,result){
+        callback(error,result);
     });
-
-    return User;
-
 }
+function generateHash(password){
+  return bcrypt.hashSync(password,bcrypt.genSaltSync(8),null);
+}
+
+function validPassword(password){
+  return bcrypt.compareSync(password,this.local.password);
+}
+
+
+ module.exports ={
+    findUser,
+    validPassword,
+    generateHash
+ };
