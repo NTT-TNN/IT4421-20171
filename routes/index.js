@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     message2:"req.flash('signupMessage')",
     type:null,
     id:null,
-    user_name:null,
+    username:null,
   });
 });
 

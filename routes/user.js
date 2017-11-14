@@ -5,16 +5,27 @@ var passport=require('passport');
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
 router.use(express.static("public"));
-router.get("/user_info",function (req,res) {
+
+router.get('/',isLoggedIn, function(req, res, next) {
+  // console.log("Tên req",req.user);
+  sql.getUSer(null,null,function(err,results){
+    // console.log(results);
+    res.render("user_info",{user:results});
+  });
+});
+
+router.get("/user_info",isLoggedIn,function (req,res) {
     sql.getUSer(null,null,function(err,results){
-      console.log(results);
+      // console.log(results);
       res.render("user_info",{user:results});
     });
 
 });
 
+
+
 router.post('/login',passport.authenticate('local-login',{
-  successRedirect: '/users/user_info',
+  successRedirect: '/users/',
   failureRedirect: '/',
   failureFlash: true,
 }))
@@ -32,7 +43,7 @@ router.post('/user_info', function(req, res) {
     add: req.body.diachi
   };
   sql.updateUser(req.body,null,function(err,results){
-    console.log(results);
+    // console.log(results);
   });
 
   // console.log(data);
@@ -43,3 +54,26 @@ router.post('/user_info', function(req, res) {
 
 
 module.exports = router;
+
+function isLoggedIn(req,res,next){
+  if(req.isAuthenticated()){
+    // login=true;
+    console.log(req.user);
+    if(req.user!=undefined){
+      if(req.user[0].type=="manager"){
+        res.redirect('/QuanLy/ThongKe');
+        // res.render('thongKe',{
+        //   message1:"req.flash('loginMessage')",
+        //   message2:"req.flash('signupMessage')",
+        //   user:req.user[0],
+        // });
+      }else if(req.user[0].type=="order"){
+        res.redirect('/BoiBan');
+      }else{
+        res.redirect('/ThuNgan');
+      }
+    }
+    return next();
+  }
+  res.redirect('/');
+}
