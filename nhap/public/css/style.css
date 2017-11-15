@@ -155,3 +155,6 @@ div.tab button.active {
 }
 /* 2 columns */
 .grid-item--width2 { width: 40%; }
+.show {
+  display: block!important;
+}

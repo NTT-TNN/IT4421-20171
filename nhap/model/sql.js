@@ -1,18 +1,25 @@
 var mysql = require('mysql');
-
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "codai1296",
     database: "it4421"
 });
+module.exports = connection;
 
-var getProducts=function(param1,param2,callback){
-    connection.query('SELECT * FROM Products',function(error,result){
-        callback(null,result);
-    });
-}
+// connection.connect(function (err) {
+//     if(err) console.log('hhhh');
+//     console.log('bbb');
+    
+// })
 
-module.exports ={
-    getProducts,
- };
+// var getProducts=function(param1,param2,callback){
+//     connection.query('SELECT * FROM Products',function(error,result){
+//         callback(null,result);
+//     });
+// }
+
+
+
+
+ 

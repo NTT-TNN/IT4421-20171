@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>A+ Coffee</title>
   <script src = "/socket.io/socket.io.js"></script>
-  <script src = "jquery-3.2.1.min.js"></script>
+  <script src = "js/jquery.min.js"></script>
   <link rel="stylesheet" href="css/bootstrap-grid.css">
   <link rel="stylesheet" href="css/bootstrap-grid.css.map">
   <link rel="stylesheet" href="css/bootstrap-grid.min.css">
@@ -46,9 +46,9 @@
       <div id="menu">
         <a id="welcome" href="index.html" style="font-family: Times New Roman, Times, serif; "onmouseover="style.color='black'"
 onmouseout="style.color='white'">WELCOME</a>
-        <a id="new" class="navactive" href="#new-product" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+        <a id="new" href="#new-product" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
 onmouseout="style.color='white'">NEW PRODUCT</a>
-        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+        <a href="#" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
 onmouseout="style.color='white'">ORDER</a>
         <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
 onmouseout="style.color='white'">SCHEDULE</a>
@@ -60,6 +60,8 @@ onmouseout="style.color='white'">LOG OUT</a>
           <span>
             <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 25px;"></i>
           </span>
+        </a>
+
       </div>
     </div>
   </div>
