@@ -25,7 +25,7 @@ var index = require('./routes/index');
 var BoiBan = require('./routes/BoiBan.js');
 var ThuNgan = require('./routes/ThuNgan.js');
 var QuanLy = require('./routes/QuanLy.js');
-var users = require('./routes/user.js');
+var users = require('./routes/users.js');
 var index = require('./routes/index.js');
 
 require('./routes/socket.js')(io);

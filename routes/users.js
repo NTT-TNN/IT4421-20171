@@ -6,7 +6,7 @@ var passport=require('passport');
 var router = express.Router()
 router.use(express.static("public"));
 
-router.get('/',isLoggedIn, function(req, res, next) {
+router.get('/',Authorization, function(req, res, next) {
   // console.log("Tên req",req.user);
   sql.getUSer(null,null,function(err,results){
     // console.log(results);
@@ -14,7 +14,7 @@ router.get('/',isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get("/user_info",isLoggedIn,function (req,res) {
+router.get("/user_info",Authentication,function (req,res) {
     sql.getUSer(null,null,function(err,results){
       // console.log(results);
       res.render("user_info",{user:results});
@@ -52,10 +52,15 @@ router.post('/user_info', function(req, res) {
   });
 });
 
+router.get('/logout',function(req,res){
+  req.logout();
+  // login=false;
+  res.redirect('/');
+})
 
 module.exports = router;
 
-function isLoggedIn(req,res,next){
+function Authorization(req,res,next){
   if(req.isAuthenticated()){
     // login=true;
     console.log(req.user);
@@ -74,6 +79,14 @@ function isLoggedIn(req,res,next){
       }
     }
     return next();
+  }
+  res.redirect('/');
+}
+
+function Authentication (req,res,next){
+  if(req.isAuthenticated()){
+    // login=true;
+    res.redirect('/users/user_info');
   }
   res.redirect('/');
 }

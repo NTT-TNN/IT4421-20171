@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/login',passport.authenticate('local-login',{
   successRedirect: '/user/',
-  failureRedirect: '/user',
+  failureRedirect: '/',
   failureFlash: true,
 }))
 
