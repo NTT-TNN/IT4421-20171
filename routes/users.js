@@ -14,7 +14,7 @@ router.get('/',Authorization, function(req, res, next) {
   });
 });
 
-router.get("/user_info",Authentication,function (req,res) {
+router.get("/user_info",isLoggedIn,function (req,res) {
     sql.getUSer(null,null,function(err,results){
       // console.log(results);
       res.render("user_info",{user:results});
@@ -85,6 +85,14 @@ function Authentication (req,res,next){
   if(req.isAuthenticated()){
     // login=true;
     res.redirect('/users/user_info');
+  }
+  res.redirect('/');
+}
+
+function isLoggedIn(req,res,next){
+  if(req.isAuthenticated()){
+    // login=true;
+    return next();
   }
   res.redirect('/');
 }
