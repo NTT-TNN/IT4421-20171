@@ -22,7 +22,10 @@
                             <img width="400" height="250" class="group list-group-image" id="AddUrl_images" src ="<%= "../images/default.jpg" %> " alt="" />
                         </p>
                         <p style="text-align: center;">
-                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="addPicture('addChange')">Upload</button>
+                            <button onclick="upload()" type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="addPicture('addChange')">Upload</button>
+                        </p>
+                        <p id="pic" style="display:none;">
+                        <input type="file" name="pic" accept="image/*">
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -66,6 +69,9 @@
                         </p>
                         <p style="text-align: center;">
                             <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button>
+                        </p>
+                        <p class="pic" style="display:none;">
+                        <input type="file" name="pic" accept="image/*">
                         </p>
                     </div>
                 </div>

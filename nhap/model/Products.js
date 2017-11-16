@@ -14,11 +14,12 @@ function insertProduct(product, callback){
                          VALUES ("${product.ProductName}", "${product.Price}", '1',"images/default.jpg","${product.Description}") `;
     connection.query(addStatement, (error, result)=>{ // query tra lai ham callback 2 bien error, result 
         if (error) {
-            console.log("sql insert error! :");
+            console.log("sql insert error!:");
             callback('add_error');
+
         }
-        else callback("add successfull");
-    })
+        else callback(result);
+    }
 
 }
 function editProduct(product, callback){

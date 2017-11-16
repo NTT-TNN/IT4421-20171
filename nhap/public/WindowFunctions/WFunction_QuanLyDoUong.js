@@ -1,4 +1,4 @@
-var len = products.length;
+// var len = products.length;
 function addProduct(){
     product = {
         ProductName: $("#AddProductName").val(),
@@ -13,19 +13,19 @@ function addProduct(){
         data: JSON.stringify(product),
         contentType: "application/json",
         success: function(){
-            var l=len++;
+            var l = products.push(product) -1;
             var newProducthtml = `<div class="item  col-xs-4 col-lg-4" id="` + l + `">
                                     <div class="thumbnail">
-                                        <img width="400" height="250" class="group list-group-image" src="` +product.Url_images+ `" alt="" />
+                                        <img width="400" height="250" class="group list-group-image" src="` +products[l].Url_images+ `" alt="" />
                                         <div class="caption">
                                             <h4 class="group inner list-group-item-heading" id="cafe01">
-                                                `+product.ProductName +`
+                                                `+products[l].ProductName +`
                                             </h4>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <p class="lead">
                                                         $`+
-                                                        product.Price+`
+                                                        products[l].Price+`
 
                                                     </p>
                                                 </div>
@@ -36,10 +36,10 @@ function addProduct(){
                                                 </div>
                                                 <div class="col-xs-6" style="margin-top:-30px;">
                                                     <div class="col-md-3 .col-md-offset-3" style="padding-left: 20; margin-right: 20px;">
-                                                        <a onclick="displayEditForm('`+ l+` ')" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
+                                                        <a onclick="displayEditForm(`+ l +`)" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
                                                     </div>
                                                     <div class="col-md-3 .col-md-offset-3" style="padding-left: 20;padding-right: 0;">
-                                                        <a onclick="displayDeleteConfirmForm('`+ l+`');" class="btn btn-success" data-toggle="modal"
+                                                        <a onclick="displayDeleteConfirmForm(`+ l +`)" class="btn btn-success" data-toggle="modal"
                                                             data-target="#deleteConfirmForm">Delete</a>
                                                     </div>
                                                 </div>
@@ -60,7 +60,8 @@ function addProduct(){
 
 
 function displayEditForm(i){
-    // console.log(products[i].ProductName);
+    console.log(i);
+    console.log(products[i].ProductName);
 
     $("#ProductName").val(products[i].ProductName);
     $("#Description").val(products[i].Description);
@@ -76,6 +77,7 @@ function displayEditForm(i){
             Url_images: products[i].Url_images,
             Categories_CategoryID: products[i].Categories_CategoryID
         };
+
         editProduct(JSON.stringify(update_product));
         var s=`#`+i;
             var changeProducthtml = `<div class="item  col-xs-4 col-lg-4" id="` + i + `">
@@ -100,10 +102,10 @@ function displayEditForm(i){
                                                 </div>
                                                 <div class="col-xs-6" style="margin-top:-30px;">
                                                     <div class="col-md-3 .col-md-offset-3" style="padding-left: 20; margin-right: 20px;">
-                                                        <a onclick="displayEditForm('`+ i+` ')" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
+                                                        <a onclick="displayEditForm(`+ i+`)" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
                                                     </div>
                                                     <div class="col-md-3 .col-md-offset-3" style="padding-left: 20;padding-right: 0;">
-                                                        <a onclick="displayDeleteConfirmForm('`+ i+`');" class="btn btn-success" data-toggle="modal"
+                                                        <a onclick="displayDeleteConfirmForm(`+ i+`)" class="btn btn-success" data-toggle="modal"
                                                             data-target="#deleteConfirmForm">Delete</a>
                                                     </div>
                                                 </div>
@@ -133,6 +135,8 @@ function editProduct(update_product){
 function displayDeleteConfirmForm(i){
     var s=`#`+i;
     $("#deleteConfirm_btn").click(function () {
+        // var p=products.splice(i,1);
+        // console.log(p.ProductName);
         deleteProduct(products[i].ProductID);
         $(s).remove();
     })
@@ -148,8 +152,13 @@ function deleteProduct(id){
         contentType: 'application/json',
         success: function(){
             console.log("ahihi");
+            
         }
     });
+}
+
+function upload(){
+    document.getElementById("pic").style="";
 }
 
 function addPicture(){

@@ -39,7 +39,7 @@ router.post("/edit", function (req, res) {
 router.post("/delete", function (req, res) {
     // console.log(req.body);
     products_sql.deleteProduct(req.body, (result) => { //truyen vao mot dinh nghia ham
-        // console.log(result);
+        console.log(result);
     });
     res.send();
 });
