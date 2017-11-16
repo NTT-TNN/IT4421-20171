@@ -22,8 +22,6 @@ router.get("/user_info",Authentication,function (req,res) {
 
 });
 
-
-
 router.post('/login',passport.authenticate('local-login',{
   successRedirect: '/users/',
   failureRedirect: '/',
