@@ -1,107 +1,94 @@
 <%- include head.ejs %>
 
 <body>
-  <div class="header-index" style="font-family: Times New Roman, Times, serif;">
-    User Infomation
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-2">
-        <div id="avatar">
 
+  <div class="container">
+
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <h6>Upload a different photo...</h6>
+
+          <input type="file" class="form-control">
         </div>
       </div>
 
-      <div class="col-md-10">
-        <form action="http://localhost:8000/user/user_info" method="post" >
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Name:
-                </div>
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!-- <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a>
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div> -->
+        <h3>Personal info</h3>
+
+        <form class="form-horizontal" role="form" action="/users/user_info" method="post">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">ID:</label>
+            <div class="col-lg-8">
+              <input  id="iduser" name="iduser" class="form-control" readonly type="text" value='<%= user[0].iduser %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Full Name:</label>
+            <div class="col-lg-8">
+              <input  id="name" name="name" class="form-control" readonly type="text" value='<%= user[0].fullname %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Sex:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="gender"eadonly type="text" value='<%= user[0].gender %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Birthday:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="birthday" readonly type="text" value='<%= user[0].birthday %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Email:</label>
+            <div class="col-md-8">
+              <input id="email" class="form-control" name="email" readonly type="text" value='<%= user[0].email %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Phone Number:</label>
+            <div class="col-md-8">
+              <input id="phone" class="form-control" readonly type="text" name="phone" value='<%= user[0].phonenumber %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Position:</label>
+            <div class="col-md-8">
+              <input class="form-control" name="position" readonly type="text" value='<%= user[0].type %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Address:</label>
+            <div class="col-md-8">
+              <input id="address" class="form-control" name="diachi" readonly type="text" value='<%= user[0].address %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <div id="btn-edit">
+                <button type="button" class="btn btn-primary mr-auto" id="edit" onclick="editInfo()">Edit</button>
+                <button type="submit" class="btn btn-primary mr-auto" id="ok" onclick="" style="display:none;">OK</button>
+                <button type="button" class="btn btn-primary mr-auto" id="cancel" onclick="" style="display:none"><a href="/user_info" style="color: white;">Cancel</a></button>
               </div>
-              <input id="name" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;" value='<%= user[0].fullname %>' name="name" type="text">
             </div>
           </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Sex:
-                </div>
-              </div>
-            <input id="sex" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].gender %>' name="gender" type="text">
-            </div>
-          </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Birthday:
-                </div>
-              </div>
-              <input id="birthday" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].birthday %>' name="birthday" type="text">
-            </div>
-          </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Email:
-                </div>
-              </div>
-              <input id="email" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].email %>' name="email" type="text">
-            </div>
-          </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Phone number:
-                </div>
-              </div >
-              <input id="phone" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].phonenumber %>' name="phone" type="text">
-            </div>
-          </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Position
-                </div>
-              </div>
-              <input id="position" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].type %>' name="position" type="text">
-            </div>
-          </div>
-
-          <div class="container-fluid line">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="field" >
-                    Address:
-                </div>
-              </div>
-              <input id="address" class="value col-md-8" readonly style="border: none;background-color: #e8e8e8;"value='<%= user[0].address %>' name="diachi" type="text">
-            </div>
-
-          </div>
-          <div id="btn-edit">
-            <button type="button" class="btn btn-primary mr-auto" id="edit" onclick="editInfo()">Edit</button>
-            <button type="submit" class="btn btn-primary mr-auto" id="ok" onclick="" style="display:none;">OK</button>
-            <button type="button" class="btn btn-primary mr-auto" id="cancel" onclick="" style="display:none"><a href="http://localhost:8000/user_info" style="color: white;">Cancel</a></button>
-          </div>
-
         </form>
-
       </div>
-    </div>
   </div>
+</div>
+<hr>
+
   <footer class="sub_footer">
     <div class="container">
       <div class="row">

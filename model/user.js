@@ -8,6 +8,15 @@ var connection = mysql.createConnection({
     database: "test_it4421"
 });
 
+var updateUser = function (param1,param2,callback) {
+  console.log(param1);
+  var updateUserCommand="UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser ="+param1.iduser+";";
+  console.log(updateUserCommand);
+  connection.query(updateUserCommand,function(error,result){
+      callback(null,result);
+  });
+}
+
 var getUSer = function(iduser,param2,callback){
   var getUserByIdCommand="SELECT * FROM user WHERE iduser="+iduser+";";
   console.log(getUserByIdCommand);
@@ -37,6 +46,7 @@ function validPassword(password){
  module.exports ={
     getUSer,
     findUser,
+    updateUser,
     validPassword,
     generateHash
  };

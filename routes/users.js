@@ -42,12 +42,13 @@ router.post('/user_info', function(req, res) {
     type: req.body.position,
     add: req.body.diachi
   };
-  sql.updateUser(req.body,null,function(err,results){
+  console.log(req.body);
+  user.updateUser(req.body,null,function(err,results){
     // console.log(results);
   });
 
   // console.log(data);
-  sql.getUSer(null,null,function(err,results){
+  user.getUSer(req.user[0].iduser,null,function(err,results){
     res.render("user_info",{user:results});
   });
 });
