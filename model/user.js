@@ -8,7 +8,17 @@ var connection = mysql.createConnection({
     database: "test_it4421"
 });
 
-var password;
+var getUSer = function(iduser,param2,callback){
+  var getUserByIdCommand="SELECT * FROM user WHERE iduser="+iduser+";";
+  console.log(getUserByIdCommand);
+  connection.query(getUserByIdCommand,function(error,result){
+    if(error){
+      throw error;
+    }
+     console.log(result);
+      callback(null,result);
+  });
+}
 var findUser=function(param1,param2,callback){
   var findUserCommand="SELECT * FROM user where username='"+param1+"' and password='"+param2+"';";
     connection.query(findUserCommand,function(error,result){
@@ -25,6 +35,7 @@ function validPassword(password){
 
 
  module.exports ={
+    getUSer,
     findUser,
     validPassword,
     generateHash

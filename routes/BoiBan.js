@@ -1,55 +1,26 @@
 var express = require('express');
 var DoUong = require("../model/DoUong.js");
+var user = require("../model/user.js");
+var authen = require("../routes/authen.js");
 
 
 var router = express.Router();
 
 
-router.get("/",isLoggedIn,function (req,res) {
-  DoUong.getProducts(null,null,function(err,results){
-    console.log(results);
-    res.render("menu",{products:results});
+router.get("/",authen.isOrder,function (req,res) {
+  DoUong.getProducts(null,null,function(err,products){
+    console.log(req.user[0].iduser);
+    user.getUSer(req.user[0].iduser,null,function(err,user){
+      // console.log(results);
+      // console.log(results);
+      res.render("menu",{
+        products:products,
+        user:user
+      });
+    });
+
   });
 
 });
 
 module.exports = router;
-
-function isLoggedIn(req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    return next();
-  }
-  res.redirect('/');
-}
-
-function Authorization(req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    console.log(req.user);
-    if(req.user!=undefined){
-      if(req.user[0].type=="manager"){
-        res.redirect('/QuanLy/ThongKe');
-        // res.render('thongKe',{
-        //   message1:"req.flash('loginMessage')",
-        //   message2:"req.flash('signupMessage')",
-        //   user:req.user[0],
-        // });
-      }else if(req.user[0].type=="order"){
-        res.redirect('/BoiBan');
-      }else{
-        res.redirect('/ThuNgan');
-      }
-    }
-    return next();
-  }
-  res.redirect('/');
-}
-
-function Authentication (req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    res.redirect('/users/user_info');
-  }
-  res.redirect('/');
-}

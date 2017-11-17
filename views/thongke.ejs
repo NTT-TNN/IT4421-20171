@@ -43,13 +43,31 @@ function LoadChart(){
     type: 'POST',
     data: JSON.stringify(data),
     contentType: 'application/json',
-    url: 'http://127.0.0.1:8000/QuanLy/LoadChart',
+    url: '/QuanLy/LoadChart',
     success: function(results) {
-
+          console.log(results);
           var columns=[];
           for(var i=0;i<results.length;++i){
-            var temp=[results[i].ProductName,results[i].number];
-            columns.push(temp);
+            console.log(columns);
+            flag=true;
+            for(var j=0;j<columns.length;++j){
+              console.log(columns[j][0]);
+              console.log(results[i].ProductName);
+              if(columns[j][0]==results[i].ProductName){
+                console.log("hihi");
+                flag=false;
+                columns[j].push(results[i].number);
+                break;
+              }
+
+            }
+            if(flag){
+              columns.push([results[i].ProductName]);
+              columns[columns.length-1].push(results[i].number);
+            }
+
+            // var temp=[results[i].ProductName,results[i].number];
+            // columns.push(temp);
           }
           console.log(columns);
           var chart = c3.generate({

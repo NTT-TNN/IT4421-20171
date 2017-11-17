@@ -1,22 +1,24 @@
 var express = require('express');
-var sql = require("../model/sql.js");
+var user = require("../model/user.js");
 var passport=require('passport');
-
+var authen = require("../routes/authen.js");
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
 router.use(express.static("public"));
 
-router.get('/',Authorization, function(req, res, next) {
-  // console.log("Tên req",req.user);
-  sql.getUSer(null,null,function(err,results){
+router.get('/',authen.isLoggedIn, function(req, res, next) {
+  console.log(req.user[0].iduser);
+  user.getUSer(req.user[0].iduser,null,function(err,results){
     // console.log(results);
+    console.log(results);
     res.render("user_info",{user:results});
   });
 });
 
-router.get("/user_info",isLoggedIn,function (req,res) {
-    sql.getUSer(null,null,function(err,results){
-      // console.log(results);
+router.get("/user_info",authen.isLoggedIn,function (req,res) {
+    console.log(req.user[0].iduser);
+    user.getUSer(req.user[0].iduser,null,function(err,results){
+      console.log(results);
       res.render("user_info",{user:results});
     });
 
@@ -57,42 +59,3 @@ router.get('/logout',function(req,res){
 })
 
 module.exports = router;
-
-function Authorization(req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    console.log(req.user);
-    if(req.user!=undefined){
-      if(req.user[0].type=="manager"){
-        res.redirect('/QuanLy/ThongKe');
-        // res.render('thongKe',{
-        //   message1:"req.flash('loginMessage')",
-        //   message2:"req.flash('signupMessage')",
-        //   user:req.user[0],
-        // });
-      }else if(req.user[0].type=="order"){
-        res.redirect('/BoiBan');
-      }else{
-        res.redirect('/ThuNgan');
-      }
-    }
-    return next();
-  }
-  res.redirect('/');
-}
-
-function Authentication (req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    res.redirect('/users/user_info');
-  }
-  res.redirect('/');
-}
-
-function isLoggedIn(req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    return next();
-  }
-  res.redirect('/');
-}

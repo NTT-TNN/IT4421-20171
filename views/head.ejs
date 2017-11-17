@@ -47,15 +47,27 @@
         <a class="navbar-brand" href="index.html" style="font-family:Playball" >A+ Coffee</a>
       </div>
       <div id="menu">
-        <a id="welcome" href="index.html" style="font-family: Times New Roman, Times, serif; "onmouseover="style.color='black'"
-onmouseout="style.color='white'">WELCOME</a>
-        <a id="new" href="#new-product" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
-onmouseout="style.color='white'">NEW PRODUCT</a>
-        <a href="#" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
-onmouseout="style.color='white'">ORDER</a>
-        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
-onmouseout="style.color='white'">SCHEDULE</a>
-        <a href="#" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+        <a id="welcome" href="/" style="font-family: Times New Roman, Times, serif; "onmouseover="style.color='black'"
+onmouseout="style.color='white'">TRANG CHỦ</a>
+
+        <%if (user[0].type == "order") { %>
+            <a href="/BoiBan" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+  onmouseout="style.color='white'">ORDER</a>
+        <% } %>
+        <%if (user[0].type == "manager") { %>
+            <a href="/QuanLy/ThongKe" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+  onmouseout="style.color='white'">THỐNG KÊ</a>
+        <% } %>
+        <%if (user[0].type == "manager") { %>
+            <a href="/QuanLy/QuanLyNhanVien" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+  onmouseout="style.color='white'">QUẢN LÝ NHÂN VIÊN</a>
+        <% } %>
+        <%if (user[0].type == "accountant") { %>
+            <a href="/ThuNgan" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+  onmouseout="style.color='white'">BÁN HÀNG</a>
+        <% } %>
+
+        <a href="/users/user_info" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
 onmouseout="style.color='white'">PROFILE</a>
         <a href="/users/logout" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
 onmouseout="style.color='white'">LOG OUT</a>

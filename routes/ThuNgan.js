@@ -1,10 +1,16 @@
 var express = require('express');
 var DonHang = require("../model/DonHang.js");
+var user = require("../model/user.js");
+var authen = require("../routes/authen.js");
 
 var router = express.Router()
 
-router.get("/",Authorization,function(req,res){
-  res.render("banhang");
+router.get("/",authen.isAccountant,function(req,res){
+  user.getUSer(req.user[0].iduser,null,function(err,user){
+    // console.log(results);
+    // console.log(results);
+    res.render("banhang",{user:user});
+  });
 });
 
 router.post("/thanhToan",function(req,res){
@@ -15,34 +21,3 @@ router.post("/thanhToan",function(req,res){
 });
 
 module.exports = router;
-
-function Authorization(req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    console.log(req.user);
-    if(req.user!=undefined){
-      if(req.user[0].type=="manager"){
-        res.redirect('/QuanLy/ThongKe');
-        // res.render('thongKe',{
-        //   message1:"req.flash('loginMessage')",
-        //   message2:"req.flash('signupMessage')",
-        //   user:req.user[0],
-        // });
-      }else if(req.user[0].type=="order"){
-        res.redirect('/BoiBan');
-      }else{
-        res.redirect('/ThuNgan');
-      }
-    }
-    return next();
-  }
-  res.redirect('/');
-}
-
-function Authentication (req,res,next){
-  if(req.isAuthenticated()){
-    // login=true;
-    res.redirect('/users/user_info');
-  }
-  res.redirect('/');
-}
