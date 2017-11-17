@@ -47,18 +47,22 @@ function LoadChart(){
     success: function(results) {
           console.log(results);
           var columns=[];
+          columns.push(['x']);
           for(var i=0;i<results.length;++i){
-            console.log(columns);
+            // console.log(columns);
             flag=true;
             for(var j=0;j<columns.length;++j){
-              console.log(columns[j][0]);
-              console.log(results[i].ProductName);
+              // console.log(columns[j][0]);
+              // console.log(results[i].ProductName);
               if(columns[j][0]==results[i].ProductName){
-                console.log("hihi");
                 flag=false;
                 columns[j].push(results[i].number);
+                if(columns[j][0]==results[0].ProductName){
+                  columns[0].push(moment(results[i].OrderDate).format("YYYY-MM-DD"));
+                }
                 break;
               }
+
 
             }
             if(flag){
@@ -73,9 +77,19 @@ function LoadChart(){
           var chart = c3.generate({
               bindto: '#chart',
               data: {
+                x:'x',
                 columns:columns,
                 type: chartType
-              }
+              },
+              axis : {
+                x : {
+                    type : 'timeseries',
+                    tick: {
+                        format: function (x) { return x.getMonth()+1; }
+                      //format: '%Y' // format string is also available for timeseries data
+                    }
+                }
+            }
           });
       }
     });

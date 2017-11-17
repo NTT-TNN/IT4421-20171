@@ -20,7 +20,7 @@ var getUSer = function(iduser,param2,callback){
   });
 }
 var findUser=function(param1,param2,callback){
-  var findUserCommand="SELECT * FROM user where username='"+param1+"' and password='"+param2+"';";
+  var findUserCommand="SELECT * FROM user where email='"+param1+"' and password='"+param2+"';";
     connection.query(findUserCommand,function(error,result){
         callback(error,result);
     });

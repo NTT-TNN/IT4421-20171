@@ -26,7 +26,6 @@ var insertDonHang = function(param1,param2,callback){
         connection.query(insertOrderdetails,function(error,result){
           if(error) throw error;
           if(i==(param1.length-1)){
-            console.log("sssssss");
             callback(null,result);
           }
         });
@@ -41,7 +40,7 @@ var getNumberProducts = function(param1,param2,callback){
   }else{
     // Command1="SELECT sum(Quantity) as number,ProductName from orderdetails,products,`order`\
   // where orderdetails.ProductID=products.ProductID and `order`.OrderDate between '"+param1.startDate+ "' and '"+param1.stopDate+ "' group by orderdetails.ProductID;";
-        Command1="select sum(Quantity) as number,ProductName ,products.ProductID from orderdetails,products,`order` where orderdetails.ProductID=products.ProductID group by orderdetails.ProductID,(`order`.OrderDate);";
+        Command1="select sum(Quantity) as number,ProductName ,products.ProductID,OrderDate from orderdetails,products,`order` where orderdetails.ProductID=products.ProductID group by orderdetails.ProductID,MONTH(`order`.OrderDate);";
   }
   connection.query(Command1,function(error,result){
     if(error) throw error;

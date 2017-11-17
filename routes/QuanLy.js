@@ -25,8 +25,8 @@ router.post("/LoadChart",function (req,res) {
   console.log(req.body);
   DonHang.getNumberProducts(req.body,null,function(err,results){
 
-    console.log("hihi");
-    console.log(results);
+    // console.log("hihi");
+    // console.log(results);
     res.send(results);
   });
   // res.render("thongKe",{});
