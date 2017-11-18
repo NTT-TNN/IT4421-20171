@@ -1,10 +1,47 @@
 var express = require('express');
+var multer  = require('multer');
 var user = require("../model/user.js");
 var passport=require('passport');
 var authen = require("../routes/authen.js");
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
 router.use(express.static("public"));
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+
+router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
+  if (!req.file) {
+    console.log("No file received");
+    return res.send({
+      success: false
+    });
+
+  } else {
+    const host = req.host;
+    // const filePath =req.file.path.subString(12);
+    console.log("iduser");
+    console.log(req.body);
+    var filePath=req.file.path.slice(7);
+    console.log(filePath);
+    // console.log(test.slice(7));
+    user.updateAvatar(filePath,req.body.iduser,function(err,result){
+      if(err) throw err;
+      // console.log(filePath);
+      console.log('file received');
+      return res.redirect("/users/user_info");
+    })
+
+  }
+});
 
 router.get('/',authen.isLoggedIn, function(req, res, next) {
   console.log(req.user[0].iduser);

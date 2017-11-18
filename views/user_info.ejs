@@ -6,12 +6,17 @@
 
 	<div class="row">
       <!-- left column -->
+
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <img src="<%= user[0].urlavatar %>" class="avatar img-circle" alt="avatar" style="width:100px;height:100px">
           <h6>Upload a different photo...</h6>
 
-          <input type="file" class="form-control">
+          <form enctype="multipart/form-data" action="/users/uploadsAvatar" method= "post">
+            <input  id="iduser" name="iduser" hidden="true" readonly type="text" value='<%= user[0].iduser %>'>
+            <input type="file" name="avatar" />
+            <input type="submit"  class="btn btn-info" value="Upload" name="submit">
+          </form>
         </div>
       </div>
 
@@ -24,7 +29,7 @@
         </div> -->
         <h3>Personal info</h3>
 
-        <form class="form-horizontal" role="form" action="/users/user_info" method="post">
+
           <div class="form-group">
             <label class="col-lg-3 control-label">ID:</label>
             <div class="col-lg-8">
@@ -100,6 +105,8 @@
   </footer>
 
   <script type="text/javascript">
+
+
   function editInfo(){
     var edit = $("#edit");
     var ok = $("#ok");

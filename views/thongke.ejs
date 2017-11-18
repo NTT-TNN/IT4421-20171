@@ -49,6 +49,7 @@ moment().format();
 console.log(moment().format("YYYY-MM-DD"));
 $("#stopDate").val(moment().format("YYYY-MM-DD"));
 $("#startDate").val(moment().subtract(1, 'months').format("YYYY-MM-DD"));
+
 function LoadChart(){
   var chartType=$('#chartType :selected').text();
   var step=$('#step :selected').val();
