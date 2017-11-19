@@ -1,0 +1,321 @@
+<%- include head.ejs %>
+    <div class="modal fade" id="Add_Product" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header" style="background-color:#2196F3">
+                        <h4 class="modal-title">Product Detail</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p> Name:
+                            <input type="text" class="form-control" step="1" placeholder="Tên đồ uống" id = "AddProductName">
+                        </p>
+                        <p> Description:
+                            <input type="text" class="form-control" step="2" placeholder="Mô tả" id="AddProductDescription">
+                        </p>
+                        <p> Price:
+                            <input type="number" class="form-control" min="1" max="100" step="10000" placeholder="Giá tiền"  id="AddProductPrice">
+                        </p>
+                        <!-- <p> Time:
+                            <input type="number" class="form-control" step="4" placeholder="Thời hạn sử dụng">
+                        </p> -->
+                        <p style="text-align: center;">
+                            <img width="400" height="250" class="group list-group-image" id="AddUrl_images" src ="<%= "../images/default.jpg" %> " alt="" />
+                        </p>
+                        <p style="text-align: center;">
+                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="changeAddPicture('addChange')">Change</button>
+                        </p>
+                        <!-- <p>
+                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Picture</button>
+                        </p> -->
+                    </div>
+                    <div class="modal-footer">
+                        <div class="container-fluid text-center">
+                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Cancel</button>
+                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto" onclick="addProduct()" data-toggle="modal" href="#table_modal"
+                                data-dismiss="modal">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editForm" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#2196F3">
+                    <h4 class="modal-title">Product details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid" style="text-align: left;">
+                        <p hidden> IdForm:
+                            <input type="text" class="form-control" step="1" id="ProductID">
+                        </p>
+                        <p> Name:
+                            <input type="text" class="form-control" step="2" id="ProductName">
+                        </p>
+                        <p> Description:
+                            <input type="text" class="form-control" step="3" id="Description">
+                        </p>
+                        <p> Price:
+                            <input type="number" class="form-control" min="1" max="100" step="10000" id="Price">
+                        </p>
+                        <!-- <p> Time:
+                            <input type="number" class="form-control" step="4" value="Thời hạn sử dụng">
+                        </p> -->
+                        <p style="text-align: center;">
+                            <img width="400" height="250" class="group list-group-image"   id ="Url_images" alt="" />
+                        </p>
+                        <p style="text-align: center;">
+                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button>
+                        </p>
+                        <!-- <p>Name:
+                            <input type="text" id="ProductName">
+                        </p>
+                        <p>Price:
+                            <input type="text" id="Price">
+                        </p>
+                        <p>Description:
+                            <input type="text" id="Description">
+                        </p> -->
+                        <!-- <img width="400" height="250" class="group list-group-image" src="<%= products[0].Url_images %> " alt="" /> -->
+                    </div>
+
+                    <!-- <div class="container-fluid" style="text-align: center;">
+                        <div class="row">
+                            <!-- <div class="col-md-1 center-margin">
+                                <h6>TABLE</h6>
+                            </div> -->
+                    <!-- <div class="col-md-4 center-margin">
+                                <h5 id="ProductName">PRODUCT</h5>
+                            </div>
+                            <div class="col-md-2 center-margin">
+                                <h6 id="Number">NUMBER</h6>
+                            </div>
+                            <div class="col-md-2 center-margin">
+                                <h6 id="Price">PRICE</h6>
+                            </div>
+                            <div class="col-md-2 center-margin">
+                                <h6>TOTAL</h6>
+                            </div>
+                            <div class="col-md-1 center-margin">
+                                <br>
+                            </div>
+                        </div>
+                        <div id="order_products">
+                        </div>
+
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid text-center">
+                        <!-- <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Hủy</button> -->
+                        <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="save_btn" data-toggle="modal" href="#table_modal"
+                            data-dismiss="modal">
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="deleteConfirmForm" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header" style="background-color:#2196F3">
+                        <h4 class="modal-title">Bạn có muốn xóa?</h4>
+                    </div>
+                    <!-- <div class="modal-body">
+                        <input type="number" class="form-control" id="table_number" min="1" max="100" step="1" placeholder="Số bàn">
+                    </div> -->
+                    <div class="modal-footer">
+                        <!-- <div class="container-fluid text-center">
+                            <button type="button" id="jaha" data-dismiss="modal" style="position:inherit" class="btn btn-primary mr-auto" onclick="addTable()">Xác nhận</button>
+                        </div> -->
+                        <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="deleteConfirm_btn" data-toggle="modal" href="#table_modal"
+                            data-dismiss="modal">
+                            Xác nhận
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="main">
+        <!-- ============ Menu Section  ============= -->
+        <div class="menu">
+            <div class="container-fluid" style="padding-left: 0;padding-right: 0;">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="tab">
+                            <button class="tablinks" onclick="openCity(event, 'Coffee')" id="defaultOpen">Coffee</button>
+                            <button class="tablinks" onclick="openCity(event, 'Cake')">Cake</button>
+                            <button class="tablinks" onclick="openCity(event, 'Other')">Other</button>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="Coffee" class="tabcontent">
+                            <!-- ============ Coffee Section  ============= -->
+                            <div id="coffee">
+                                <div class="header-index" style="font-family: Times New Roman, Times, serif;">
+                                    Coffee
+                                </div>
+
+
+                                <!-- <div class="row-md-3">
+                                    <a onclick="addProduct(<%=i%>)" class="btn btn-success">Add</a>
+                                </div> -->
+
+
+                                <!-- hien thi danh sach do uong -->
+                                <div class="row-md-9">
+
+                                    <div class="container-fluid">
+                                        <div class="row" id="productsForm" list-group>
+
+
+                                                <div>
+                                                    <button data-toggle="modal" data-target="#Add_Product" >
+                                                        <span>
+                                                            <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 250px;"></i>
+                                                        </span>
+                                                        </button>
+                                                </div>
+                                                <% for(var i=0; i<products.length; i++) { %>
+
+                                                    <div class="item  col-md-4 col-lg-4" id=<%=products[i].ProductID %> >
+                                                        <div class="thumbnail">
+                                                            <img width="400" height="250" class="group list-group-image" src="<%= products[i].Url_images %> " alt="" id="img<%=products[i].Url_images %>""
+                                                            />
+                                                            <div class="caption">
+                                                                <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
+                                                                    <%= products[i].ProductName %>
+                                                                </h4>
+                                                                <p class="group inner list-group-item-text" style="display :none;" id="des<%=products[i].ProductID %>">
+                                                                    <%= products[i].Description %>
+                                                                </p>
+                                                                <p class="group inner list-group-item-text" style="display :none;" id="url<%=products[i].ProductID %>">
+                                                                    <%= products[i].Url_images %>
+                                                                </p>
+                                                                <p class="group inner list-group-item-text" style="display :none;" id="category<%=products[i].ProductID %>">
+                                                                    <%= products[i].Categories_CategoryID%>
+                                                                </p>
+                                                                <!-- <p class="group inner list-group-item-text">
+                                                                                                                <%= products[i].Description %>
+                                                                                                            </p> -->
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <p class="lead" id="price<%=products[i].ProductID %>">
+                                                                            $
+                                                                            <%= products[i].Price %>
+                                                                        </p>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                    </div>
+                                                                    <div class="col-md-6" style="margin-top:-30px;">
+                                                                        <div class="col-md-3 .col-md-offset-3" style="padding-left: 20; margin-right: 20px;">
+                                                                            <a onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
+                                                                        </div>
+                                                                        <div class="col-md-3 .col-md-offset-3" style="padding-left: 20;padding-right: 0;">
+                                                                            <a onclick="displayDeleteConfirmForm('<%= JSON.stringify(products[i]) %>');" class="btn btn-success" data-toggle="modal"
+                                                                                data-target="#deleteConfirmForm">Delete</a>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <%}%>
+                                                <!-- <div id = "productsForm"> -->
+
+                                        </div>
+                                           </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- ============ Footer Section  ============= -->
+            <footer class="sub_footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by
+                                <a href="https://themewagon.com/">Team 9</a>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="sub-footer-text text-center">Back to
+                                <a href="#top">TOP</a>
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="sub-footer-text text-center">Built With Care By
+                                <a href="#" target="_blank">Us</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+
+        </div>
+        <script>
+            var products = JSON.parse('<%-JSON.stringify(products)%>');
+        </script>
+
+        <script src="WindowFunctions/WFunction_QuanLyDoUong.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        </script>
+        <script src="js/jquery.flexslider.min.js"></script>
+        <script src="js/jquery.hoverdir.js"></script>
+        <script src="js/jquery.mixitup.min.js"></script>
+        <script src="js/jQuery.scrollSpeed.js"></script>
+        <script src="js/jquery.validate.js"></script>
+        </script>
+        </script>
+        </script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/script.js"></script>
+        <!-- <script type="text/javascript" src="js/main.js" ></script> -->
+        <script src="js/wow.min.js"></script>
+        <!-- <script>
+    $("#table_modal").hide()
+    </script> -->
+        </body>
+
+        </html>
