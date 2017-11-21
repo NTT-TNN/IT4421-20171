@@ -67,52 +67,13 @@
                         <p> Price:
                             <input type="number" class="form-control" min="1" max="100" step="10000" id="Price">
                         </p>
-                        <!-- <p> Time:
-                            <input type="number" class="form-control" step="4" value="Thời hạn sử dụng">
-                        </p> -->
                         <p style="text-align: center;">
                             <img width="400" height="250" class="group list-group-image"   id ="Url_images" alt="" />
                         </p>
                         <p style="text-align: center;">
                             <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button>
                         </p>
-                        <!-- <p>Name:
-                            <input type="text" id="ProductName">
-                        </p>
-                        <p>Price:
-                            <input type="text" id="Price">
-                        </p>
-                        <p>Description:
-                            <input type="text" id="Description">
-                        </p> -->
-                        <!-- <img width="400" height="250" class="group list-group-image" src="<%= products[0].Url_images %> " alt="" /> -->
                     </div>
-
-                    <!-- <div class="container-fluid" style="text-align: center;">
-                        <div class="row">
-                            <!-- <div class="col-md-1 center-margin">
-                                <h6>TABLE</h6>
-                            </div> -->
-                    <!-- <div class="col-md-4 center-margin">
-                                <h5 id="ProductName">PRODUCT</h5>
-                            </div>
-                            <div class="col-md-2 center-margin">
-                                <h6 id="Number">NUMBER</h6>
-                            </div>
-                            <div class="col-md-2 center-margin">
-                                <h6 id="Price">PRICE</h6>
-                            </div>
-                            <div class="col-md-2 center-margin">
-                                <h6>TOTAL</h6>
-                            </div>
-                            <div class="col-md-1 center-margin">
-                                <br>
-                            </div>
-                        </div>
-                        <div id="order_products">
-                        </div>
-
-                    </div> -->
                 </div>
                 <div class="modal-footer">
                     <div class="container-fluid text-center">
@@ -177,14 +138,6 @@
                                 <div class="header-index" style="font-family: Times New Roman, Times, serif;">
                                     Coffee
                                 </div>
-
-
-                                <!-- <div class="row-md-3">
-                                    <a onclick="addProduct(<%=i%>)" class="btn btn-success">Add</a>
-                                </div> -->
-
-
-                                <!-- hien thi danh sach do uong -->
                                 <div class="row-md-9">
 
                                     <div class="container-fluid">
@@ -200,26 +153,14 @@
                                                 </div>
                                                 <% for(var i=0; i<products.length; i++) { %>
 
-                                                    <div class="item  col-md-4 col-lg-4" id=<%=products[i].ProductID %> >
+                                                    <div class="item  col-md-4 col-lg-4" id="<%=products[i].ProductID %>" >
                                                         <div class="thumbnail">
-                                                            <img width="400" height="250" class="group list-group-image" src="<%= products[i].Url_images %> " alt="" id="img<%=products[i].Url_images %>""
-                                                            />
+                                                            <img width="400" height="250" class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>"/>
                                                             <div class="caption">
                                                                 <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
                                                                     <%= products[i].ProductName %>
                                                                 </h4>
-                                                                <p class="group inner list-group-item-text" style="display :none;" id="des<%=products[i].ProductID %>">
-                                                                    <%= products[i].Description %>
-                                                                </p>
-                                                                <p class="group inner list-group-item-text" style="display :none;" id="url<%=products[i].ProductID %>">
-                                                                    <%= products[i].Url_images %>
-                                                                </p>
-                                                                <p class="group inner list-group-item-text" style="display :none;" id="category<%=products[i].ProductID %>">
-                                                                    <%= products[i].Categories_CategoryID%>
-                                                                </p>
-                                                                <!-- <p class="group inner list-group-item-text">
-                                                                                                                <%= products[i].Description %>
-                                                                                                            </p> -->
+
                                                                 <div class="row">
                                                                     <div class="col-md-4">
                                                                         <p class="lead" id="price<%=products[i].ProductID %>">
@@ -237,7 +178,7 @@
                                                                             <a onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success" data-toggle="modal" data-target="#editForm">Edit</a>
                                                                         </div>
                                                                         <div class="col-md-3 .col-md-offset-3" style="padding-left: 20;padding-right: 0;">
-                                                                            <a onclick="displayDeleteConfirmForm('<%= JSON.stringify(products[i]) %>');" class="btn btn-success" data-toggle="modal"
+                                                                            <a onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success" data-toggle="modal"
                                                                                 data-target="#deleteConfirmForm">Delete</a>
                                                                         </div>
                                                                     </div>
@@ -249,7 +190,6 @@
                                                     </div>
 
                                                 <%}%>
-                                                <!-- <div id = "productsForm"> -->
 
                                         </div>
                                            </div>
