@@ -53,7 +53,9 @@
       $("#BH").addClass("navactive");
     }else if (path.includes("users")) {
       $("#PRO").addClass("navactive");
-    }
+    }else if (path.includes("QuanLyDoUong") {
+      $("#QLDU").addClass("navactive");
+    })
 });
   </script>
 
@@ -70,9 +72,8 @@
         <% } %>
         <%if (user[0].type == "manager") { %>
             <a id="TK" class="font-menu" href="/QuanLy/ThongKe">THỐNG KÊ</a>
-        <% } %>
-        <%if (user[0].type == "manager") { %>
-            <a id="QLNV" class="font-menu" href="/QuanLy/QuanLyNhanVien">QUẢN LÝ NHÂN VIÊN</a>
+            <a id="QLNV" class="font-menu" href="/QuanLy/QuanLyNhanVien">NHÂN VIÊN</a>
+            <a id="QLDU" class="font-menu" href="/QuanLy/QuanLyDoUong">ĐỒ UỐNG</a>
         <% } %>
         <%if (user[0].type == "accountant") { %>
             <a id="BH" class="font-menu" href="/ThuNgan">BÁN HÀNG</a>

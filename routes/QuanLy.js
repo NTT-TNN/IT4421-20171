@@ -27,9 +27,13 @@ router.get("/QuanLyNhanVien",authen.isManager,function (req,res) {
         user:user
       });
     });
-
-
-  // res.render("thongKe",{});
+});
+router.get("/QuanLyDoUong",authen.isManager,function (req,res) {
+    user.getUSer(req.user[0].iduser,null,function(err,user){
+      res.render("quanlydouong",{
+        user:user
+      });
+    });
 });
 
 router.post("/LoadChart",function (req,res) {
