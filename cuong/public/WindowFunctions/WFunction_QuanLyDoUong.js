@@ -15,13 +15,14 @@ function displayEditForm(id){
     document.getElementById("ProductName").value = name;
     document.getElementById("Price").value = price;
     document.getElementById("Description").value = description;
+    document.getElementById("Url_images").setAttribute("src",url);
     $("#save_btn").click(function () {
         console.log("hello")
         update_product = {
             ProductID: id,
             ProductName: name,
             Description:description,
-            Price: price2,
+            Price: price,
             Url_images: url,
             Categories_CategoryID: category,
         };
@@ -29,6 +30,7 @@ function displayEditForm(id){
         editProduct(JSON.stringify(update_product));
         document.getElementById("cafe" +id).innerText = document.getElementById("ProductName").value;
         document.getElementById("price"+id).innerText= document.getElementById("Price").value;
+        document.getElementById("img"+id).setAttribute("src",  document.getElementById("Url_images").getAttribute("src"));
     })
 }
 
