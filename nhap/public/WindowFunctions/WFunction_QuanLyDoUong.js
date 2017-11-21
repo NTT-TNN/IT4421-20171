@@ -7,6 +7,12 @@ function addProduct(){
         Url_images: $("#AddUrl_images").attr("src")
         // Categories_CategoryID: product.Categories_CategoryID
     };
+
+    // $("#s_img").click(function(){
+    //     var html=`<img width="400" height="250" class="group list-group-image" id="AddUrl_images" alt="" />`
+    //     $(html).replaceAll("#AddUrl_images");
+    // })
+
     $.ajax({
         url: "DK_QuanLy/add",
         type: "POST",
@@ -157,8 +163,22 @@ function deleteProduct(id){
     });
 }
 
-function upload(){
+function status(){
     document.getElementById("pic").style="";
+}
+
+function up(){
+    console.log("abc");
+    $.ajax({
+        url:'/DK_QuanLy/upload',
+        cache:false,
+        contentType:false,
+        processData:false,
+        async:false,
+        success:function(answ){
+            // $('#result').html(answ);
+        }
+    });
 }
 
 function addPicture(){

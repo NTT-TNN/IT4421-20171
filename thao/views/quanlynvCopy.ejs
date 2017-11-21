@@ -1,0 +1,110 @@
+<%- include head.ejs %>
+<div class="main">
+  <div class="searching-area container">
+    <div class="input-group" id="text-area-searching">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+      </span>
+      <input id="text-searching" type="text" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,...">
+    </div>
+
+      <div id="add-emp">
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </span>
+      </div>
+
+  </div>
+
+  <div class="content-qlnv">
+    <!-- Title -->
+    <div class="title-qlnv">
+      <h3>DANH SÁCH NHÂN VIÊN</h3>
+    </div>
+    <!-- List of employees -->
+    <div class="list-employees">
+      <% for(var i=0; i<employees.length; i++) {%>
+      <div class="employee">
+        <div class="container emp-content">
+          <div class="col-md-2 img-emp">
+            <img src="images/avatar-1510997165958" alt="">
+          </div>
+          <div class="col-md-10 emp-description">
+            <div class="emp-body">
+              <div class="title-emp">
+                <h2><%= employees[i].fullname %></h2>
+                </div>
+                <div class="description container-fluid">
+                  <div class="col-md-6">
+                    <div class="item birthday">
+                      <div class="icon">
+                        <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].birthday %></p>
+                    </div>
+                    <div class="item sex">
+                      <div class="icon">
+                        <i class="fa fa-mars" aria-hidden="true"></i>
+                        <i class="fa fa-venus" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].gender %></p>
+                    </div>
+                    <div class="item position">
+                      <div class="icon">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].type %></p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="item email">
+                      <div class="icon">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].email %></p>
+                    </div>
+                    <div class="item phone">
+                      <div class="icon">
+                        <i class="fa fa-mobile" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].phonenumber %></p>
+                    </div>
+                    <div class="item address">
+                      <div class="icon">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      </div>
+                      <p><%= employees[i].address %></p>
+                    </div>
+                  </div>
+
+                  </div>
+
+                <div class="emp-bottom">
+                    <button type="button" class="btn btn-primary mr-auto edit" onclick="">Edit</button>
+                    <button type="button" class="btn btn-primary mr-auto delete"  onclick="">Delete</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <%}%>
+        
+
+      </div>
+    </div>
+
+    <footer class="sub_footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+          <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+          <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+<script src="javascript/qlnv.js" ></script>
+

@@ -22,10 +22,10 @@
                             <img width="400" height="250" class="group list-group-image" id="AddUrl_images" src ="<%= "../images/default.jpg" %> " alt="" />
                         </p>
                         <p style="text-align: center;">
-                            <button onclick="upload()" type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="addPicture('addChange')">Upload</button>
+                            <button onclick="status()" type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="addPicture('addChange')">Upload</button>
                         </p>
-                        <p id="pic" style="display:none;">
-                        <input type="file" name="pic" accept="image/*">
+                        <p style="display:none;">
+                          
                         </p>
                     </div>
                     <div class="modal-footer">
@@ -65,13 +65,16 @@
                             <input type="number" class="form-control" min="1" max="100" step="10000" id="Price">
                         </p>
                         <p style="text-align: center;">
-                            <img width="400" height="250" class="group list-group-image"   id ="Url_images" alt="" />
+                            <img width="400" height="250" class="group list-group-image" src="<%= typeof file != 'undefined' ? file : '' %>"  id ="Url_images" alt="" />
                         </p>
                         <p style="text-align: center;">
-                            <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button>
+                            <button onclick="status()" type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button>
                         </p>
-                        <p class="pic" style="display:none;">
-                        <input type="file" name="pic" accept="image/*">
+                        <p>
+                             <form id="pic" style="display:none;">
+                                  <input name="myImage" type="file">
+                                  <button onclick="up()" type="submit" class="btn">Submit</button>
+                            </form>   
                         </p>
                     </div>
                 </div>
@@ -151,6 +154,7 @@
                                                         <span>
                                                             <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 250px;"></i>
                                                         </span>
+                                                    </button>
                                                 </div>
                                                 <% for(var i=0; i<products.length; i++) { %>
                                                     
@@ -234,7 +238,6 @@
                     </div>
                 </div>
             </footer>
-
 
         </div>
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <title>Node File Uploads</title>
+</head>
+<body>
+  <div class="container">
+    <h1>File Upload</h1>
+    <%= typeof msg != 'undefined' ? msg : '' %>
+    <form action="http://localhost:9000/DK_QuanLy/upload" method="POST" enctype="multipart/form-data">
+          <span>File</span>
+          <input name="file" type="file">
+          <input type="submit" class="btn">
+    </form>
+    <br>
+  </div>
+ </body>
+</html>

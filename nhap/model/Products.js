@@ -18,8 +18,8 @@ function insertProduct(product, callback){
             callback('add_error');
 
         }
-        else callback(result);
-    }
+        else callback('successfull add');
+    })
 
 }
 function editProduct(product, callback){
@@ -46,6 +46,7 @@ function deleteProduct(product, callback) {
         else callback("delete successfull");
     })
 }
+
 module.exports = {
     getProducts,
     insertProduct,
