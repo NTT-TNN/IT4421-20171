@@ -11,13 +11,24 @@ router.use(express.static("public"));
 router.get("/ThongKe",authen.isManager,function (req,res) {
   DonHang.getNumberProducts(null,null,function(err,results){
     user.getUSer(req.user[0].iduser,null,function(err,user){
-      res.render("thongKe",{
+      res.render("thongke",{
         results:results,
         user:user
       });
     });
 
   });
+  // res.render("thongKe",{});
+});
+
+router.get("/QuanLyNhanVien",authen.isManager,function (req,res) {
+    user.getUSer(req.user[0].iduser,null,function(err,user){
+      res.render("quanlynv",{
+        user:user
+      });
+    });
+
+
   // res.render("thongKe",{});
 });
 

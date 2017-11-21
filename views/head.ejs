@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style-portfolio.css">
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon-1.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -38,45 +38,61 @@
   <link rel="stylesheet" href="css/banhang.css">
   <link rel="stylesheet" href="css/menu.css">
   <link rel="stylesheet" href="css/info.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="js/jquery.validate.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var path = document.URL;
+    if(path.includes("BoiBan")){
+      $("#OD").addClass("navactive");
+    }else if (path.includes("ThongKe")){
+      $("#TK").addClass("navactive");
+    }else if (path.includes("QuanLyNhanVien")) {
+      $("#QLNV").addClass("navactive");
+    }else if (path.includes("ThuNgan")) {
+      $("#BH").addClass("navactive");
+    }else if (path.includes("user_info")) {
+      $("#PRO").addClass("navactive");
+    }
+});
+  </script>
 
 <body>
-  <div class="navbar ">
+  <div class="navbar">
     <div class="container hidden-xl-down hidden-xs-up">
       <div class="col-md-4 hidden-xl-down hidden-xs-up">
         <a class="navbar-brand" href="index.html" style="font-family:Playball" >A+ Coffee</a>
       </div>
       <div id="menu">
-        <a id="welcome" href="/" style="font-family: Times New Roman, Times, serif; "onmouseover="style.color='black'"
-onmouseout="style.color='white'">TRANG CHỦ</a>
 
         <%if (user[0].type == "order") { %>
-            <a href="/BoiBan" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+            <a id="OD" class="font-menu" href="/BoiBan" onmouseover="style.color='black'"
   onmouseout="style.color='white'">ORDER</a>
         <% } %>
         <%if (user[0].type == "manager") { %>
-            <a href="/QuanLy/ThongKe" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+            <a id="TK" class="font-menu" href="/QuanLy/ThongKe"  onmouseover="style.color='black'"
   onmouseout="style.color='white'">THỐNG KÊ</a>
         <% } %>
         <%if (user[0].type == "manager") { %>
-            <a href="/QuanLy/QuanLyNhanVien" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+            <a id="QLNV" class="font-menu" href="/QuanLy/QuanLyNhanVien" onmouseover="style.color='black'"
   onmouseout="style.color='white'">QUẢN LÝ NHÂN VIÊN</a>
         <% } %>
         <%if (user[0].type == "accountant") { %>
-            <a href="/ThuNgan" class="navactive" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+            <a id="BH" class="font-menu" href="/ThuNgan" onmouseover="style.color='black'"
   onmouseout="style.color='white'">BÁN HÀNG</a>
         <% } %>
 
-        <a href="/users/user_info" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+        <a id="PRO" class="font-menu" href="/users/user_info" onmouseover="style.color='black'"
 onmouseout="style.color='white'">PROFILE</a>
-        <a href="/users/logout" style="font-family: Times New Roman, Times, serif;" onmouseover="style.color='black'"
+        <a class="font-menu" href="/users/logout" onmouseover="style.color='black'"
 onmouseout="style.color='white'">LOG OUT</a>
-        <button data-toggle="modal" data-target="#Order_detail">
+  <%if (user[0].type == "order") { %>
+        <button class="coffee-btn" data-toggle="modal" data-target="#Order_detail">
           <span>
             <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 25px;"></i>
           </span>
         </a>
-
+<% } %>
       </div>
     </div>
   </div>

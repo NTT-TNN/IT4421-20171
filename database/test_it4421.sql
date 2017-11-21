@@ -184,6 +184,10 @@ LOCK TABLES `user` WRITE;
 INSERT INTO `user` VALUES (1,'Dem Tran b','29/10/1996','trandem','abcxyzt','0979651189','tranvandem291096@gmail.com','nam','gqiutb iq','manager','Quang Ninh');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'test_it4421'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -194,4 +198,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-11 11:33:11
+-- Dump completed on 2017-11-21  7:07:12

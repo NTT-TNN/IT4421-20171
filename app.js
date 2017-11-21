@@ -28,6 +28,7 @@ var QuanLy = require('./routes/QuanLy.js');
 var users = require('./routes/users.js');
 var index = require('./routes/index.js');
 
+
 require('./routes/socket.js')(io);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

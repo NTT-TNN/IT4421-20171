@@ -12,6 +12,7 @@ socket.on('connect', function() {
 })
 
 socket.on("order", function(order) {
+  $(".modal-backdrop").remove();
   // console.log('data: ', order);
   orders.push(order);
   reload("chuaxacnhan", orders, "order_list_waitting", order_modal,"Xác nhận");
@@ -125,6 +126,8 @@ var changeStt = function(x) {
 }
 
 function thanhToan(i){
+  orders[i][0].status = 2;
+  reload("chuathanhtoan",orders,"unpaid_bills",unpaid_bills, "Thanh Toán");
   var data=orders[i];
   $.ajax({
   type: 'POST',
