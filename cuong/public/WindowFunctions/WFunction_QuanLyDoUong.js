@@ -95,7 +95,6 @@ function addProduct(){
             console.log(products);
         }
     });
-
 }
 function editProduct(update_product){
     $.ajax({

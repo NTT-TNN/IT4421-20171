@@ -1,8 +1,8 @@
 <%- include head.ejs %>
+<form method="post" action="/DK_QuanLy/add" enctype="multipart/form-data">
   <div class="modal fade" id="Add_Product" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form>
           <div class="modal-header" style="background-color:#2196F3">
             <h4 class="modal-title">Product Detail</h4>
           </div>
@@ -25,7 +25,7 @@
             </p>
             <p style="text-align: center;">
               <input type="file" name="productImage" id="choseimage" style="display:none;" onchange="readURL(this);" />
-              <!-- <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="changeAddPicture('addChange')">Change</button> -->
+              <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="changeAddPicture('addChange')">Change</button>
             </p>
             <!-- <p>
                             <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Picture</button>
@@ -34,9 +34,8 @@
           <div class="modal-footer">
             <div class="container-fluid text-center">
               <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Cancel</button>
-              <button type="button" style="position:inherit" class="btn btn-primary mr-auto" onclick="addProduct()" data-toggle="modal" href="#table_modal" data-dismiss="modal">
-                                Save
-                            </button>
+              <input type="submit" style="position:inherit" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal"value="Save"/>
+
             </div>
           </div>
         </form>
@@ -71,7 +70,7 @@
               </p>
               <p style="text-align: center;">
                 <input type="file" name="productImage" id="editimage" style="display:none;" onchange="readURL1(this);" />
-                <!-- <button type="button" style="position:inherit" class="btn btn-primary mr-auto">Change</button> -->
+                <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="editUrl_images">Change</button>
               </p>
             </div>
           </div>
@@ -232,10 +231,10 @@
   </div>
   <script>
     var products = JSON.parse('<%-JSON.stringify(products)%>');
-    $("#AddUrl_images").click(function() {
+    $("#addChange").click(function() {
       $("#choseimage").click();
     });
-    $("#Url_images").click(function() {
+    $("#editUrl_images").click(function() {
       $("#editimage").click();
     });
 

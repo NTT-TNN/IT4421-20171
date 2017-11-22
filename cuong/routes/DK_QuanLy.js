@@ -5,7 +5,7 @@ var router = express.Router();
 // var products;
 router.get("/", function (req, res) {
     // console.log(req)
-    // getProductArray cua DK_QuanLy 
+    // getProductArray cua DK_QuanLy
     products_sql.getProducts(null, null, function (err, results) { //Goi den ham getProducts (return results) cua Model Product
         // console.log(results);
         // products = JSON.parse(results);
@@ -15,7 +15,7 @@ router.get("/", function (req, res) {
     });
 });
 router.post("/add", function(req, res){
-    // console.log(req.body);
+    console.log(req.body);
     products_sql.insertProduct(req.body, (result) => { //truyen vao mot dinh nghia ham
         products_sql.getProduct(result, null, (rs)=>{
             console.log("ket qua query" + result);
@@ -24,7 +24,7 @@ router.post("/add", function(req, res){
         })
 
     })
-    
+
 })
 router.post("/edit", function (req, res) {
     console.log(req.body);
