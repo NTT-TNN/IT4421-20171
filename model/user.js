@@ -63,9 +63,8 @@ var deleteUser = function(id, callback){
   });
 }
 
-var getUSer = function(iduser, param2, callback) {
+var getUser = function(iduser, param2, callback) {
   var getUserByIdCommand = "SELECT * FROM user WHERE iduser=" + iduser + ";";
-  // console.log(getUserByIdCommand);
   connection.query(getUserByIdCommand, function(error, result) {
     if (error) {
       throw error;
@@ -105,7 +104,7 @@ module.exports = {
   deleteUser,
   editUser,
   updateAvatar,
-  getUSer,
+  getUser,
   getAllUSers,
   findUser,
   updateUser,

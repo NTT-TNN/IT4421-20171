@@ -24,7 +24,7 @@ router.use(express.static("public"));
 
 router.get("/ThongKe", authen.isManager, function(req, res) {
   DonHang.getNumberProducts(null, null, function(err, results) {
-    user.getUSer(req.user[0].iduser, null, function(err, user) {
+    user.getUser(req.user[0].iduser, null, function(err, user) {
       res.render("thongke", {
         results: results,
         user: user
@@ -40,7 +40,7 @@ router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
     position = posi;
   });
   user.getAllUSers(null,null, function(err,result){
-    user.getUSer(req.user[0].iduser, null, function(err, user) {
+    user.getUser(req.user[0].iduser, null, function(err, user) {
         res.render("quanlynv", {
           allUsers:result,
           user: user,
@@ -59,7 +59,7 @@ router.post("/deleteUser",function(req,res){
 
 router.post("/addUser",function(req,res){
   user.insertUser(req.body,function(err,result){
-    user.getUSer(result.insertId,null,function(error,addedUser){
+    user.getUser(result.insertId,null,function(error,addedUser){
       res.send(addedUser);
     })
   });
@@ -69,7 +69,7 @@ router.post("/addUser",function(req,res){
 router.get("/QuanLyDoUong", authen.isManager, function(req, res) {
   products_sql.getProducts(null, null, function(err, results) { //Goi den ham getProducts (return results) cua Model Product
 
-    user.getUSer(req.user[0].iduser, null, function(err, user) {
+    user.getUser(req.user[0].iduser, null, function(err, user) {
       console.log(results);
       res.render("quanlydouong", {
         products: results,

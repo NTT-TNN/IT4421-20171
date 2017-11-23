@@ -47,7 +47,7 @@ router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
 
 router.get('/',authen.isLoggedIn, function(req, res, next) {
   console.log(req.user[0].iduser);
-  user.getUSer(req.user[0].iduser,null,function(err,results){
+  user.getUser(req.user[0].iduser,null,function(err,results){
     // console.log(results);
     console.log(results);
     res.render("user_info",{user:results});
@@ -56,7 +56,7 @@ router.get('/',authen.isLoggedIn, function(req, res, next) {
 
 router.get("/user_info",authen.isLoggedIn,function (req,res) {
     console.log(req.user[0].iduser);
-    user.getUSer(req.user[0].iduser,null,function(err,results){
+    user.getUser(req.user[0].iduser,null,function(err,results){
       console.log(results);
       res.render("user_info",{user:results});
     });
@@ -87,7 +87,7 @@ router.post('/user_info', function(req, res) {
   });
 
   // console.log(data);
-  user.getUSer(req.user[0].iduser,null,function(err,results){
+  user.getUser(req.user[0].iduser,null,function(err,results){
     res.render("user_info",{user:results});
   });
 });

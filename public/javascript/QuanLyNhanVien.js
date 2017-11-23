@@ -15,8 +15,6 @@ var displayEdit = function(id) {
   }
 
   document.getElementById("position"+type).setAttribute("selected","selected");
-
-  console.log(fullname);
   document.getElementById("nameEdit").value = fullname;
   document.getElementById("birthdayEdit").value = birthday;
   document.getElementById("sexEdit").value = gender;
@@ -31,7 +29,6 @@ var displayEdit = function(id) {
     birthdayEdit = document.getElementById("birthdayEdit").value;
     sexEdit = document.getElementById("sexEdit").value;
     typeEdit = listType.options[listType.selectedIndex].text;
-    console.log(typeEdit);
     emailEdit = document.getElementById("emailEdit").value;
     phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
     addressEdit = document.getElementById("addressEdit").value;
@@ -47,6 +44,20 @@ var displayEdit = function(id) {
       type: typeEdit,
       address: addressEdit
     };
+    for (var i = 0; i < allUsers.length; i++) {
+      if(allUsers[i].iduser == id){
+        allUsers[i].fullname = nameEdit;
+        allUsers[i].birthday = birthdayEdit;
+        allUsers[i].phonenumber = phoneNumberEdit;
+        allUsers[i].email = emailEdit;
+        allUsers[i].gender = sexEdit;
+        allUsers[i].type = typeEdit;
+        allUsers[i].address = addressEdit;
+        allUsers[i].password = passwordEdit;
+        console.log("edit thanh cong");
+        break;
+      }
+    }
     document.getElementById("name" + id).innerText = nameEdit;
     document.getElementById("birthday" + id).innerText = birthdayEdit;
     document.getElementById("sex" + id).innerText = sexEdit;
@@ -60,8 +71,9 @@ var displayEdit = function(id) {
       data: JSON.stringify(user),
       contentType: 'application/json',
       success: function() {
+
         // $("#results").append(html);
-        console.log("successful!")
+        console.log("edit thành công")
       }
     });
   })
@@ -154,7 +166,7 @@ var creatNewUser = function(user) {
   </div>
 
   <div class="emp-bottom">
-  <button type="button" data-toggle="modal" data-target="#emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(`+user.iduser+`)">Edit</button>
+  <button type="button" data-toggle="modal" data-target="#edit_emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(`+user.iduser+`)">Edit</button>
   <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser(`+user.iduser+`)" data-target="#ConfirmFormDelete">Delete</button>
   </div>
   </div>
@@ -197,7 +209,9 @@ var addEmployee =function(){
     success: function (user) {
       var newUser = creatNewUser(user[0]);
       $("#list-emp").append(newUser);
+      console.log("trc " + allUsers.length);
       allUsers.push(user[0]);
+      console.log("sau " + allUsers.length);
       resetAddModal();
     }
   }

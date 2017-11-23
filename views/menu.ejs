@@ -71,8 +71,6 @@
               <div id="Coffee" class="tabcontent">
                 <!-- ============ Coffee Section  ============= -->
                 <div id="coffee">
-
-
                   <!-- hien thi danh sach do uong -->
                   <div class="container-fluid">
                     <div class="row" list-group>
@@ -92,18 +90,15 @@
                                           <p class="lead">
                                               $<%= products[i].Price %></p>
                                       </div>
-
                                   </div>
                                   <div class="row">
                                     <form>
                                       <div class="col-md-6">
                                           <input class="form-control" type="number" min="1" value="1" id="<%= products[i].ProductID %>">
                                       </div>
-
                                       <div class="col-md-6">
                                           <a onclick="addDoUong(<%=i%>)"class="btn btn-success" >Add to cart</a>
                                       </div>
-
                                     </form>
 
                                   </div>
@@ -303,7 +298,6 @@
         evt.currentTarget.className += " active";
     }
 
-    // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
     </script>
 
