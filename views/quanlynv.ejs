@@ -1,51 +1,77 @@
 <%- include head.ejs %>
-<div class="modal fade" id="emp2_detail" role="dialog">
+<div class="modal fade" id="ConfirmFormDelete" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header" >
+      <form>
+        <div class="modal-header" style="background-color:#2196F3">
+          <h4 class="modal-title">Bạn có muốn xóa?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="deleteConfirm_btn" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+            Xác nhận
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal emp_detail -->
+<div class="modal fade" id="emp_detail" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
         <h4 class="modal-title">Profile</h4>
       </div>
       <div class="modal-body">
-          <div class="container-fluid" id="emp2-info">
-            <div class="name-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Họ và tên:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="Nguyễn Tuấn Anh">
-                </div>
+        <div class="container-fluid" id="emp-info">
+          <div class="name-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Họ và tên:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="nameEdit" type="text" value="Nguyễn Tuấn Anh">
               </div>
             </div>
-            <div class="birthday-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Ngày sinh:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="17/08/1996">
-                </div>
+          </div>
+          <div class="birthday-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Ngày sinh:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="birthdayEdit" type="text" value="17/08/1996">
               </div>
             </div>
-            <div class="sex-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Giới tính:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="Nam">
-                </div>
+          </div>
+          <div class="sex-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Giới tính:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="sexEdit" type="text" value="Nam">
               </div>
             </div>
-            <div class="position-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Chức vụ:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="Giám đốc">
+          </div>
+          <div class="position-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Chức vụ:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="typeEdit" type="text" value="Giám đốc" style="display:none;">
+
+                <select id="positionList">
+                  <% for(var i=0; i< position.length ; i++) {%>
+                    <option value="<%=i+1%>" id="position<%=position[i].type%>"><%=position[i].type%></option>
+                    <% } %>
+                  </select>
+
                 </div>
               </div>
             </div>
@@ -55,7 +81,7 @@
                   <h6>Email:</h6>
                 </div>
                 <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="tuaanhnguyen170896@gmail.com">
+                  <input class="form-control" id="emailEdit" type="text" value="tuaanhnguyen170896@gmail.com">
                 </div>
               </div>
             </div>
@@ -65,7 +91,7 @@
                   <h6>Số điện thoại:</h6>
                 </div>
                 <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="0123456789">
+                  <input class="form-control" id="phoneNumberEdit" type="text" value="0123456789">
                 </div>
               </div>
             </div>
@@ -75,198 +101,475 @@
                   <h6>Địa chỉ:</h6>
                 </div>
                 <div class="col-md-8 center-margin">
-                  <input class="form-control" id="focusedInput" type="text" value="Số 1 Đại Cồ Việt">
+                  <input class="form-control" id="addressEdit" type="text" value="Số 1 Đại Cồ Việt">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Mật Khẩu:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="passwordEdit" type="password" value="123456">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="container-fluid text-center">
+            <button type="button" class="btn btn-primary mr-auto" onclick="" id="editUser" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End modal emp_detail -->
+
+  <!-- Modal add -->
+  <div class="modal fade" id="emp-add" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Profile</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid" id="emp-add-info">
+            <div class="name-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Họ và tên:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="nameAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="birthday-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Ngày sinh:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="birthdayAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="sex-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Giới tính:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="sexAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="position-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Chức vụ:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="typeAdd" type="text" value="Giám đốc" style="display:none;">
+
+                  <select id="positionListAdd">
+                    <% for(var i=0; i< position.length ; i++) {%>
+                      <option value="<%=i+1%>" id="positionAdd<%=position[i].type%>"><%=position[i].type%></option>
+                      <% } %>
+                    </select>
+
+                  </div>
+                </div>
+              </div>
+              <div class="email-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Email:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="emailAdd" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="phone-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Số điện thoại:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="phoneAdd" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="address-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Địa chỉ:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="addressAdd" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Mật Khẩu:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="passwordAdd" type="password" value="">
                 </div>
               </div>
             </div>
           </div>
-      </div>
-      <div class="modal-footer">
-        <div class="container-fluid text-center">
-          <button type="button" class="btn btn-primary mr-auto" onclick="">OK</button>
-          <button type="button" class="btn btn-primary mr-auto"onclick=""
-          data-toggle="modal" href="#table_modal" data-dismiss="modal">
-            Cancel
-          </button>
+          <div class="modal-footer">
+            <div class="container-fluid text-center">
+              <button type="button" class="btn btn-primary mr-auto" onclick="addEmployee()" id="addUser" data-dismiss="modal">OK</button>
+              <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <!-- End modal add -->
+
+    <div class="main">
+      <div class="searching-area container">
+        <div class="input-group" id="text-area-searching">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+          <input id="text-searching" type="text" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,...">
+        </div>
+
+        <div id="add-emp">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#emp-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </span>
+        </div>
 
       </div>
-    </div>
 
-  </div>
+      <div class="content-qlnv">
+        <!-- Title -->
+        <div class="title-qlnv">
+          <h3>DANH SÁCH NHÂN VIÊN</h3>
+        </div>
+        <!-- List of employees -->
+        <div class="list-employees" id="list-emp">
+          <!-- employee 1 -->
+          <% for(var i=0; i< allUsers.length ; i++) {%>
+            <div class="employee" id="<%=allUsers[i].iduser %>">
+              <div class="container emp-content">
+                <div class="col-md-2 img-emp">
+                  <img src="<%=allUsers[i].urlavatar %>" alt="">
+                </div>
+                <div class="col-md-10 emp-description">
+                  <div class="emp-body">
+                    <div class="title-emp">
+                      <h2 id="name<%=allUsers[i].iduser %>"><%=allUsers[i].fullname %></h2>
+                    </div>
+                    <div class="description container-fluid">
+                      <div class="col-md-6">
+                        <div class="item birthday">
+                          <div class="icon">
+                            <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                          </div>
+                          <p id="birthday<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].birthday %>
+                          </p>
+                        </div>
+                        <div class="item sex">
+                          <div class="icon">
+                            <i class="fa fa-mars" aria-hidden="true"></i>
+                            <i class="fa fa-venus" aria-hidden="true"></i>
+                          </div>
+                          <p id="sex<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].gender %>
+                          </p>
+                        </div>
+                        <div class="item position">
+                          <div class="icon">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                          </div>
+                          <p id="type<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].type %>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="item email">
+                          <div class="icon">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                          </div>
+                          <p id="email<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].email %>
+                          </p>
+                        </div>
+                        <div class="item phone">
+                          <div class="icon">
+                            <i class="fa fa-mobile" aria-hidden="true"></i>
+                          </div>
+                          <p id="phone<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].phonenumber %>
+                          </p>
+                        </div>
+                        <div class="item address">
+                          <div class="icon">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                          </div>
+                          <p id="address<%=allUsers[i].iduser %>">
+                            <%=allUsers[i].address %>
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="emp-bottom">
+                      <button type="button" data-toggle="modal" data-target="#emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(<%=allUsers[i].iduser%>)">Edit</button>
+                      <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser(<%=allUsers[i].iduser%>)" data-target="#ConfirmFormDelete">Delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }%>
+
+          </div>
+        </div>
 
 
-<div class="main">
-  <div class="searching-area container">
-    <div class="input-group" id="text-area-searching">
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </span>
-      <input id="text-searching" type="text" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,...">
-    </div>
+        <footer class="sub_footer">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p>
+              </div>
+              <div class="col-md-4">
+                <p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p>
+              </div>
+              <div class="col-md-4">
+                <p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p>
+              </div>
+            </div>
+          </div>
+        </footer>
+        <script>
+        var allUsers = JSON.parse('<%-JSON.stringify(allUsers)%>');
+        var position = JSON.parse('<%-JSON.stringify(position)%>');
+        var displayEdit = function(id) {
+          var fullname,birthday,phonenumber,email,gender,type,address,password;
+          for(i =0 ; i<allUsers.length;i++){
+            if (allUsers[i].iduser == id) {
+              fullname = allUsers[i].fullname;
+              birthday = allUsers[i].birthday;
+              phonenumber = allUsers[i].phonenumber;
+              email = allUsers[i].email;
+              gender = allUsers[i].gender;
+              type = allUsers[i].type;
+              address = allUsers[i].address;
+              password = allUsers[i].password;
+              break;
+            }
+          }
 
-      <div id="add-emp">
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        </span>
-      </div>
+          document.getElementById("position"+type).setAttribute("selected","selected");
 
-  </div>
+          console.log(fullname);
+          document.getElementById("nameEdit").value = fullname;
+          document.getElementById("birthdayEdit").value = birthday;
+          document.getElementById("sexEdit").value = gender;
+          document.getElementById("typeEdit").value = type;
+          document.getElementById("emailEdit").value = email;
+          document.getElementById("phoneNumberEdit").value = phonenumber;
+          document.getElementById("addressEdit").value = address;
+          document.getElementById("passwordEdit").value = password;
+          $("#editUser").click(function() {
+            listType = document.getElementById("positionList");
+            nameEdit = document.getElementById("nameEdit").value;
+            birthdayEdit = document.getElementById("birthdayEdit").value;
+            sexEdit = document.getElementById("sexEdit").value;
+            typeEdit = listType.options[listType.selectedIndex].text;
+            console.log(typeEdit);
+            emailEdit = document.getElementById("emailEdit").value;
+            phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
+            addressEdit = document.getElementById("addressEdit").value;
+            passEdit = document.getElementById("passwordEdit").value
+            user = {
+              iduser: id,
+              fullname: nameEdit,
+              birthday: birthdayEdit,
+              password: passEdit,
+              phonenumber: phoneNumberEdit,
+              email: emailEdit,
+              gender: sexEdit,
+              type: typeEdit,
+              address: addressEdit
+            };
+            document.getElementById("name" + id).innerText = nameEdit;
+            document.getElementById("birthday" + id).innerText = birthdayEdit;
+            document.getElementById("sex" + id).innerText = sexEdit;
+            document.getElementById("type" + id).innerText = typeEdit;
+            document.getElementById("email" + id).innerText = emailEdit;
+            document.getElementById("phone" + id).innerText = phoneNumberEdit;
+            document.getElementById("address" + id).innerText = addressEdit;
+            $.ajax({
+              url: "/QuanLy/editUser",
+              type: "POST",
+              data: JSON.stringify(user),
+              contentType: 'application/json',
+              success: function() {
+                // $("#results").append(html);
+                console.log("successful!")
+              }
+            });
+          })
+        }
 
-  <div class="content-qlnv">
-    <!-- Title -->
-    <div class="title-qlnv">
-      <h3>DANH SÁCH NHÂN VIÊN</h3>
-    </div>
-    <!-- List of employees -->
-    <div class="list-employees">
-      <!-- employee 1 -->
-      <div class="employee" id="emp1">
-        <div class="container emp-content">
+        var deleteUser = function(id){
+          console.log(id);
+          $("#deleteConfirm_btn").click(function(){
+            $("#"+id).remove();
+            $.ajax({
+              url: "/QuanLy/deleteUser",
+              type: "POST",
+              data: JSON.stringify({
+                userid: id
+              }),
+              contentType: 'application/json',
+              success: function() {
+                console.log("successful!")
+              }
+            });
+          })
+        }
+
+        var creatNewUser = function(user) {
+          html = `<div class="employee" id="`+user.iduser+`">
+          <div class="container emp-content">
           <div class="col-md-2 img-emp">
-            <img src="images/avatar-1510997165958" alt="">
+          <img src="`+user.urlavatar+`" alt="">
           </div>
           <div class="col-md-10 emp-description">
-            <div class="emp-body">
-              <div class="title-emp">
-                <h2>Nguyễn Tuấn Anh</h2>
-                </div>
-                <div class="description container-fluid">
-                  <div class="col-md-6">
-                    <div class="item birthday">
-                      <div class="icon">
-                        <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-                      </div>
-                      <p>17/08/1996</p>
-                    </div>
-                    <div class="item sex">
-                      <div class="icon">
-                        <i class="fa fa-mars" aria-hidden="true"></i>
-                        <i class="fa fa-venus" aria-hidden="true"></i>
-                      </div>
-                      <p>Nam</p>
-                    </div>
-                    <div class="item position">
-                      <div class="icon">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                      </div>
-                      <p>Giám đốc</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="item email">
-                      <div class="icon">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                      </div>
-                      <p>tuananhnguyen170896@gmail.com</p>
-                    </div>
-                    <div class="item phone">
-                      <div class="icon">
-                        <i class="fa fa-mobile" aria-hidden="true"></i>
-                      </div>
-                      <p>0123456789</p>
-                    </div>
-                    <div class="item address">
-                      <div class="icon">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                      </div>
-                      <p>Số 1 Đại Cồ Việt</p>
-                    </div>
-                  </div>
-
-                  </div>
-
-                <div class="emp-bottom">
-                    <button type="button" class="btn btn-primary mr-auto edit" onclick="">Edit</button>
-                    <button type="button" class="btn btn-primary mr-auto delete"  onclick="">Delete</button>
-                </div>
-              </div>
-
-            </div>
+          <div class="emp-body">
+          <div class="title-emp">
+          <h2 id="name`+user.iduser+`">`+user.fullname+`</h2>
           </div>
-        </div>
-
-        <div class="employee" id="emp2">
-          <div class="container emp-content">
-            <div class="col-md-2 img-emp">
-              <img src="images/avatar-1510997165958" alt="">
-            </div>
-            <div class="col-md-10 emp-description">
-              <div class="emp-body">
-                <div class="title-emp">
-                  <h2>Nguyễn Tuấn Anh</h2>
-                  </div>
-                  <div class="description container-fluid">
-                    <div class="col-md-6">
-                      <div class="item birthday">
-                        <div class="icon">
-                          <i class="fa fa-birthday-cake" aria-hidden="true"></i>
-                        </div>
-                        <p>17/08/1996</p>
-                      </div>
-                      <div class="item sex">
-                        <div class="icon">
-                          <i class="fa fa-mars" aria-hidden="true"></i>
-                          <i class="fa fa-venus" aria-hidden="true"></i>
-                        </div>
-                        <p>Nam</p>
-                      </div>
-                      <div class="item position">
-                        <div class="icon">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                        <p>Giám đốc</p>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="item email">
-                        <div class="icon">
-                          <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </div>
-                        <p>tuananhnguyen170896@gmail.com</p>
-                      </div>
-                      <div class="item phone">
-                        <div class="icon">
-                          <i class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-                        <p>0123456789</p>
-                      </div>
-                      <div class="item address">
-                        <div class="icon">
-                          <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        </div>
-                        <p>Số 1 Đại Cồ Việt</p>
-                      </div>
-                    </div>
-
-                    </div>
-
-                  <div class="emp-bottom">
-                      <button type="button" data-toggle="modal" data-target="#emp2_detail" class="btn btn-primary mr-auto edit" onclick="">Edit</button>
-                      <button type="button" class="btn btn-primary mr-auto delete" onclick="">Delete</button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+          <div class="description container-fluid">
+          <div class="col-md-6">
+          <div class="item birthday">
+          <div class="icon">
+          <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+          </div>
+          <p id="birthday`+user.iduser+`">
+          `+user.birthday+`
+          </p>
+          </div>
+          <div class="item sex">
+          <div class="icon">
+          <i class="fa fa-mars" aria-hidden="true"></i>
+          <i class="fa fa-venus" aria-hidden="true"></i>
+          </div>
+          <p id="sex`+user.iduser+`">
+          `+user.gender +`
+          </p>
+          </div>
+          <div class="item position">
+          <div class="icon">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          </div>
+          <p id="type`+user.iduser+`">
+          `+user.type+`
+          </p>
+          </div>
+          </div>
+          <div class="col-md-6">
+          <div class="item email">
+          <div class="icon">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          </div>
+          <p id="email`+user.userid+`">
+          `+user.email+`
+          </p>
+          </div>
+          <div class="item phone">
+          <div class="icon">
+          <i class="fa fa-mobile" aria-hidden="true"></i>
+          </div>
+          <p id="phone`+user.iduser+`">
+          `+user.phonenumber+`
+          </p>
+          </div>
+          <div class="item address">
+          <div class="icon">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </div>
+          <p id="address`+user.iduser+`">
+          `+user.address+`
+          </p>
+          </div>
           </div>
 
-      </div>
+          </div>
+
+          <div class="emp-bottom">
+          <button type="button" data-toggle="modal" data-target="#emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(`+user.iduser+`)">Edit</button>
+          <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser(`+user.iduser+`)" data-target="#ConfirmFormDelete">Delete</button>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>`;
+          return html;
+        }
+
+        var resetAddModal =function(){
+          $("#nameAdd").val("");
+          $("#birthdayAdd").val("");
+          $("#sexAdd").val("");
+          $("#emailAdd").val("");
+          $("#phoneAdd").val("");
+          $("#addressAdd").val("");
+          $("#passwordAdd").val("");
+          $("#positionAdd"+position[0].type).attr("selected","selected");
+        }
+
+        var addEmployee =function(){
+          var typeList = document.getElementById("positionListAdd");
+          var addedEmployee =
+          {
+            name: $("#nameAdd").val(),
+            birthday: $("#birthdayAdd").val(),
+            sex: $("#sexAdd").val(),
+            email: $("#emailAdd").val(),
+            phone: $("#phoneAdd").val(),
+            address: $("#addressAdd").val(),
+            password: $("#passwordAdd").val(),
+            type: typeList.options[typeList.selectedIndex].text
+          }
+
+          $.ajax({
+            url: "/QuanLy/addUser",
+            type : "POST",
+            data: JSON.stringify(addedEmployee),
+            contentType: 'application/json',
+            success: function (user) {
+              var newUser = creatNewUser(user[0]);
+              $("#list-emp").append(newUser);
+              allUsers.push(user[0]);
+              resetAddModal();
+            }
+          }
+        );
+
+      }
+      </script>
+
+
+
     </div>
-
-
-    <footer class="sub_footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
-          <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
-          <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
-        </div>
-      </div>
-    </footer>
-
-
-
-
-  </div>

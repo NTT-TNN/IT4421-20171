@@ -9,13 +9,13 @@
 
       <div class="col-md-3" style="margin-top: 100px;">
         <div class="text-center">
-          <img src="<%= user[0].urlavatar %>" class="avatar img-circle" alt="avatar" style="width:100px;height:100px">
-          <h6>Upload a different photo...</h6>
+          <img src="<%= user[0].urlavatar %>" class="avatar img-circle" alt="avatar" style="width:100px;height:100px" id="imageAvatar">
+          <h6>Click Into The Image To Upload a different photo...</h6>
 
           <form enctype="multipart/form-data" action="/users/uploadsAvatar" method= "post">
             <input  id="iduser" name="iduser" hidden="true" readonly type="text" value='<%= user[0].iduser %>'>
-            <input type="file" name="avatar" />
-            <input id="upload-btn" type="submit"  class="btn btn-info" value="Upload" name="submit">
+            <input type="file" name="avatar" style="display : none" onchange="readURL(this)" id="fileImage">
+            <input id="upload-btn" type="submit"  class="btn btn-info" value="Upload" name="submit" style="position: relative;">
           </form>
         </div>
       </div>
@@ -45,7 +45,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Sex:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="gender"eadonly type="text" value='<%= user[0].gender %>'>
+              <input class="form-control" name="gender"readonly type="text" value='<%= user[0].gender %>'>
             </div>
           </div>
           <div class="form-group">
@@ -126,6 +126,22 @@
     email.css("background-color","white");
     address.attr("readonly", false).addClass("form-control");
     address.css("background-color","white");
+  }
+
+  $("#imageAvatar").click(function(){
+    $("#fileImage").click();
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#imageAvatar')
+          .attr('src', e.target.result)
+      };
+      console.log(input.files[0]);
+      reader.readAsDataURL(input.files[0]);
+    }
   }
 
   </script>

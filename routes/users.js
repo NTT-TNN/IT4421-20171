@@ -19,6 +19,8 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
   if (!req.file) {
     console.log("No file received");
     return res.send({
@@ -69,7 +71,7 @@ router.post('/login',passport.authenticate('local-login',{
 
 
 router.post('/user_info', function(req, res) {
-  // console.log(req.body);
+  console.log(req.body);
   data = {
     fullname: req.body.name,
     gender: req.body.gender,
