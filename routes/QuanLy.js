@@ -144,7 +144,7 @@ router.post("/LoadChart", function(req, res) {
 });
 
 router.post("/editUser",function(req,res){
-  console.log(req.body);
+  console.log('====> Edit post: ', req.body);
   user.editUser(req.body,function(err,rs){
   })
 });

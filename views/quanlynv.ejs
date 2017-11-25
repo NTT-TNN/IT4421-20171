@@ -116,9 +116,10 @@
         <div class="modal-footer">
           <div class="container-fluid text-center">
             <button type="button" class="btn btn-primary mr-auto" onclick="" id="editUser" data-dismiss="modal">OK</button>
-            <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+            <button type="button" class="btn btn-primary mr-auto" onclick=""  data-toggle="modal" href="#table_modal" data-dismiss="modal">
               Cancel
             </button>
+            
           </div>
         </div>
       </div>
@@ -260,7 +261,7 @@
       <div class="list-employees" id="list-emp">
         <!-- employee 1 -->
         <% for(var i=0; i< allUsers.length ; i++) {%>
-          <div class="employee" id="<%=allUsers[i].iduser %>">
+          <div class="employee" id="user<%=allUsers[i].iduser %>">
             <div class="container emp-content">
               <div class="col-md-2 img-emp">
                 <img src="<%=allUsers[i].urlavatar %>" alt="">
@@ -268,7 +269,7 @@
               <div class="col-md-10 emp-description">
                 <div class="emp-body">
                   <div class="title-emp">
-                    <h2 id="name<%=allUsers[i].iduser %>"><%=allUsers[i].fullname %></h2>
+                    <h2 id="name"><%=allUsers[i].fullname %></h2>
                   </div>
                   <div class="description container-fluid">
                     <div class="col-md-6">
@@ -276,7 +277,7 @@
                         <div class="icon">
                           <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                         </div>
-                        <p id="birthday<%=allUsers[i].iduser %>">
+                        <p id="birthday">
                           <%=allUsers[i].birthday %>
                         </p>
                       </div>
@@ -285,7 +286,7 @@
                           <i class="fa fa-mars" aria-hidden="true"></i>
                           <i class="fa fa-venus" aria-hidden="true"></i>
                         </div>
-                        <p id="sex<%=allUsers[i].iduser %>">
+                        <p id="sex">
                           <%=allUsers[i].gender %>
                         </p>
                       </div>
@@ -293,7 +294,7 @@
                         <div class="icon">
                           <i class="fa fa-user" aria-hidden="true"></i>
                         </div>
-                        <p id="type<%=allUsers[i].iduser %>">
+                        <p id="type">
                           <%=allUsers[i].type %>
                         </p>
                       </div>
@@ -303,7 +304,7 @@
                         <div class="icon">
                           <i class="fa fa-envelope" aria-hidden="true"></i>
                         </div>
-                        <p id="email<%=allUsers[i].iduser %>">
+                        <p id="email">
                           <%=allUsers[i].email %>
                         </p>
                       </div>
@@ -311,7 +312,7 @@
                         <div class="icon">
                           <i class="fa fa-mobile" aria-hidden="true"></i>
                         </div>
-                        <p id="phone<%=allUsers[i].iduser %>">
+                        <p id="phone">
                           <%=allUsers[i].phonenumber %>
                         </p>
                       </div>
@@ -319,7 +320,7 @@
                         <div class="icon">
                           <i class="fa fa-map-marker" aria-hidden="true"></i>
                         </div>
-                        <p id="address<%=allUsers[i].iduser %>">
+                        <p id="address">
                           <%=allUsers[i].address %>
                         </p>
                       </div>
@@ -328,8 +329,8 @@
                   </div>
 
                   <div class="emp-bottom">
-                    <button type="button" data-toggle="modal" data-target="#edit_emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(<%=allUsers[i].iduser%>)">Edit</button>
-                    <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser(<%=allUsers[i].iduser%>)" data-target="#ConfirmFormDelete">Delete</button>
+                    <button type="button" data-toggle="modal" data-target="#edit_emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit('<%- allUsers[i].iduser%>')">Edit</button>
+                    <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser('<%=allUsers[i].iduser%>')" data-target="#ConfirmFormDelete">Delete</button>
                   </div>
                 </div>
               </div>
