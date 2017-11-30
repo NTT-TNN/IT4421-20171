@@ -1,0 +1,67 @@
+<%- include head.ejs %>
+<% var date = new Date();
+var month;
+if(date.getMonth()==11){
+  month = 1;
+}else{
+  month = date.getMonth()+2;
+}
+var year = date.getFullYear();
+var number = new Date(year, month, 0).getDate();%>
+<form  action="/QuanLy/createSchedule" method="post">
+  <div class="schedule">
+    <div class="container-fluid" id="title-schedule">
+      <h2>LỊCH LÀM VIỆC THÁNG <%=month%> CHO NHÂN VIÊN</h2>
+    </div>
+    <div class="container-fluid">
+      <table class="table table-bordered" name="worked-schedule">
+        <thead>
+          <tr>
+            <th scope="col">Mã nhân viên</th>
+            <th scope="col">Họ tên</th>
+            <% for(var day=1; day<= number ; day++) {%>
+              <th scope="col"><%=day%></th>
+              <% }%>
+            </tr>
+          </thead>
+          <% for(var i=0; i< allUsers.length ; i++) {%>
+            <tr class = "gradeX" align="center">
+              <td><%=allUsers[i].iduser %></td>
+              <td><%=allUsers[i].fullname %></td>
+              <%
+
+              for(var day=1; day<= number ; day++) {
+                var count = 0;
+                for(var index = 0; index < schedule.length ; index++){
+                  if(schedule[index].iduser == allUsers[i].iduser && day == schedule[index].data){%>
+                    <td>
+                      <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" checked>
+                    </td>
+                    <%break; }else{
+                      count++;
+                    }
+                    if (count == schedule.length){%>
+                      <td>
+                        <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                      </td>
+                      <%}}}%>
+              </tr>
+              <% }%>
+            </table>
+          </div>
+        </div>
+        <div class="submit-btn">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+
+      <!-- ============ Footer Section  ============= -->
+      <footer class="sub_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+          </div>
+        </div>
+      </footer>

@@ -22,8 +22,15 @@ var getProduct = function (param1, param2, callback) {
 
 
 function insertProduct(param1, product ,callback){
-
-    var addStatement = "INSERT INTO products (ProductName, Price, Categories_CategoryID, Url_images,  descriptions) VALUES ('"+product.productName+"', "+product.productPrice+", '1','"+escape(param1)+"',"+product.productDescription+");";
+    var CategoryID = 1;
+    if(product.productType == "coffee"){
+      CategoryID = 1;
+    }else if(product.productType == "cake"){
+      CategoryID = 2;
+    }else{
+      CategoryID = 3;
+    }
+    var addStatement = "INSERT INTO products (ProductName, Price, Categories_CategoryID, Url_images,  descriptions) VALUES ('"+product.productName+"', "+product.productPrice+", '"+CategoryID+"','"+escape(param1)+"','"+product.productDescription+"');";
     console.log(addStatement);
     connection.query(addStatement, function(error, result){ // query tra lai ham callback 2 bien error, result
         callback(error,result);
@@ -31,14 +38,22 @@ function insertProduct(param1, product ,callback){
 
 }
 function editProduct(param1,product, callback){
+  var CategoryID = 1;
+  if(product.productType == "coffee"){
+    CategoryID = 1;
+  }else if(product.productType == "cake"){
+    CategoryID = 2;
+  }else{
+    CategoryID = 3;
+  }
     if (param1) {
-      var editStatement = "UPDATE products SET ProductName = '"+product.editProductName+"', Price = "+product.editProductPrice+",Categories_CategoryID = 1,  Url_images= '"+escape(param1)+"', descriptions= '"+product.editProductDescription+"' WHERE ProductID = "+product.editProductID+";";
+      var editStatement = "UPDATE products SET ProductName = '"+product.editProductName+"', Price = "+product.editProductPrice+",Categories_CategoryID = "+CategoryID+",  Url_images= '"+escape(param1)+"', descriptions= '"+product.editProductDescription+"' WHERE ProductID = "+product.editProductID+";";
       console.log(editStatement);
       connection.query(editStatement, function(error, result) { // query tra lai ham callback 2 bien error, result
           callback(error,result);
       });
     }else {
-      var editStatement = "UPDATE products SET ProductName = '"+product.editProductName+"', Price = "+product.editProductPrice+",Categories_CategoryID = 1, descriptions= '"+product.editProductDescription+"' WHERE ProductID = "+product.editProductID+";";
+      var editStatement = "UPDATE products SET ProductName = '"+product.editProductName+"', Price = "+product.editProductPrice+",Categories_CategoryID = "+CategoryID+", descriptions= '"+product.editProductDescription+"' WHERE ProductID = "+product.editProductID+";";
       console.log(editStatement);
       connection.query(editStatement, function(error, result) { // query tra lai ham callback 2 bien error, result
           callback(error,result);

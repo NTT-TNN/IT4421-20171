@@ -1,22 +1,23 @@
 var displayEdit = function(id) {
-  var fullname,birthday,phonenumber,email,gender,type,address,password;
+  // var fullname,birthday,phonenumber,email,gender,type,address,password;
+  var index;
   for(i =0 ; i<allUsers.length;i++){
     if (allUsers[i].iduser == id) {
-      fullname = allUsers[i].fullname;
-      birthday = allUsers[i].birthday;
-      phonenumber = allUsers[i].phonenumber;
-      email = allUsers[i].email;
-      gender = allUsers[i].gender;
-      type = allUsers[i].type;
-      address = allUsers[i].address;
-      password = allUsers[i].password;
+      index = i;
       break;
     }
   }
-
+  fullname = allUsers[index].fullname;
+  birthday = allUsers[index].birthday;
+  phonenumber = allUsers[index].phonenumber;
+  email = allUsers[index].email;
+  gender = allUsers[index].gender;
+  type = allUsers[index].type;
+  address = allUsers[index].address;
+  password = allUsers[index].password;
   document.getElementById("position"+type).setAttribute("selected","selected");
   document.getElementById("nameEdit").value = fullname;
-  document.getElementById("birthdayEdit").value = birthday;
+  $("#birthdayEdit").val(moment(birthday).format("YYYY-MM-DD"));
   document.getElementById("sexEdit").value = gender;
   document.getElementById("typeEdit").value = type;
   document.getElementById("emailEdit").value = email;
@@ -32,7 +33,8 @@ var displayEdit = function(id) {
     emailEdit = document.getElementById("emailEdit").value;
     phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
     addressEdit = document.getElementById("addressEdit").value;
-    passEdit = document.getElementById("passwordEdit").value
+    passEdit = document.getElementById("passwordEdit").value;
+    console.log(moment(birthdayEdit).format("YYYY-MM-DD"));
     user = {
       iduser: id,
       fullname: nameEdit,
@@ -44,22 +46,16 @@ var displayEdit = function(id) {
       type: typeEdit,
       address: addressEdit
     };
-    for (var i = 0; i < allUsers.length; i++) {
-      if(allUsers[i].iduser == id){
-        allUsers[i].fullname = nameEdit;
-        allUsers[i].birthday = birthdayEdit;
-        allUsers[i].phonenumber = phoneNumberEdit;
-        allUsers[i].email = emailEdit;
-        allUsers[i].gender = sexEdit;
-        allUsers[i].type = typeEdit;
-        allUsers[i].address = addressEdit;
-        allUsers[i].password = passwordEdit;
-        console.log("edit thanh cong");
-        break;
-      }
-    }
+        allUsers[index].fullname = nameEdit;
+        allUsers[index].birthday = birthdayEdit;
+        allUsers[index].phonenumber = phoneNumberEdit;
+        allUsers[index].email = emailEdit;
+        allUsers[index].gender = sexEdit;
+        allUsers[index].type = typeEdit;
+        allUsers[index].address = addressEdit;
+        allUsers[index].password = passwordEdit;
     document.getElementById("name" + id).innerText = nameEdit;
-    document.getElementById("birthday" + id).innerText = birthdayEdit;
+    $("#birthday" + id).text(moment(birthdayEdit).format("YYYY-MM-DD"));
     document.getElementById("sex" + id).innerText = sexEdit;
     document.getElementById("type" + id).innerText = typeEdit;
     document.getElementById("email" + id).innerText = emailEdit;
@@ -71,8 +67,6 @@ var displayEdit = function(id) {
       data: JSON.stringify(user),
       contentType: 'application/json',
       success: function() {
-
-        // $("#results").append(html);
         console.log("edit thành công")
       }
     });
@@ -115,7 +109,7 @@ var creatNewUser = function(user) {
   <i class="fa fa-birthday-cake" aria-hidden="true"></i>
   </div>
   <p id="birthday`+user.iduser+`">
-  `+user.birthday+`
+  `+new Date(user.birthday).toDateString()+`
   </p>
   </div>
   <div class="item sex">

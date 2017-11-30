@@ -6,18 +6,17 @@ var authen = require("../routes/authen.js");
 var router = express.Router()
 
 router.get("/",authen.isAccountant,function(req,res){
-  user.getUSer(req.user[0].iduser,null,function(err,user){
-    // console.log(results);
-    // console.log(results);
+  user.getUser(req.user[0].iduser,null,function(err,user){
     res.render("banhang",{user:user});
   });
 });
 
 router.post("/thanhToan",function(req,res){
+  console.log(req.body);
+  console.log("id cua thang thanh toan "+req.user);
   DonHang.insertDonHang(req.body,null,function (error,result) {
-      res.send({status:"Success"});
-  })
-
+      console.log(" da chay ok");
+  });
 });
 
 module.exports = router;

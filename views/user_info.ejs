@@ -51,7 +51,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Birthday:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="birthday" readonly type="text" value='<%= user[0].birthday %>'>
+              <input class="form-control" name="birthday" readonly type="text" value='<%=new Date(user[0].birthday).toDateString() %>'>
             </div>
           </div>
           <div class="form-group">
@@ -84,7 +84,7 @@
               <div id="btn-edit">
                 <button type="button" class="btn btn-primary mr-auto" id="edit" onclick="editInfo()">Edit</button>
                 <button type="submit" class="btn btn-primary mr-auto" id="ok" >OK</button>
-                <button type="button" class="btn btn-primary mr-auto" id="cancel"><a href="/user_info">Cancel</a></button>
+                <button type="button" type="reset" class="btn btn-primary mr-auto" id="cancel"><a href="http://localhost:8000/users/user_info">Cancel</a></button>
               </div>
             </div>
           </div>

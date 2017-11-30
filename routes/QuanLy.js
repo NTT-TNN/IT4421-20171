@@ -5,6 +5,8 @@ var path = require('path');
 var authen = require("../routes/authen.js");
 var products_sql = require("../model/Products.js");
 var multer = require('multer');
+var schedule = require("../model/Schedule.js");
+var timekeeping = require("../model/Timekeeping.js");
 
 var router = express.Router();
 var storage = multer.diskStorage({
@@ -33,27 +35,106 @@ router.get("/ThongKe", authen.isManager, function(req, res) {
   });
 });
 
-router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
-  var position;
-  user.getPosition(null,null , function(error,posi){
-    // console.log("day la ket qua "+posi);
-    position = posi;
-  });
-  user.getAllUSers(null,null, function(err,result){
-    user.getUser(req.user[0].iduser, null, function(err, user) {
-        res.render("quanlynv", {
-          allUsers:result,
-          user: user,
-          position : position
+router.get("/ChamCong", authen.isManager, function(req, res) {
+  user.getAllUsers(null,null, function(err,result){
+    user.getUser(req.user[0].iduser, null, function(err, user){
+      timekeeping.getTimekeeping(function(err,tk){
+        timekeeping.getAllTotalWorkedDay(function(err,total){
+          console.log(total);
+          res.render("chamcong", {
+            allUsers:result,
+            user:user,
+            timekeeping: tk,
+            total: total
+          });
         });
       });
+    });
   });
 });
 
-router.post("/deleteUser",function(req,res){
-  // console.log(req.body);
-  user.deleteUser(req.body.userid,function(err,result){
-    console.log("delete thanh cong");
+
+router.get("/LapLich", authen.isManager, function(req, res) {
+  user.getAllUsers(null, null, function(err, results) {
+    user.getUser(req.user[0].iduser, null, function(err, user) {
+      schedule.getAllSchedule(function(err,schedule){
+        res.render("laplich", {
+          allUsers: results,
+          user: user,
+          schedule: schedule
+        });
+        });
+      });
+    });
+  });
+
+
+  router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
+    var position;
+    user.getPosition(null,null , function(error,posi){
+      // console.log("day la ket qua "+posi);
+      position = posi;
+    });
+    user.getAllUsers(null,null, function(err,result){
+      user.getUser(req.user[0].iduser, null, function(err, user) {
+          res.render("quanlynv", {
+            allUsers:result,
+            user: user,
+            position : position
+          });
+        });
+    });
+  });
+
+  router.post("/deleteUser",function(req,res){
+    // console.log(req.body);
+    user.deleteUser(req.body.userid,function(err,result){
+      console.log("delete thanh cong");
+    });
+  });
+
+router.post("/createSchedule",function(req,res){
+  console.log(req.body);
+  schedule.deleteSchedule(function(err,rs){
+    var key =   Object.keys(req.body);
+    for(var i = 0; i< key.length ; i++){
+      var value = req.body[key[i]];
+      if((typeof value) == "string"){
+        schedule.createSchedule(key[i], value, function(err, rs){
+        });
+      }else{
+        for(var j = 0 ; j<value.length;j++){
+        schedule.createSchedule(key[i], value[j], function(err, rs){
+        });
+      }
+    }
+  }
+    res.redirect("/QuanLy/LapLich");
+
+  });
+});
+
+router.post("/createTimekeeping",function(req,res){
+  timekeeping.deleteTimekeeping(true,function(err,rs){
+    console.log(req.body);
+    var key =   Object.keys(req.body);
+    console.log("key: " + key);
+    for(var i = 0; i< key.length ; i++){
+      var value = req.body[key[i]];
+      // console.log(typeof value);
+      // console.log("value: " + value);
+      if((typeof value)=="string"){
+        timekeeping.createTimekeeping(key[i], value, function(err, rs){
+        });
+      }else{
+        for(var j = 0 ; j<value.length;j++){
+          console.log("value[j] = ", value[j]);
+          timekeeping.createTimekeeping(key[i], value[j], function(err, rs){
+          });
+        }
+      }
+    }
+    res.redirect("/QuanLy/ChamCong");
   });
 });
 
@@ -104,7 +185,7 @@ router.post("/add", upload.single('productImage'), function(req, res) {
 });
 
 router.post("/edit",upload.single('editProductImage') ,function(req, res) {
-console.log("edit nhan");
+  console.log("edit nhan");
   console.log(req.body);
   console.log(req.file);
   if (!req.file) {
@@ -140,12 +221,12 @@ router.post("/LoadChart", function(req, res) {
   DonHang.getNumberProducts(req.body, null, function(err, results) {
     res.send(results);
   });
-  // res.render("thongKe",{});
 });
 
 router.post("/editUser",function(req,res){
   console.log(req.body);
   user.editUser(req.body,function(err,rs){
+    console.log(rs);
   })
 });
 

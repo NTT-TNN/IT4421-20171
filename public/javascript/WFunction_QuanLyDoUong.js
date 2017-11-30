@@ -1,17 +1,27 @@
 
 function displayEditForm(id){
-    var description,category,url,name,price;
+    var index,description,category,url,name,price;
     for (i = 0; i < products.length; i++) {
       if(products[i].ProductID == id){
-          console.log("ok");
-          description = products[i].descriptions;
-          url = products[i].Url_images;
-          category = products[i].Categories_CategoryID;
-          price = products[i].Price;
-          name = products[i].ProductName;
-          console.log("gia cua no "+price);
+        index = i;
+        break;
       }
     }
+    console.log("index: " + index);
+    description = products[index].descriptions;
+    url = products[index].Url_images;
+    if(products[index].Categories_CategoryID == 1){
+      category = "coffee";
+    }else if (products[index].Categories_CategoryID == 2) {
+      category = "cake";
+    }else{
+      category = "other";
+    }
+    price = products[index].Price;
+    name = products[index].ProductName;
+    console.log("gia cua no "+price);
+
+    document.getElementById(category+"Edit").setAttribute("selected","selected");
     document.getElementById("ProductName").value = name;
     document.getElementById("Price").value = price;
     document.getElementById("Description").value = description;

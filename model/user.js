@@ -18,13 +18,16 @@ var updateAvatar = function(param1, param2, callback) {
 var updateUser = function(param1, param2, callback) {
 
   var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
+  console.log(updateUserCommand);
   connection.query(updateUserCommand, function(error, result) {
     callback(null, result);
   });
 }
 
 var insertUser = function(user,callback) {
-  var statement = "INSERT into user(fullname,birthday,password,phonenumber,email,gender,urlavatar,type,address) values('"+user.name+"', '"+user.birthday+"','"+user.password+"','"+user.phone+"','"+user.email+"','"+user.sex+"','images/avatar-1510997165958','"+user.type+"','"+user.address+"');";
+  var startdate = moment(new Date()).format("YYYY-MM-DD");
+  var statement = "INSERT into user(fullname,birthday,password,phonenumber,email,gender,urlavatar,type,address,startdate,isActive) values('"+user.name+"', '"+user.birthday+"','"+user.password+"','"+user.phone+"','"+user.email+"','"+user.sex+"','images/avatar-1510997165958','"+user.type+"','"+user.address+"','"+startdate+"',1);";
+  console.log(statement);
   connection.query(statement, function(error,result){
     if (error) {
       throw error;
@@ -36,6 +39,7 @@ var insertUser = function(user,callback) {
 
 var editUser = function(param1,callback){
     var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "',password ='"+param1.password+"' WHERE iduser =" + param1.iduser + ";";
+    console.log(updateUser);
     connection.query(updateUser, function(error, result){
       if (error) {
         throw error;
@@ -45,8 +49,8 @@ var editUser = function(param1,callback){
     })
 };
 
-var getAllUSers = function(param1, param2, callback) {
-  var getall = "SELECT * FROM user ;";
+var getAllUsers = function(param1, param2, callback) {
+  var getall = "SELECT * FROM user where isActive = 1;";
   connection.query(getall, function(error, result) {
     if (error) {
       throw error;
@@ -57,11 +61,12 @@ var getAllUSers = function(param1, param2, callback) {
 };
 
 var deleteUser = function(id, callback){
-  var deleteStatement = "DELETE FROM user WHERE iduser = "+id+";";
+  var enddate = moment(new Date()).format("YYYY-MM-DD");
+  var deleteStatement = "UPDATE user SET isActive = 0 , enddate = '"+enddate+"' WHERE iduser = "+id+";";
   connection.query(deleteStatement, function(error,result){
     callback(error,result);
   });
-}
+};
 
 var getUser = function(iduser, param2, callback) {
   var getUserByIdCommand = "SELECT * FROM user WHERE iduser=" + iduser + ";";
@@ -79,7 +84,6 @@ var getPosition = function(param1, param2,callback){
     // console.log("ket qua truy van "+result);
     callback(error,result);
   })
-
 };
 
 var findUser = function(param1, param2, callback) {
@@ -105,7 +109,7 @@ module.exports = {
   editUser,
   updateAvatar,
   getUser,
-  getAllUSers,
+  getAllUsers,
   findUser,
   updateUser,
   validPassword,

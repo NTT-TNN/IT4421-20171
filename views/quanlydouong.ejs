@@ -9,35 +9,49 @@
           <h4 class="modal-title">Product Detail</h4>
         </div>
         <div class="modal-body">
+          <div class="sub-body">
+            <p class="index"> Name: </p>
+            <input type="text" class="form-control" step="1" placeholder="Tên đồ uống" id="AddProductName" name="productName" style="display: inline-block; width: 80%; float: right; height:100%;">
+          </div>
+          <div class="sub-body">
+            <p class="index"> Description: </p>
+            <input type="text" class="form-control" step="2" placeholder="Mô tả" id="AddProductDescription" name="productDescription" style="display: inline-block; width: 80%; float: right; height:100%;">
+          </div>
+          <div class="sub-body">
 
-          <p> Name:
-            <input type="text" class="form-control" step="1" placeholder="Tên đồ uống" id="AddProductName" name="productName">
-          </p>
-          <p> Description:
-            <input type="text" class="form-control" step="2" placeholder="Mô tả" id="AddProductDescription" name="productDescription">
-          </p>
-          <p> Price:
-            <input type="number" class="form-control" min="1" max="100" step="10000" placeholder="Giá tiền" id="AddProductPrice" name="productPrice">
-          </p>
 
-        <p style="text-align: center;">
-          <img class="group list-group-image" id="AddUrl_images" src="<%= " ../images/default.jpg " %> " alt="" style="height:170px;" />
-        </p>
-        <p style="text-align: center;">
-          <input type="file" name="productImage" id="choseimage" style="display:none;" onchange="readURL(this);" />
-          <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="">Change</button>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <div class="container-fluid text-center">
-          <input type="submit" style="position:inherit" class="btn btn-info btn-primary mr-auto" name="submit" value="Save" />
+            <p class="index"> Price:</p>
+            <input type="number" class="form-control" min="1" max="1000" step="1" placeholder="Giá tiền" id="AddProductPrice" name="productPrice" style="display: inline-block; width: 80%; float: right; height:100%;">
+          </div>
+          <div class="sub-body">
+
+
+            <p class="index"> Category: </p>
+            <select name="productType" class="form-control" style="display: inline-block; width: 40%; height:100%;border-radius: 10px;background: #337ab7; color: white;">
+              <option value="coffee">Coffee</option>
+              <option value="cake">Cake</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <p style="text-align: center;">
+            <img class="group list-group-image" id="AddUrl_images" src="<%= " ../images/default.jpg " %> " alt="" style="height:170px;" />
+          </p>
+          <p style="text-align: center;">
+            <input type="file" name="productImage" id="choseimage" style="display:none;" onchange="readURL(this);" />
+            <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="">Change</button>
+          </p>
         </div>
+        <div class="modal-footer">
+          <div class="container-fluid text-center">
+            <input type="submit" style="position:inherit" class="btn btn-info btn-primary mr-auto" name="submit" value="Save" />
+          </div>
+        </div>
+
       </div>
+    </form>
 
-    </div>
-  </form>
-
-</div>
+  </div>
 </div>
 
 <div class="modal fade" id="editForm" role="dialog">
@@ -53,17 +67,28 @@
             <p hidden> IdForm:
               <input type="text" class="form-control" step="1" id="ProductID" name ="editProductID">
             </p>
-            <p> Name:
-              <input type="text" class="form-control" step="2" id="ProductName" name="editProductName">
-            </p>
-            <p> Description:
-              <input type="text" class="form-control" step="3" id="Description" name="editProductDescription">
-            </p>
-            <p> Price:
-              <input type="number" class="form-control"  id="Price" name="editProductPrice">
-            </p>
+            <div class="sub-body">
+              <p class="index"> Name: </p>
+                <input type="text" class="form-control" step="2" id="ProductName" name="editProductName" style="display: inline-block; width: 80%; float: right; height:100%;">
+            </div>
+            <div class="sub-body">
+              <p class="index"> Description:  </p>
+                <input type="text" class="form-control" step="3" id="Description" name="editProductDescription" style="display: inline-block; width: 80%; float: right; height:100%;">
+            </div>
+            <div class="sub-body">
+              <p class="index"> Price:</p>
+                <input type="number" class="form-control"  id="Price" name="editProductPrice" style="display: inline-block; width: 80%; float: right; height:100%;">
+            </div>
+            <div class="sub-body">
+              <p class="index"> Category: </p>
+              <select class="form-control" name="productType" style="display: inline-block; width: 40%; height:100%;border-radius: 10px;background: #337ab7; color: white;">
+                <option id="coffeeEdit" value="coffee">Coffee</option>
+                <option id="cakeEdit" value="cake">Cake</option>
+                <option id="otherEdit" value="other">Other</option>
+              </select>
+            </div>
             <p style="text-align: center;">
-              <img class="group list-group-image" id="Url_images" alt="" />
+              <img class="group list-group-image" id="Url_images" alt="" style="height:170px; width: auto;"/>
               <input type="file" name="editProductImage" id="editimage" style="display:none;" onchange="readURL1(this);" />
             </p>
             <p style="text-align: center;">
@@ -132,48 +157,6 @@
                     </div>
                     <% for(var i=0; i<products.length; i++) { %>
                       <% if( products[i].Categories_CategoryID == 1 ){ %>
-                      <div class="item col-md-4 col-lg-4" id="<%=products[i].ProductID %>">
-                        <div class="thumbnail">
-                          <img class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>" />
-                          <div class="caption">
-                            <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
-                              <%= products[i].ProductName %>
-                            </h4>
-                            <div>
-                              <p class="lead" id="price<%=products[i].ProductID %>">
-                                $
-                                <%= products[i].Price %>
-                              </p>
-                            </div>
-                            <div class="button-group" >
-                                  <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
-                                  <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <%}}%>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="Cake" class="tabcontent">
-              <!-- ============ Cake Section  ============= -->
-              <div id="cake">
-                <div class="row-md-9">
-                  <div class="container-fluid">
-                    <div class="row" id="productsForm" list-group>
-                      <div class="item  col-md-4 col-lg-4">
-                        <button data-toggle="modal" data-target="#Add_Product">
-                          <span>
-                            <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 250px;"></i>
-                          </span>
-                        </button>
-                      </div>
-                      <% for(var i=0; i<products.length; i++) { %>
-                        <% if( products[i].Categories_CategoryID == 2 ){ %>
                         <div class="item col-md-4 col-lg-4" id="<%=products[i].ProductID %>">
                           <div class="thumbnail">
                             <img class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>" />
@@ -188,8 +171,8 @@
                                 </p>
                               </div>
                               <div class="button-group" >
-                                    <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
-                                    <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
+                                <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
+                                <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
                               </div>
                             </div>
                           </div>
@@ -201,10 +184,9 @@
                 </div>
               </div>
 
-
-              <div id="Other" class="tabcontent">
-                <!-- ============ Other Section  ============= -->
-                <div id="other">
+              <div id="Cake" class="tabcontent">
+                <!-- ============ Cake Section  ============= -->
+                <div id="cake">
                   <div class="row-md-9">
                     <div class="container-fluid">
                       <div class="row" id="productsForm" list-group>
@@ -216,118 +198,162 @@
                           </button>
                         </div>
                         <% for(var i=0; i<products.length; i++) { %>
-                          <% if( products[i].Categories_CategoryID == 3 ){ %>
-                          <div class="item col-md-4 col-lg-4" id="<%=products[i].ProductID %>">
-                            <div class="thumbnail">
-                              <img class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>" />
-                              <div class="caption">
-                                <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
-                                  <%= products[i].ProductName %>
-                                </h4>
-                                <div>
-                                  <p class="lead" id="price<%=products[i].ProductID %>">
-                                    $
-                                    <%= products[i].Price %>
-                                  </p>
-                                </div>
-                                <div class="button-group" >
-                                      <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
-                                      <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
+                          <% if( products[i].Categories_CategoryID == 2 ){ %>
+                            <div class="item col-md-4 col-lg-4" id="<%=products[i].ProductID %>">
+                              <div class="thumbnail">
+                                <img class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>" />
+                                <div class="caption">
+                                  <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
+                                    <%= products[i].ProductName %>
+                                  </h4>
+                                  <div>
+                                    <p class="lead" id="price<%=products[i].ProductID %>">
+                                      $
+                                      <%= products[i].Price %>
+                                    </p>
+                                  </div>
+                                  <div class="button-group" >
+                                    <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
+                                    <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
+                                  </div>
                                 </div>
                               </div>
                             </div>
+                            <%}}%>
                           </div>
-                          <%}}%>
                         </div>
                       </div>
                     </div>
                   </div>
+
+
+                  <div id="Other" class="tabcontent">
+                    <!-- ============ Other Section  ============= -->
+                    <div id="other">
+                      <div class="row-md-9">
+                        <div class="container-fluid">
+                          <div class="row" id="productsForm" list-group>
+                            <div class="item  col-md-4 col-lg-4">
+                              <button data-toggle="modal" data-target="#Add_Product">
+                                <span>
+                                  <i class="fa fa-coffee" aria-hidden="true" style="color: white;font-size: 250px;"></i>
+                                </span>
+                              </button>
+                            </div>
+                            <% for(var i=0; i<products.length; i++) { %>
+                              <% if( products[i].Categories_CategoryID == 3 ){ %>
+                                <div class="item col-md-4 col-lg-4" id="<%=products[i].ProductID %>">
+                                  <div class="thumbnail">
+                                    <img class="group list-group-image" src="<%= products[i].Url_images %>" alt="" id="img<%=products[i].Url_images %>" />
+                                    <div class="caption">
+                                      <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
+                                        <%= products[i].ProductName %>
+                                      </h4>
+                                      <div>
+                                        <p class="lead" id="price<%=products[i].ProductID %>">
+                                          $
+                                          <%= products[i].Price %>
+                                        </p>
+                                      </div>
+                                      <div class="button-group" >
+                                        <a  onclick="displayEditForm('<%=products[i].ProductID %>')" class="btn btn-success edit-btn-product" data-toggle="modal" data-target="#editForm">Edit</a>
+                                        <a  onclick="displayDeleteConfirmForm('<%=products[i].ProductID %>');" class="btn btn-success del-btn-product" data-toggle="modal" data-target="#deleteConfirmForm">Delete</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <%}}%>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <!-- ============ Footer Section  ============= -->
+              <footer class="sub_footer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+                    <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+                    <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+                  </div>
+                </div>
+              </footer>
 
 
-          </div>
-        </div>
-      </div>
-    </div>
+            </div>
+            <script>
+            var products = JSON.parse('<%-JSON.stringify(products)%>');
+            // var products = JSON.parse('<%-JSON.stringify(products)%>');
+            $("#addChange").click(function() {
+              $("#choseimage").click();
+            });
+            $("#editUrl_images").click(function() {
+              $("#editimage").click();
+            });
 
-    <!-- ============ Footer Section  ============= -->
-    <footer class="sub_footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
-          <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
-          <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
-        </div>
-      </div>
-    </footer>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  $('#AddUrl_images')
+                  .attr('src', e.target.result)
+                };
+                console.log(input.files[0]);
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
 
-
-  </div>
-  <script>
-  var products = JSON.parse('<%-JSON.stringify(products)%>');
-  // var products = JSON.parse('<%-JSON.stringify(products)%>');
-  $("#addChange").click(function() {
-    $("#choseimage").click();
-  });
-  $("#editUrl_images").click(function() {
-    $("#editimage").click();
-  });
-
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#AddUrl_images')
-        .attr('src', e.target.result)
-      };
-      console.log(input.files[0]);
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  function readURL1(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#Url_images')
-        .attr('src', e.target.result)
-      };
-      console.log(input.files[0]);
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-  </script>
+            function readURL1(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  $('#Url_images')
+                  .attr('src', e.target.result)
+                };
+                console.log(input.files[0]);
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+            </script>
 
 
-  <script src="javascript/WFunction_QuanLyDoUong.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.flexslider.min.js"></script>
-  <script src="js/jquery.hoverdir.js"></script>
-  <script src="js/jquery.mixitup.min.js"></script>
-  <script src="js/jQuery.scrollSpeed.js"></script>
-  <script src="js/jquery.validate.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/wow.min.js"></script>
-  <script>
-  function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
+            <script src="javascript/WFunction_QuanLyDoUong.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.flexslider.min.js"></script>
+            <script src="js/jquery.hoverdir.js"></script>
+            <script src="js/jquery.mixitup.min.js"></script>
+            <script src="js/jQuery.scrollSpeed.js"></script>
+            <script src="js/jquery.validate.js"></script>
+            <script src="js/owl.carousel.min.js"></script>
+            <script src="js/script.js"></script>
+            <script src="js/wow.min.js"></script>
+            
+            <script>
+            function openCity(evt, cityName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
 
-  // Get the element with id="defaultOpen" and click on it
-  document.getElementById("defaultOpen").click();
-  </script>
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+            </script>
 
-</body>
+          </body>
 
-</html>
+          </html>

@@ -44,7 +44,7 @@
                 <h6>Ngày sinh:</h6>
               </div>
               <div class="col-md-8 center-margin">
-                <input class="form-control" id="birthdayEdit" type="text" value="">
+                <input class="form-control" id="birthdayEdit" type="date" value="">
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@
                 <h6>Ngày sinh:</h6>
               </div>
               <div class="col-md-8 center-margin">
-                <input class="form-control" id="birthdayAdd" type="text" value="">
+                <input class="form-control" id="birthdayAdd" type="date" >
               </div>
             </div>
           </div>
@@ -277,7 +277,7 @@
                           <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                         </div>
                         <p id="birthday<%=allUsers[i].iduser %>">
-                          <%=allUsers[i].birthday %>
+
                         </p>
                       </div>
                       <div class="item sex">
@@ -361,7 +361,12 @@
       var position = JSON.parse('<%-JSON.stringify(position)%>');
 
       </script>
+      <script src="js/moment.min.js" charset="utf-8"></script>
       <script src="javascript/QuanLyNhanVien.js" ></script>
-
+      <script>
+        for(var i =0 ; i<allUsers[i].length ;i++){
+          $("#birthday"+allUsers[i].iduser).text(moment(allUsers[i].birthday).format("YYYY-MM-DD"));
+        }
+      </script>
 
     </div>

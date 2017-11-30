@@ -3,14 +3,14 @@
 
 <div class="row">
   <div class="col-md-3 col-xs-3 col=lg-3">
-    <select id="step" class="form-control height-35" >
+    <select id="step" class="form-control" style="height: 35px;" >
       <option value="WEEK">Tuần</option>
       <option value="MONTH">Tháng</option>
       <option value="YEAR">Năm</option>
     </select>
   </div>
   <div class="col-md-3 col-xs-3 col=lg-3">
-    <select id="chartType" class="form-control height-35">
+    <select id="chartType" class="form-control" style="height: 35px;">
       <option value="pie">pie</option>
       <option value="line">line</option>
       <option value="bar">bar</option>
@@ -95,34 +95,29 @@ function LoadChart(){
                 }
                 break;
               }
-
-
             }
             if(flag){
               columns.push([results[i].ProductName]);
               columns[columns.length-1].push(results[i].number);
             }
-
-            // var temp=[results[i].ProductName,results[i].number];
-            // columns.push(temp);
           }
           console.log(columns);
           var chart = c3.generate({
               bindto: '#chart',
               data: {
-                x:'x',
+                // x:'x',
                 columns:columns,
                 type: chartType
               },
-              axis : {
-                x : {
-                    type : 'timeseries',
-                    tick: {
-                        format: function (x) { return x.getMonth()+1; }
-                      //format: '%Y' // format string is also available for timeseries data
-                    }
-                }
-            }
+            //   axis : {
+            //     x : {
+            //         type : 'timeseries',
+            //         tick: {
+            //             format: function (x) { return x.getMonth()+1; }
+            //           //format: '%Y' // format string is also available for timeseries data
+            //         }
+            //     }
+            // }
           });
       }
     });

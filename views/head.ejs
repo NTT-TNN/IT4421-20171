@@ -51,19 +51,26 @@
       $("#QLNV").addClass("navactive");
     }else if (path.includes("ThuNgan")) {
       $("#BH").addClass("navactive");
-    }else if (path.includes("users")) {
+    }else if (path.includes("user_info")) {
       $("#PRO").addClass("navactive");
     }else if (path.includes("QuanLyDoUong")) {
       $("#QLDU").addClass("navactive");
+    }else if (path.includes("LapLich")) {
+      $("#LL").addClass("navactive");
+    }else if (path.includes("LichLamViec")) {
+      $("#LLV").addClass("navactive");
+    }else if (path.includes("ChamCong")) {
+      $("#CC").addClass("navactive");
     }
+
 });
   </script>
 
 <body>
   <div class="navbar">
-    <div class="container hidden-xl-down hidden-xs-up">
-      <div class="col-md-4 hidden-xl-down hidden-xs-up">
-        <a id="logo" class="navbar-brand" href="#" >A+ Coffee</a>
+    <div class="container-fluid hidden-xl-down hidden-xs-up">
+      <div class="col-md-2 hidden-xl-down hidden-xs-up">
+        <a id="logo" class="navbar-brand" href="/users/user_info" >A+ Coffee</a>
       </div>
       <div id="menu">
 
@@ -74,12 +81,16 @@
             <a id="TK" class="font-menu" href="/QuanLy/ThongKe">THỐNG KÊ</a>
             <a id="QLNV" class="font-menu" href="/QuanLy/QuanLyNhanVien">NHÂN VIÊN</a>
             <a id="QLDU" class="font-menu" href="/QuanLy/QuanLyDoUong">ĐỒ UỐNG</a>
+            <a id="LL" class="font-menu" href="/Quanly/LapLich">LẬP LỊCH</a>
+            <a id="CC" class="font-menu" href="/Quanly/ChamCong">CHẤM CÔNG</a>
         <% } %>
         <%if (user[0].type == "accountant") { %>
             <a id="BH" class="font-menu" href="/ThuNgan">BÁN HÀNG</a>
         <% } %>
-
         <a id="PRO" class="font-menu" href="/users/user_info">PROFILE</a>
+
+          <a id="LLV" class="font-menu" href="/users/LichLamViec">LỊCH LÀM VIỆC</a>
+
         <a class="font-menu" href="/users/logout">LOG OUT</a>
   <%if (user[0].type == "order") { %>
         <button class="coffee-btn" data-toggle="modal" data-target="#Order_detail">
