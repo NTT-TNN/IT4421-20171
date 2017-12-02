@@ -55,5 +55,4 @@ passport.use('local-login', new LocalStrategy({
      return done(null, false, req.flash('loginMessage', 'Wrong password.'));
    });
  }));
-
 };

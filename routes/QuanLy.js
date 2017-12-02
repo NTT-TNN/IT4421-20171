@@ -179,8 +179,6 @@ router.post("/createTimekeeping",function(req,res){
     console.log("key: " + key);
     for(var i = 0; i< key.length ; i++){
       var value = req.body[key[i]];
-      // console.log(typeof value);
-      // console.log("value: " + value);
       if((typeof value)=="string"){
         timekeeping.createTimekeeping(key[i], value, function(err, rs){
         });
@@ -285,7 +283,9 @@ router.post("/LoadChart", function(req, res) {
 router.post("/editUser",function(req,res){
   console.log(req.body);
   user.editUser(req.body,function(err,rs){
-    console.log(rs);
+    user.getUser(req.body.iduser,null,function(error,addedUser){
+      res.send(addedUser);
+    })
   })
 });
 

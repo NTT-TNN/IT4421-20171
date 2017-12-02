@@ -8,8 +8,7 @@ var displayEdit = function(id) {
       break;
     }
   }
-  console.log("index:", index);
-  //lay du lieu cua user co userid = id
+    //lay du lieu cua user co userid = id
   fullname = allUsers[index].fullname;
   birthday = allUsers[index].birthday;
   phonenumber = allUsers[index].phonenumber;
@@ -19,7 +18,6 @@ var displayEdit = function(id) {
   address = allUsers[index].address;
   password = allUsers[index].password;
 
-  //hien thi modal edit
   document.getElementById("position"+type).setAttribute("selected","selected");
   document.getElementById(gender+"Edit").setAttribute("selected","selected");
   document.getElementById("nameEdit").value = fullname;
@@ -32,7 +30,6 @@ var displayEdit = function(id) {
   $("#editUser").unbind().on('click',function(){
     listType = document.getElementById("positionList");
     listSex = document.getElementById("sexList");
-
     nameEdit = document.getElementById("nameEdit").value;
     birthdayEdit = document.getElementById("birthdayEdit").value;
     sexEdit = listSex.options[listSex.selectedIndex].text;
@@ -41,7 +38,6 @@ var displayEdit = function(id) {
     phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
     addressEdit = document.getElementById("addressEdit").value;
     passwordEdit = document.getElementById("passwordEdit").value;
-    // console.log(moment(birthdayEdit).format("YYYY-MM-DD"));
     user = {
       iduser: id,
       fullname: nameEdit,
@@ -61,29 +57,27 @@ var displayEdit = function(id) {
           break;
         }
       }
-        allUsers[index].fullname = nameEdit;
-        allUsers[index].birthday = birthdayEdit;
-        allUsers[index].phonenumber = phoneNumberEdit;
-        allUsers[index].email = emailEdit;
-        allUsers[index].gender = sexEdit;
-        allUsers[index].type = typeEdit;
-        allUsers[index].address = addressEdit;
-        allUsers[index].password = passwordEdit;
-      console.log("index: "+ index +" id: "+id);
-    //thay doi thong tin tren giao dien ng dung
-    document.getElementById("name" + id).innerText = nameEdit;
-    $("#birthday" + id).text(moment(birthdayEdit).format("DD/MM/YYYY"));
-    document.getElementById("sex" + id).innerText = sexEdit;
-    document.getElementById("type" + id).innerText = typeEdit;
-    document.getElementById("email" + id).innerText = emailEdit;
-    document.getElementById("phone" + id).innerText = phoneNumberEdit;
-    document.getElementById("address" + id).innerText = addressEdit;
     $.ajax({
       url: "/QuanLy/editUser",
       type: "POST",
       data: JSON.stringify(user),
       contentType: 'application/json',
-      success: function() {
+      success: function(user) {
+        allUsers[index].fullname = user[0].fullname;
+        allUsers[index].birthday = user[0].birthday1;
+        allUsers[index].phonenumber = user[0].phonenumber;
+        allUsers[index].email = user[0].email;
+        allUsers[index].gender = user[0].gender;
+        allUsers[index].type = user[0].type;
+        allUsers[index].address = user[0].address;
+        allUsers[index].password = user[0].password;
+        document.getElementById("name" + id).innerText = user[0].fullname;
+        $("#birthday" + id).text(user[0].birthday1);
+        document.getElementById("sex" + id).innerText = user[0].gender;
+        document.getElementById("type" + id).innerText = user[0].type;
+        document.getElementById("email" + id).innerText = user[0].email;
+        document.getElementById("phone" + id).innerText = user[0].phonenumber;
+        document.getElementById("address" + id).innerText = user[0].address;
         console.log("edit thành công")
       }
     });
@@ -126,7 +120,7 @@ var creatNewUser = function(user) {
   <i class="fa fa-birthday-cake" aria-hidden="true"></i>
   </div>
   <p id="birthday`+user.iduser+`">
-  `+new Date(user.birthday).toDateString()+`
+  `+user.birthday1+`
   </p>
   </div>
   <div class="item sex">
@@ -175,7 +169,6 @@ var creatNewUser = function(user) {
   </div>
 
   </div>
-
   <div class="emp-bottom">
   <button type="button" data-toggle="modal" data-target="#edit_emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit(`+user.iduser+`)">Edit</button>
   <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser(`+user.iduser+`)" data-target="#ConfirmFormDelete">Delete</button>
@@ -228,5 +221,4 @@ var addEmployee =function(){
     }
   }
 );
-
 }

@@ -76,6 +76,7 @@
 
         <%if (user[0].type == "order") { %>
             <a id="OD" class="font-menu" href="/BoiBan">ORDER</a>
+            <a id="LLV" class="font-menu" href="/users/LichLamViec">LỊCH LÀM VIỆC</a>
         <% } %>
         <%if (user[0].type == "manager") { %>
             <a id="TK" class="font-menu" href="/QuanLy/ThongKe">THỐNG KÊ</a>
@@ -86,10 +87,11 @@
         <% } %>
         <%if (user[0].type == "accountant") { %>
             <a id="BH" class="font-menu" href="/ThuNgan">BÁN HÀNG</a>
+            <a id="LLV" class="font-menu" href="/users/LichLamViec">LỊCH LÀM VIỆC</a>
         <% } %>
         <a id="PRO" class="font-menu" href="/users/user_info">PROFILE</a>
 
-          <a id="LLV" class="font-menu" href="/users/LichLamViec">LỊCH LÀM VIỆC</a>
+
 
         <a class="font-menu" href="/users/logout">LOG OUT</a>
   <%if (user[0].type == "order") { %>

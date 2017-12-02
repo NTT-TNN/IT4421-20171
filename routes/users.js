@@ -94,7 +94,6 @@ router.post('/user_info', function(req, res) {
 
 router.get('/logout',function(req,res){
   req.logout();
-  // login=false;
   res.redirect('/');
 })
 

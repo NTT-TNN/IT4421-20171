@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var moment = require('moment');
+var md5 = require('md5');
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -16,8 +17,9 @@ var updateAvatar = function(param1, param2, callback) {
 }
 
 var updateUser = function(param1, param2, callback) {
+  console.log(moment(param1.birthday).format("YYYY-MM-DD"));
 
-  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
+  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + moment(param1.birthday).format("YYYY-MM-DD") + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
   console.log(updateUserCommand);
   connection.query(updateUserCommand, function(error, result) {
     callback(null, result);
@@ -26,7 +28,8 @@ var updateUser = function(param1, param2, callback) {
 
 var insertUser = function(user,callback) {
   var startdate = moment(new Date()).format("YYYY-MM-DD");
-  var statement = "INSERT into user(fullname,birthday,password,phonenumber,email,gender,urlavatar,type,address,startdate,isActive) values('"+user.name+"', '"+user.birthday+"','"+user.password+"','"+user.phone+"','"+user.email+"','"+user.sex+"','images/avatar-1510997165958','"+user.type+"','"+user.address+"','"+startdate+"',1);";
+  console.log(md5(user.password));
+  var statement = "INSERT into user(fullname,birthday,password,phonenumber,email,gender,urlavatar,type,address,startdate,isActive) values('"+user.name+"', '"+user.birthday+"','"+md5(user.password)+"','"+user.phone+"','"+user.email+"','"+user.sex+"','images/avatar-1510997165958','"+user.type+"','"+user.address+"','"+startdate+"',1);";
   console.log(statement);
   connection.query(statement, function(error,result){
     if (error) {
@@ -38,7 +41,7 @@ var insertUser = function(user,callback) {
 }
 
 var editUser = function(param1,callback){
-    var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "',password ='"+param1.password+"' WHERE iduser =" + param1.iduser + ";";
+    var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "',password ='"+md5(param1.password)+"' WHERE iduser =" + param1.iduser + ";";
     console.log(updateUser);
     connection.query(updateUser, function(error, result){
       if (error) {
@@ -50,7 +53,7 @@ var editUser = function(param1,callback){
 };
 
 var getAllUsers = function(param1, param2, callback) {
-  var getall = "SELECT * , DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user where isActive = 1;";
+  var getall = "SELECT * , DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user where isActive = 1 and type <> 'manager';";
   connection.query(getall, function(error, result) {
     if (error) {
       throw error;
@@ -87,7 +90,8 @@ var getPosition = function(param1, param2,callback){
 };
 
 var findUser = function(param1, param2, callback) {
-  var findUserCommand = "SELECT * FROM user where email='" + param1 + "' and password='" + param2 + "';";
+// console.log(md5(param2));
+  var findUserCommand = "SELECT * FROM user where email='" + param1 + "' and password='" +md5(param2) + "';";
   connection.query(findUserCommand, function(error, result) {
     callback(error, result);
   });
