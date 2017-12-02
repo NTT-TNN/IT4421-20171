@@ -19,112 +19,119 @@
 </div>
 
 <!-- Modal edit_emp_detail -->
-<div class="modal fade" id="edit_emp_detail" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Profile</h4>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid" id="emp-info">
-          <div class="name-modal">
-            <div class="row">
-              <div class="col-md-4 center-margin">
-                <h6>Họ và tên:</h6>
-              </div>
-              <div class="col-md-8 center-margin">
-                <input class="form-control" id="nameEdit" type="text" value="">
-              </div>
-            </div>
-          </div>
-          <div class="birthday-modal">
-            <div class="row">
-              <div class="col-md-4 center-margin">
-                <h6>Ngày sinh:</h6>
-              </div>
-              <div class="col-md-8 center-margin">
-                <input class="form-control" id="birthdayEdit" type="date" value="">
-              </div>
-            </div>
-          </div>
-          <div class="sex-modal">
-            <div class="row">
-              <div class="col-md-4 center-margin">
-                <h6>Giới tính:</h6>
-              </div>
-              <div class="col-md-8 center-margin">
-                <input class="form-control" id="sexEdit" type="text" value="">
-              </div>
-            </div>
-          </div>
-          <div class="position-modal">
-            <div class="row">
-              <div class="col-md-4 center-margin">
-                <h6>Chức vụ:</h6>
-              </div>
-              <div class="col-md-8 center-margin">
-                <input class="form-control" id="typeEdit" type="text" value="" style="display:none;">
-                <select id="positionList">
-                  <% for(var i=0; i< position.length ; i++) {%>
-                    <option value="<%=i+1%>" id="position<%=position[i].type%>"><%=position[i].type%></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="email-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Email:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="emailEdit" type="text" value="">
-                </div>
-              </div>
-            </div>
-            <div class="phone-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Số điện thoại:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="phoneNumberEdit" type="text" value="">
-                </div>
-              </div>
-            </div>
-            <div class="address-modal">
-              <div class="row">
-                <div class="col-md-4 center-margin">
-                  <h6>Địa chỉ:</h6>
-                </div>
-                <div class="col-md-8 center-margin">
-                  <input class="form-control" id="addressEdit" type="text" value="">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-4 center-margin">
-                <h6>Mật Khẩu:</h6>
-              </div>
-              <div class="col-md-8 center-margin">
-                <input class="form-control" id="passwordEdit" type="password" value="">
-              </div>
-            </div>
-          </div>
+<%for(var i=0; i< allUsers.length ; i++){%>
+  <div class="modal fade" id="edit_emp_detail" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Profile</h4>
         </div>
-        <div class="modal-footer">
-          <div class="container-fluid text-center">
-            <button type="button" class="btn btn-primary mr-auto" onclick="" id="editUser" data-dismiss="modal">OK</button>
-            <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
-              Cancel
-            </button>
+        <div class="modal-body">
+          <div class="container-fluid" id="emp-info">
+            <div class="name-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Họ và tên:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="nameEdit" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="birthday-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Ngày sinh:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="birthdayEdit" type="date" value="">
+                </div>
+              </div>
+            </div>
+            <div class="sex-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Giới tính:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <select class="select-option" id="sexList">
+                      <option value="1" id="maleEdit">male</option>
+                      <option value="2" id="femaleEdit">female</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+            <div class="position-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Chức vụ:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <select class="select-option" id="positionList">
+
+                      <option value="1" id="positionmanager">manager</option>
+                      <option value="2" id="positionaccountant">accountant</option>
+                      <option value="3" id="positionorder">order</option>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="email-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Email:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="emailEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="phone-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Số điện thoại:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="phoneNumberEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="address-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Địa chỉ:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="addressEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Mật Khẩu:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="passwordEdit" type="password" value="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="container-fluid text-center">
+              <button type="button" class="btn btn-primary mr-auto" id="editUser" data-dismiss="modal">OK</button>
+              <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<%}%>
+
 <!-- End modal edit_emp_detail -->
 
 <!-- Modal add -->
@@ -162,7 +169,11 @@
                 <h6>Giới tính:</h6>
               </div>
               <div class="col-md-8 center-margin">
-                <input class="form-control" id="sexAdd" type="text" value="">
+                <!-- <input class="form-control" id="sexAdd" type="text" value=""> -->
+                <select class="select-option" id="sexAdd">
+                    <option value="1" id="male">male</option>
+                    <option value="2" id="female">female</option>
+                  </select>
               </div>
             </div>
           </div>
@@ -172,11 +183,10 @@
                 <h6>Chức vụ:</h6>
               </div>
               <div class="col-md-8 center-margin">
-                <input class="form-control" id="typeAdd" type="text" value="" style="display:none;">
-                <select id="positionListAdd">
-                  <% for(var i=0; i< position.length ; i++) {%>
-                    <option value="<%=i+1%>" id="positionAdd<%=position[i].type%>"><%=position[i].type%></option>
-                    <% } %>
+                <select id="positionListAdd" class="select-option">
+                    <option value="1" id="positionAddmanager">manager</option>
+                    <option value="2" id="positionAddaccountant">accountant</option>
+                    <option value="3" id="positionAddorder">order</option>
                   </select>
                 </div>
               </div>
@@ -236,19 +246,23 @@
 
   <div class="main">
     <div class="searching-area container">
-      <div class="input-group" id="text-area-searching">
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </span>
-        <input id="text-searching" type="text" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,...">
-      </div>
+      <form method="get" action="/QuanLy/TKNV">
+        <div class="input-group" id="text-area-searching">
+          <span class="input-group-btn">
 
-      <div id="add-emp">
-        <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#emp-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        </span>
-      </div>
+            <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+          <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên, chức vụ,..." />
+          <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
+          <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
+        </div>
 
+        <div id="add-emp">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#emp-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
     </div>
 
     <div class="content-qlnv">
@@ -277,7 +291,7 @@
                           <i class="fa fa-birthday-cake" aria-hidden="true"></i>
                         </div>
                         <p id="birthday<%=allUsers[i].iduser %>">
-
+                          <%=allUsers[i].birthday1 %>
                         </p>
                       </div>
                       <div class="item sex">
@@ -362,11 +376,20 @@
 
       </script>
       <script src="js/moment.min.js" charset="utf-8"></script>
+      <script src ="js/typeahead.min.js"></script>
       <script src="javascript/QuanLyNhanVien.js" ></script>
       <script>
-        for(var i =0 ; i<allUsers[i].length ;i++){
-          $("#birthday"+allUsers[i].iduser).text(moment(allUsers[i].birthday).format("YYYY-MM-DD"));
-        }
+      $("#btn-search").click(function() {
+        $("#inputsearch").click();
+      });
+
+      $(document).ready(function(){
+        $('input.typeahead').typeahead({
+          name: 'typeahead',
+          remote: 'http://localhost:8000/QuanLy/searchUser?key=%QUERY',
+          limit: 10
+        });
+      });
       </script>
 
     </div>

@@ -3,7 +3,7 @@ var DonHang = require("../model/DonHang.js");
 var user = require("../model/user.js");
 var path = require('path');
 var authen = require("../routes/authen.js");
-var products_sql = require("../model/Products.js");
+var product = require("../model/Products.js");
 var multer = require('multer');
 var schedule = require("../model/Schedule.js");
 var timekeeping = require("../model/Timekeeping.js");
@@ -63,35 +63,93 @@ router.get("/LapLich", authen.isManager, function(req, res) {
           user: user,
           schedule: schedule
         });
-        });
       });
     });
   });
+});
 
-
-  router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
-    var position;
-    user.getPosition(null,null , function(error,posi){
-      // console.log("day la ket qua "+posi);
-      position = posi;
+router.get("/TKNV", function(req,res){
+  // console.log(req.query.datasearch);
+  var position;
+  user.getPosition(null,null , function(error,posi){
+    position = posi;
+  });
+  user.searchUser(req.query.typeahead, function(err,result){
+    user.getUser(req.user[0].iduser, null, function(err, user) {
+      res.render("quanlynv", {
+        allUsers:result,
+        user: user,
+        position : position
+      });
     });
-    user.getAllUsers(null,null, function(err,result){
-      user.getUser(req.user[0].iduser, null, function(err, user) {
-          res.render("quanlynv", {
-            allUsers:result,
-            user: user,
-            position : position
-          });
-        });
+  });
+});
+router.get("/searchUser" , function(req,res){
+  user.complete(req.query.key, function(err,result){
+    var data= [];
+    for(i=0;i<result.length;i++)
+    {
+      data.push(result[i].fullname);
+    }
+    user.complete1(req.query.key,function(err,type){
+      for(i=0;i<type.length;i++)
+      {
+          data.push(type[i].type);
+      }
+      console.log(data);
+      res.end(JSON.stringify(data));
+    });
+  });
+})
+
+router.get("/TKSP", function(req,res){
+  // console.log(req.query.datasearch);
+  product.searchProduct(req.query.typeahead, function(err,result){
+    user.getUser(req.user[0].iduser, null, function(err, user) {
+      res.render("quanlydouong", {
+        products:result,
+        user: user
+      });
+    });
+  });
+});
+
+router.get("/searchProduct" , function(req,res){
+  product.searchProduct(req.query.key, function(err,result){
+    var data= [];
+    for(i=0;i<result.length;i++)
+    {
+      data.push(result[i].ProductName);
+    }
+      console.log(data);
+      res.end(JSON.stringify(data));
     });
   });
 
-  router.post("/deleteUser",function(req,res){
-    // console.log(req.body);
-    user.deleteUser(req.body.userid,function(err,result){
-      console.log("delete thanh cong");
+
+
+router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
+  var position;
+  user.getPosition(null,null , function(error,posi){
+    // console.log("day la ket qua "+posi);
+    position = posi;
+  });
+  user.getAllUsers(null,null, function(err,result){
+    user.getUser(req.user[0].iduser, null, function(err, user) {
+      res.render("quanlynv", {
+        allUsers:result,
+        user: user,
+        position : position
+      });
     });
   });
+});
+
+router.post("/deleteUser",function(req,res){
+  user.deleteUser(req.body.userid,function(err,result){
+    console.log("delete thanh cong");
+  });
+});
 
 router.post("/createSchedule",function(req,res){
   console.log(req.body);
@@ -104,11 +162,11 @@ router.post("/createSchedule",function(req,res){
         });
       }else{
         for(var j = 0 ; j<value.length;j++){
-        schedule.createSchedule(key[i], value[j], function(err, rs){
-        });
+          schedule.createSchedule(key[i], value[j], function(err, rs){
+          });
+        }
       }
     }
-  }
     res.redirect("/QuanLy/LapLich");
 
   });
@@ -148,7 +206,7 @@ router.post("/addUser",function(req,res){
 });
 
 router.get("/QuanLyDoUong", authen.isManager, function(req, res) {
-  products_sql.getProducts(null, null, function(err, results) { //Goi den ham getProducts (return results) cua Model Product
+  product.getProducts(null, null, function(err, results) { //Goi den ham getProducts (return results) cua Model Product
 
     user.getUser(req.user[0].iduser, null, function(err, user) {
       console.log(results);
@@ -176,7 +234,7 @@ router.post("/add", upload.single('productImage'), function(req, res) {
     var filePath = req.file.path.slice(7);
     console.log(filePath);
     // console.log(test.slice(7));
-    products_sql.insertProduct(filePath , req.body,function(err , result){
+    product.insertProduct(filePath , req.body,function(err , result){
       if(err) throw err;
       console.log("update product");
       res.redirect("/QuanLy/QuanLyDoUong");
@@ -190,7 +248,7 @@ router.post("/edit",upload.single('editProductImage') ,function(req, res) {
   console.log(req.file);
   if (!req.file) {
     console.log("No file received");
-    products_sql.editProduct(null , req.body,function(err , result){
+    product.editProduct(null , req.body,function(err , result){
       if(err) throw err;
       console.log("update product");
       res.redirect("/QuanLy/QuanLyDoUong");
@@ -200,20 +258,21 @@ router.post("/edit",upload.single('editProductImage') ,function(req, res) {
     console.log(req.body);
     var filePath = req.file.path.slice(7);
     console.log(filePath);
-    products_sql.editProduct(filePath , req.body,function(err , result){
+    product.editProduct(filePath , req.body,function(err , result){
       if(err) throw err;
       console.log("update product");
       res.redirect("/QuanLy/QuanLyDoUong");
     });
   }
-})
+});
+
 router.post("/delete", function(req, res) {
   // console.log(req.body);
-  products_sql.deleteProduct(req.body, (result) => { //truyen vao mot dinh nghia ham
+  product.deleteProduct(req.body, (result) => { //truyen vao mot dinh nghia ham
     // console.log(result);
   })
   res.send()
-})
+});
 
 
 router.post("/LoadChart", function(req, res) {

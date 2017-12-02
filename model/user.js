@@ -50,7 +50,7 @@ var editUser = function(param1,callback){
 };
 
 var getAllUsers = function(param1, param2, callback) {
-  var getall = "SELECT * FROM user where isActive = 1;";
+  var getall = "SELECT * , DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user where isActive = 1;";
   connection.query(getall, function(error, result) {
     if (error) {
       throw error;
@@ -69,7 +69,7 @@ var deleteUser = function(id, callback){
 };
 
 var getUser = function(iduser, param2, callback) {
-  var getUserByIdCommand = "SELECT * FROM user WHERE iduser=" + iduser + ";";
+  var getUserByIdCommand = "SELECT *,DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user WHERE iduser=" + iduser + ";";
   connection.query(getUserByIdCommand, function(error, result) {
     if (error) {
       throw error;
@@ -101,9 +101,37 @@ function validPassword(password) {
   return bcrypt.compareSync(password, this.local.password);
 };
 
+var searchUser = function(data , callback){
+  var statement = "SELECT *,DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user where fullname like '%"+data+"%' or type like '%"+data+"%';"
+  connection.query(statement, function(error, result){
+    if (error) {
+      throw error;
+    }
+    callback(null, result);
+  })
+}
+var complete = function(data,callback){
+  connection.query('SELECT fullname,type from user where fullname like "%'+data+'%"', function(err, rows) {
+    if (err) {
+      throw error;
+    }
+      callback(null,rows);
+	});
+}
+var complete1 = function(data,callback){
+  connection.query('SELECT type from user where type like "%'+data+'%"', function(err, rows) {
+    if (err) {
+      throw error;
+    }
+      callback(null,rows);
+	});
+}
 
 module.exports = {
   insertUser,
+  complete1,
+  complete,
+  searchUser,
   getPosition,
   deleteUser,
   editUser,

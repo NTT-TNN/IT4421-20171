@@ -1,12 +1,15 @@
 var displayEdit = function(id) {
   // var fullname,birthday,phonenumber,email,gender,type,address,password;
+  console.log("id: ",id);
   var index;
-  for(i =0 ; i<allUsers.length;i++){
+  for(var i = 0 ; i<allUsers.length;i++){
     if (allUsers[i].iduser == id) {
       index = i;
       break;
     }
   }
+  console.log("index:", index);
+  //lay du lieu cua user co userid = id
   fullname = allUsers[index].fullname;
   birthday = allUsers[index].birthday;
   phonenumber = allUsers[index].phonenumber;
@@ -15,37 +18,49 @@ var displayEdit = function(id) {
   type = allUsers[index].type;
   address = allUsers[index].address;
   password = allUsers[index].password;
+
+  //hien thi modal edit
   document.getElementById("position"+type).setAttribute("selected","selected");
+  document.getElementById(gender+"Edit").setAttribute("selected","selected");
   document.getElementById("nameEdit").value = fullname;
   $("#birthdayEdit").val(moment(birthday).format("YYYY-MM-DD"));
-  document.getElementById("sexEdit").value = gender;
-  document.getElementById("typeEdit").value = type;
   document.getElementById("emailEdit").value = email;
   document.getElementById("phoneNumberEdit").value = phonenumber;
   document.getElementById("addressEdit").value = address;
   document.getElementById("passwordEdit").value = password;
-  $("#editUser").click(function() {
+
+  $("#editUser").unbind().on('click',function(){
     listType = document.getElementById("positionList");
+    listSex = document.getElementById("sexList");
+
     nameEdit = document.getElementById("nameEdit").value;
     birthdayEdit = document.getElementById("birthdayEdit").value;
-    sexEdit = document.getElementById("sexEdit").value;
+    sexEdit = listSex.options[listSex.selectedIndex].text;
     typeEdit = listType.options[listType.selectedIndex].text;
     emailEdit = document.getElementById("emailEdit").value;
     phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
     addressEdit = document.getElementById("addressEdit").value;
-    passEdit = document.getElementById("passwordEdit").value;
-    console.log(moment(birthdayEdit).format("YYYY-MM-DD"));
+    passwordEdit = document.getElementById("passwordEdit").value;
+    // console.log(moment(birthdayEdit).format("YYYY-MM-DD"));
     user = {
       iduser: id,
       fullname: nameEdit,
       birthday: birthdayEdit,
-      password: passEdit,
+      password: passwordEdit,
       phonenumber: phoneNumberEdit,
       email: emailEdit,
       gender: sexEdit,
       type: typeEdit,
       address: addressEdit
     };
+    console.log("user: "+user.iduser);
+      var index;
+      for(var i = 0 ; i<allUsers.length;i++){
+        if (allUsers[i].iduser == id) {
+          index = i;
+          break;
+        }
+      }
         allUsers[index].fullname = nameEdit;
         allUsers[index].birthday = birthdayEdit;
         allUsers[index].phonenumber = phoneNumberEdit;
@@ -54,8 +69,10 @@ var displayEdit = function(id) {
         allUsers[index].type = typeEdit;
         allUsers[index].address = addressEdit;
         allUsers[index].password = passwordEdit;
+      console.log("index: "+ index +" id: "+id);
+    //thay doi thong tin tren giao dien ng dung
     document.getElementById("name" + id).innerText = nameEdit;
-    $("#birthday" + id).text(moment(birthdayEdit).format("YYYY-MM-DD"));
+    $("#birthday" + id).text(moment(birthdayEdit).format("DD/MM/YYYY"));
     document.getElementById("sex" + id).innerText = sexEdit;
     document.getElementById("type" + id).innerText = typeEdit;
     document.getElementById("email" + id).innerText = emailEdit;
@@ -70,7 +87,7 @@ var displayEdit = function(id) {
         console.log("edit thành công")
       }
     });
-  })
+  });
 }
 
 var deleteUser = function(id){
@@ -173,7 +190,7 @@ var creatNewUser = function(user) {
 var resetAddModal =function(){
   $("#nameAdd").val("");
   $("#birthdayAdd").val("");
-  $("#sexAdd").val("");
+  $("#male").attr("selected","selected");
   $("#emailAdd").val("");
   $("#phoneAdd").val("");
   $("#addressAdd").val("");
@@ -183,11 +200,12 @@ var resetAddModal =function(){
 
 var addEmployee =function(){
   var typeList = document.getElementById("positionListAdd");
+  var sexList = document.getElementById("sexAdd");
   var addedEmployee =
   {
     name: $("#nameAdd").val(),
     birthday: $("#birthdayAdd").val(),
-    sex: $("#sexAdd").val(),
+    sex: sexList.options[sexList.selectedIndex].text,
     email: $("#emailAdd").val(),
     phone: $("#phoneAdd").val(),
     address: $("#addressAdd").val(),

@@ -32,6 +32,7 @@ var number = new Date(year, month, 0).getDate();%>
                     <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
                   </td>
                 <%}%>
+                  <td>0</td>
               <%}else{
                 for(var day=1; day<= number ; day++) {
                   var count = 0;
@@ -58,8 +59,8 @@ var number = new Date(year, month, 0).getDate();%>
                           <td>
                             <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" disabled>
                           </td>
-                        <%}}}}%>
-                    <% var count = 0;
+                        <%}}}}
+                    var count = 0;
                     for(var j=0; j< total.length ; j++){
                       if(allUsers[i].iduser == total[j].iduser){%>
                         <td><%=total[j].numOfDays %></td>

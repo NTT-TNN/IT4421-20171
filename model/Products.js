@@ -74,10 +74,22 @@ function deleteProduct(product, callback) {
         else callback("delete successfull");
     })
 }
+
+var searchProduct = function(data , callback){
+  var statement = "SELECT * FROM products where ProductName like '%"+data+"%';"
+  connection.query(statement, function(error, result){
+    if (error) {
+      throw error;
+    }
+    callback(null, result);
+  })
+}
+
 module.exports = {
     getProduct,
     getProducts,
     insertProduct,
     editProduct,
-    deleteProduct
+    deleteProduct,
+    searchProduct
 };

@@ -29,22 +29,28 @@ var number = new Date(year, month, 0).getDate();%>
               <td><%=allUsers[i].iduser %></td>
               <td><%=allUsers[i].fullname %></td>
               <%
-
-              for(var day=1; day<= number ; day++) {
-                var count = 0;
-                for(var index = 0; index < schedule.length ; index++){
-                  if(schedule[index].iduser == allUsers[i].iduser && day == schedule[index].data){%>
-                    <td>
-                      <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" checked>
-                    </td>
-                    <%break; }else{
-                      count++;
-                    }
-                    if (count == schedule.length){%>
+              if(schedule.length == 0){
+                for(var day=1; day<= number ; day++){%>
+                  <td>
+                    <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                  </td>
+                <%}
+              }else{
+                for(var day=1; day<= number ; day++) {
+                  var count = 0;
+                  for(var index = 0; index < schedule.length ; index++){
+                    if(schedule[index].iduser == allUsers[i].iduser && day == schedule[index].data){%>
                       <td>
-                        <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                        <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" checked>
                       </td>
-                      <%}}}%>
+                      <%break; }else{
+                        count++;
+                      }
+                      if (count == schedule.length){%>
+                        <td>
+                          <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                        </td>
+                        <%}}}}%>
               </tr>
               <% }%>
             </table>

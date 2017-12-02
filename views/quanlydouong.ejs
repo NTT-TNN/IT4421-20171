@@ -108,7 +108,6 @@
 </div>
 <div class="modal fade" id="deleteConfirmForm" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <form>
@@ -119,18 +118,27 @@
           <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="deleteConfirm_btn" data-toggle="modal" href="#table_modal" data-dismiss="modal">
             Xác nhận
           </button>
-
         </div>
-
       </form>
-
     </div>
   </div>
-
 </div>
 
 <div class="main">
   <!-- ============ Menu Section  ============= -->
+  <div class="searching-area-product">
+    <form method="get" action="/QuanLy/TKSP" >
+      <div class="input-group" id="text-area-searching">
+        <span class="input-group-btn">
+          <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </span>
+        <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên,thể loại" />
+        <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
+        <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
+      </div>
+    </form>
+  </div>
+
   <div class="menu">
     <div class="container-fluid">
       <div class="row">
@@ -334,7 +342,7 @@
             <script src="js/owl.carousel.min.js"></script>
             <script src="js/script.js"></script>
             <script src="js/wow.min.js"></script>
-            
+            <script src ="js/typeahead.min.js"></script>
             <script>
             function openCity(evt, cityName) {
               var i, tabcontent, tablinks;
@@ -352,6 +360,20 @@
 
             // Get the element with id="defaultOpen" and click on it
             document.getElementById("defaultOpen").click();
+            </script>
+
+            <script>
+            $("#btn-search").click(function() {
+              $("#inputsearch").click();
+            });
+
+            $(document).ready(function(){
+              $('input.typeahead').typeahead({
+                name: 'typeahead',
+                remote: 'http://localhost:8000/QuanLy/searchProduct?key=%QUERY',
+                limit: 10
+              });
+            });
             </script>
 
           </body>
