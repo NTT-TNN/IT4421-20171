@@ -78,7 +78,7 @@ var displayEdit = function(id) {
         document.getElementById("email" + id).innerText = user[0].email;
         document.getElementById("phone" + id).innerText = user[0].phonenumber;
         document.getElementById("address" + id).innerText = user[0].address;
-        console.log("edit thành công")
+        console.log("edit thành công");
       }
     });
   });

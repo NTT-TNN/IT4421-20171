@@ -18,7 +18,6 @@ var updateAvatar = function(param1, param2, callback) {
 
 var updateUser = function(param1, param2, callback) {
   console.log(moment(param1.birthday).format("YYYY-MM-DD"));
-
   var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + moment(param1.birthday).format("YYYY-MM-DD") + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
   console.log(updateUserCommand);
   connection.query(updateUserCommand, function(error, result) {
@@ -41,15 +40,30 @@ var insertUser = function(user,callback) {
 }
 
 var editUser = function(param1,callback){
-    var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "',password ='"+md5(param1.password)+"' WHERE iduser =" + param1.iduser + ";";
-    console.log(updateUser);
-    connection.query(updateUser, function(error, result){
-      if (error) {
-        throw error;
-      }else {
-          callback(null, result);
+    var find = " select * from user where iduser ="+ param1.iduser +";";
+    connection.query(find, function(error , rs ){
+      if(rs[0].password == param1.password){
+        var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "' WHERE iduser =" + param1.iduser + ";";
+        console.log(updateUser);
+        connection.query(updateUser, function(error, result){
+          if (error) {
+            throw error;
+          }else {
+              callback(null, result);
+          }
+        })
+      }else{
+        var updateUser = "UPDATE user SET fullname = '" + param1.fullname + "', gender = '" + param1.gender + "',birthday = '" + param1.birthday + "', email ='" + param1.email + "',phonenumber = '" + param1.phonenumber + "',type ='" + param1.type + "', address = '" + param1.address + "',password ='"+md5(param1.password)+"' WHERE iduser =" + param1.iduser + ";";
+        console.log(updateUser);
+        connection.query(updateUser, function(error, result){
+          if (error) {
+            throw error;
+          }else {
+              callback(null, result);
+          }
+        })
       }
-    })
+    });
 };
 
 var getAllUsers = function(param1, param2, callback) {
@@ -58,7 +72,6 @@ var getAllUsers = function(param1, param2, callback) {
     if (error) {
       throw error;
     }
-    // console.log(" ket qua truy van allUsers" + result);
     callback(null, result);
   });
 };
@@ -73,7 +86,9 @@ var deleteUser = function(id, callback){
 
 var getUser = function(iduser, param2, callback) {
   var getUserByIdCommand = "SELECT *,DATE_FORMAT(birthday,'%d/%m/%Y') as birthday1 FROM user WHERE iduser=" + iduser + ";";
+  console.log(getUserByIdCommand);
   connection.query(getUserByIdCommand, function(error, result) {
+    console.log("result: ", result[0].iduser);
     if (error) {
       throw error;
     }

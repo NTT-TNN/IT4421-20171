@@ -161,7 +161,7 @@
                                       </div>
 
                                       <div class="col-md-6">
-                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                          <a onclick="addDoUong(<%=i%>)"class="btn btn-success" >Add to cart</a>
                                       </div>
 
                                     </form>
@@ -213,7 +213,7 @@
                                       </div>
 
                                       <div class="col-md-6">
-                                          <a onclick="add(<%=i%>)"class="btn btn-success" >Add to cart</a>
+                                          <a onclick="addDoUong(<%=i%>)"class="btn btn-success" >Add to cart</a>
                                       </div>
 
                                     </form>
@@ -280,6 +280,7 @@
     <script>
 
     var products = JSON.parse('<%-JSON.stringify(products)%>');
+    var user = JSON.parse('<%-JSON.stringify(user)%>');
     </script>
     <script src="javascript/BoiBan.js" ></script>
     <script src="js/bootstrap.min.js" ></script>

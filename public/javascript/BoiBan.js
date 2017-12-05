@@ -3,18 +3,21 @@ tableNumber = 0;
 flagEdit=false;
 var table={};
 orders=[];
+
 $('#table_modal').hide().on('hide', function() {
     $('#table_modal').modal('show')
 });
+
 function addTable(){
   tableNumber=document.getElementById("table_number").value;
-  console.log(tableNumber);
+  // console.log(tableNumber);
   table={
     tableID:tableNumber,
-    status:0
+    status:0,
+    iduser: user[0].iduser
   }
-  console.log(table);
   orders.push(table);
+  // console.log(orders);
   document.getElementById("table_number").value="";
 }
 
@@ -46,10 +49,8 @@ socket.on('connect', function() {
 })
 
 function addDoUong(i){
-  
   var ProductID= products[i].ProductID;
   var ProductName= products[i].ProductName;
-  var ProductUrl= products[i].Url_images;
   var ProductPrice=products[i].Price;
   var number= parseInt(document.getElementById(ProductID).value);
   // var number=1;
@@ -57,7 +58,6 @@ function addDoUong(i){
     ProductID: ProductID,
     number:number,
     ProductName:ProductName,
-    ProductUrl:ProductUrl,
     ProductPrice:ProductPrice
   }
   console.log(orders);
@@ -112,12 +112,12 @@ function addDoUong(i){
      </div>`;
     document.getElementById("order_products").innerHTML = html;
     html="";
-    return true
+    return true;
 };
 
 function guiDonHang(){
-  if(orders.length>1){
-    if(flagEdit===true){
+  if(orders.length>1){ // Don hang ko rong
+    if(flagEdit===true){ //Neu don hang duoc edit
       var x = $(".ordernumber");
       x.attr("readonly", false).addClass("form-control");
       x.each(function(i){
@@ -125,14 +125,23 @@ function guiDonHang(){
       })
       flagEdit=false;
     }
-    console.log(orders);
-    socket.emit("order",orders);
+    // luu vao csdl
+    var data = orders;
+
+    // console.log("products",products);
+    // console.log("user: ",user);
+    // console.log("data: ",data);
+
+    socket.emit("order",data);
+    // console.log(orders);
+
     orders=[];
     // orders.push(table);
     toastr.success('Gửi đơn hàng thành công','Success!');
     document.getElementById("order_products").innerHTML = html;
+
     return true;
-  }else {
+  }else { // Don hang rong
     toastr.error('Đơn hàng rỗng','Error!',{timeOut: 20000});
     return false;
   }

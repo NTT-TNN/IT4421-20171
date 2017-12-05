@@ -9,16 +9,28 @@ socket.on('connect', function() {
   socket.emit('name', {
     name: 'banhang'
   });
-})
+});
 
 socket.on("order", function(order) {
   $(".modal-backdrop").remove();
-  // console.log('data: ', order);
+  console.log("data: ", order);
+
   orders.push(order);
-  reload("chuaxacnhan", orders, "order_list_waitting", order_modal,"Xác nhận");
+  //hien thi don hang moi
+  var $order, $orders;
+  $orders = $(".orders");
+  $order = `<div class="note">
+  <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail` + 1 + `"><span style="font-size:50px;">` + orders[x][0].tableID + `</span>
+  </div>
+  </div>`;
+  $bills.append($bill);
+
+  // reload("chuaxacnhan", orders, "order_list_waitting", order_modal,"Xác nhận");
   display_all();
 
 });
+
+
 
 // ham nay su dung de xoa toan bo html da su dung truoc do
 
@@ -37,7 +49,7 @@ var changeStt = function(x) {
     var $bill, $bills;
     $bills = $(".bills");
     $bill = `<div class="note">
-    <div class="note-inner" style="height:` + height + `px;width:` + height + `px" data-toggle="modal" data-target="#Order_detail` +
+    <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail` +
     (x+1) + `"><span style="font-size:50px;">` + orders[x][0].tableID + `</span>
     </div>
     </div>`;
@@ -74,8 +86,9 @@ var changeStt = function(x) {
     </div>
     </div>
     <div id="order_products` + orders[x].length + `">`;
+    total = 0;
+    console.log(orders[x]);
     for (var j = 1; j < orders[x].length; j++) {
-      total = 0;
       total += orders[x][j].ProductPrice * orders[x][j].number;
       unpaid_bills += `<div class="row">
       <div class="col-md-1 center-margin">
@@ -129,11 +142,16 @@ function thanhToan(i){
   orders[i][0].status = 2;
   reload("chuathanhtoan",orders,"unpaid_bills",unpaid_bills, "Thanh Toán");
   var data=orders[i];
+  var id = {
+    userid : user[0].iduser
+  };
+  data.push(id);
+  console.log(data);
   $.ajax({
   type: 'POST',
   data: JSON.stringify(data),
   contentType: 'application/json',
-  url: 'http://127.0.0.1:8000/ThuNgan/thanhToan',
+  url: "/ThuNgan/thanhToan",
   success: function(data) {
         console.log('success');
         console.log(JSON.stringify(data));
@@ -151,7 +169,7 @@ var reload = function(id_list,list,id_modal,modal,button){
   modal = "";
   removeAllChiled(id_list);
   id_list = "#"+id_list;
-  var length=0 ;
+  var length = 0 ;
 
   for (var i = 0; i < list.length; i++) {
     length++;
@@ -159,7 +177,7 @@ var reload = function(id_list,list,id_modal,modal,button){
       var $element, $arr;
       $arr = $(id_list);
       $element = `<div class="note">
-      <div class="note-inner" style="height:` + height + `px;width:` + height + `px" data-toggle="modal" data-target="#Order_detail` +
+      <div class="note-inner" style="height:100px;width: 100px" data-toggle="modal" data-target="#Order_detail` +
       length + `"><span style="font-size:50px;">` + list[i][0].tableID + `</span>
       </div>
       </div>`;
@@ -196,8 +214,8 @@ var reload = function(id_list,list,id_modal,modal,button){
       </div>
       </div>
       <div id="order_products` + length + `">`;
+      total = 0;
       for (var j = 1; j < list[i].length; j++) {
-        total = 0;
         total += list[i][j].ProductPrice * list[i][j].number;
         modal += `<div class="row">
         <div class="col-md-1 center-margin">
@@ -249,7 +267,7 @@ var reload = function(id_list,list,id_modal,modal,button){
 var display_all = function(){
   $all = $(".all_bills");
   $element = `<div class="note">
-  <div class="note-inner" style="height:` + height + `px;width:` + height + `px" data-toggle="modal" data-target="#Bill_detail` +
+  <div class="note-inner" style="height:100px;width:100px" data-toggle="modal" data-target="#Bill_detail` +
   orders.length + `"><span style="font-size:50px;">` + orders[orders.length-1][0].tableID + `</span>
   </div>
   </div>`;
@@ -285,8 +303,8 @@ var display_all = function(){
   </div>
   </div>
   <div id="order_products` + orders.length + `">`;
+  total = 0;
   for (var j = 1; j < orders[orders.length-1].length; j++) {
-    total = 0;
     total += orders[orders.length-1][j].ProductPrice * orders[orders.length-1][j].number;
     all_bills += `<div class="row">
     <div class="col-md-1 center-margin">

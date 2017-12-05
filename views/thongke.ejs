@@ -3,25 +3,25 @@
 
 <div class="row">
   <!-- <div class="col-md-3 col-xs-3 col=lg-3">
-    <select id="step" class="form-control" style="height: 35px;" >
-      <option value="WEEK">Tuần</option>
-      <option value="MONTH">Tháng</option>
-      <option value="YEAR">Năm</option>
-    </select>
-  </div> -->
-  <div class="col-md-4 col-xs-4 col=lg-4">
-    <select id="chartType" class="form-control" style="height: 35px;">
-      <option value="pie">pie</option>
-      <option value="line">line</option>
-      <option value="bar">bar</option>
-    </select>
-  </div>
-  <div class="col-md-4 col-xs-4 col=lg-4">
-    <input id="startDate" type="date" class="form-control" >
-  </div>
-  <div class="col-md-4 col-xs-4 col=lg-4">
-    <input id="stopDate" type="date" class="form-control">
-  </div>
+  <select id="step" class="form-control" style="height: 35px;" >
+  <option value="WEEK">Tuần</option>
+  <option value="MONTH">Tháng</option>
+  <option value="YEAR">Năm</option>
+</select>
+</div> -->
+<div class="col-md-4 col-xs-4 col=lg-4">
+  <select id="chartType" class="form-control" style="height: 35px;">
+    <option value="pie">pie</option>
+    <option value="line">line</option>
+    <option value="bar">bar</option>
+  </select>
+</div>
+<div class="col-md-4 col-xs-4 col=lg-4">
+  <input id="startDate" type="date" class="form-control" >
+</div>
+<div class="col-md-4 col-xs-4 col=lg-4">
+  <input id="stopDate" type="date" class="form-control">
+</div>
 </div>
 <br>
 <div class="row">
@@ -73,72 +73,93 @@ function LoadChart(){
   };
   if(startDate!=""&& stopDate!=""){
     $.ajax({
-    type: 'POST',
-    data: JSON.stringify(data),
-    contentType: 'application/json',
-    url: '/QuanLy/LoadChart',
-    success: function(results) {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      url: '/QuanLy/LoadChart',
+      success: function(results) {
+        console.log("ket qua truoc khi add");
+        console.log(results);
+
+        if(chartType =="line"){
           console.log(results);
-          var columns=[];
-          columns.push(['x']);
-          for(var i=0;i<results.length;++i){
-            // console.log(columns);
-            flag=true;
-            for(var j=0;j<columns.length;++j){
-              // console.log(columns[j][0]);
-              // console.log(results[i].ProductName);
-              if(columns[j][0]==results[i].ProductName){
-                flag=false;
-                columns[j].push(results[i].number);
-                if(columns[j][0]==results[0].ProductName){
-                  columns[0].push(moment(results[i].OrderDate).format("YYYY-MM-DD"));
-                }
-                break;
+          var columnsLine = [];
+          var datax = [];
+          datax.push("x");
+          for(var i =0 ; i< results.length; i++){
+            datax.push(moment(results[i].OrderDate).format("YYYY-MM-DD"));
+          }
+          columnsLine.push(datax);
+          for(var i = 0 ; i< results.length ; i++){
+            console.log(i);
+            console.log(results[i].ProductName);
+            var data = [];
+            data.push(results[i].ProductName);
+            for(var j = 0 ; j<results.length ; j++){
+              if(results[j].ProductName == results[i].ProductName){
+                data.push(results[j].number);
               }
             }
-            if(flag){
-              columns.push([results[i].ProductName]);
-              columns[columns.length-1].push(results[i].number);
-            }
+            columnsLine.push(data);
           }
-          console.log(columns);
+          console.log("colum line");
+          console.log(columnsLine);
           var chart = c3.generate({
-              bindto: '#chart',
-              data: {
-                // x:'x',
-                columns:columns,
-                type: chartType
-              },
-            //   axis : {
-            //     x : {
-            //         type : 'timeseries',
-            //         tick: {
-            //             format: function (x) { return x.getMonth()+1; }
-            //           //format: '%Y' // format string is also available for timeseries data
-            //         }
-            //     }
-            // }
+            bindto: '#chart',
+            data: {
+              x:'x',
+              columns:columnsLine,
+              type: chartType
+            },
+            axis : {
+              x : {
+                type: 'timeseries',
+                tick: {
+                  format: '%Y-%m-%d'
+                }
+              }
+            }
           });
+        }else {
+          console.log(results);
+          var columns=[];
+          for(var i=0;i<results.length;++i){
+            var data = [];
+            var number = 0;
+            data.push(results[i].ProductName);
+            for(var j =0 ; j< results.length ; j++){
+              if(results[i].ProductName == results[j].ProductName){
+                number += results[j].number;
+              }
+            }
+            data.push(number);
+            columns.push(data);
+          }
+          var chart = c3.generate({
+            bindto: '#chart',
+            data: {
+              columns:columns,
+              type: chartType
+            }
+          });
+        }
       }
     });
   }
-
 }
 
+var result = JSON.parse('<%-JSON.stringify(results)%>');
+var columns=[];
+for(var i=0;i<result.length;i++){
+  var temp=[result[i].ProductName,result[i].number];
+  columns.push(temp);
+}
 
-  var results = JSON.parse('<%-JSON.stringify(results)%>');
-  console.log(results);
-  var columns=[];
-  for(var i=0;i<results.length;++i){
-    var temp=[results[i].ProductName,results[i].number];
-    columns.push(temp);
+var chart = c3.generate({
+  bindto: '#chart',
+  data: {
+    columns:columns,
+    type: 'pie'
   }
-  console.log(columns);
-  var chart = c3.generate({
-      bindto: '#chart',
-      data: {
-        columns:columns,
-        type: 'pie'
-      }
-  });
+});
 </script>
