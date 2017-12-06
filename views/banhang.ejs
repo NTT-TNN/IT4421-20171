@@ -59,11 +59,11 @@
 
                 <!-- hien thi danh sach tat ca cac order -->
                 <div class="container-fluid all_bills" id="all">
-                  <%for (var i = 0; i< list_ids.length; i++){%>
+                  <%for (var i = 0; i< current_ids.length; i++){%>
                     <div class="note">
-                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Bill_detail<%=list_ids[i].OrderID%>">
+                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Bill_detail<%=current_ids[i].OrderID%>">
                         <span style="font-size:50px;">
-                          <%=list_ids[i].OrderID%>
+                          <%=current_ids[i].OrderID%>
                         </span>
                       </div>
                     </div>
@@ -243,13 +243,13 @@
                 }%>
               </div>
               <div id="all_bills_modal">
-                <%for(var i = 0; i< list_ids.length; i++){%>
-                  <div class="modal fade" id="Bill_detail<%=list_ids[i].OrderID%>" role="dialog">
+                <%for(var i = 0; i< current_ids.length; i++){%>
+                  <div class="modal fade" id="Bill_detail<%=current_ids[i].OrderID%>" role="dialog">
                     <div class="modal-dialog">
                       <!-- Modal content-->
                       <div class="modal-content">
                         <div class="modal-header" style="bacorders.lengthground-color:#2196F3">
-                          <h4 class="modal-title">TABLE: <%=list_ids[i].TableID%></h4>
+                          <h4 class="modal-title">TABLE: <%=current_ids[i].TableID%></h4>
                         </div>
                         <div class="modal-body">
                           <div class="container-fluid" style="text-align: center;">
@@ -270,18 +270,18 @@
                                 <br>
                               </div>
                             </div>
-                            <div id="order_products<%=list_ids[i].OrderID%>">
-                              <%for(var j=0; j< list_orders.length; j++){
-                                if(list_orders[j].OrderID == list_ids[i].OrderID){%>
+                            <div id="order_products<%=current_ids[i].OrderID%>">
+                              <%for(var j=0; j< current_orders.length; j++){
+                                if(current_orders[j].OrderID == current_ids[i].OrderID){%>
                                   <div class="row">
                                     <div class="col-md-5 center-margin">
-                                      <%=list_orders[j].ProductName%>
+                                      <%=current_orders[j].ProductName%>
                                     </div>
                                     <div class="col-md-2 center-margin">
-                                      <%=list_orders[j].Quantity%>
+                                      <%=current_orders[j].Quantity%>
                                     </div>
                                     <div class="col-md-2 center-margin">
-                                      <%=list_orders[j].Price%>$
+                                      <%=current_orders[j].Price%>$
                                     </div>
                                     <div class="col-md-2 center-margin">
                                       <h6></h6>
@@ -300,7 +300,7 @@
                               <div class="col-md-2 center-margin"></div>
                               <div class="col-md-2 center-margin"></div>
                               <div class="col-md-2 center-margin">
-                                <h6><%=list_ids[i].Total%>$</h6>
+                                <h6><%=current_ids[i].Total%>$</h6>
                               </div>
                               <div class="col-md-1 center-margin">
                                 <br>

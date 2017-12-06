@@ -97,7 +97,7 @@ router.get("/searchUser" , function(req,res){
           data.push(type[i].type);
       }
       console.log(data);
-      res.end(JSON.stringify(data));
+      res.send(JSON.stringify(data));
     });
   });
 })
@@ -122,7 +122,7 @@ router.get("/searchProduct" , function(req,res){
       data.push(result[i].ProductName);
     }
       console.log(data);
-      res.end(JSON.stringify(data));
+      res.send(JSON.stringify(data));
     });
   });
 
@@ -146,6 +146,7 @@ router.get("/QuanLyNhanVien", authen.isManager, function(req, res) {
 });
 
 router.post("/deleteUser",function(req,res){
+  console.log("id xoa " +req.body.userid);
   user.deleteUser(req.body.userid,function(err,result){
     console.log("delete thanh cong");
   });
@@ -265,11 +266,11 @@ router.post("/edit",upload.single('editProductImage') ,function(req, res) {
 });
 
 router.post("/delete", function(req, res) {
-  // console.log(req.body);
-  product.deleteProduct(req.body, (result) => { //truyen vao mot dinh nghia ham
+  console.log("lolol" +req.body.ProductID);
+  product.deleteProduct(req.body.ProductID, function(err, result) { //truyen vao mot dinh nghia ham
     // console.log(result);
   })
-  res.send()
+  res.send();
 });
 
 

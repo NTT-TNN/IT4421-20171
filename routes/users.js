@@ -25,9 +25,7 @@ router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
   console.log(req.file);
   if (!req.file) {
     console.log("No file received");
-    return res.send({
-      success: false
-    });
+    return res.redirect("/users/user_info");
 
   } else {
     const host = req.host;
@@ -85,11 +83,11 @@ router.post('/user_info', function(req, res) {
   user.updateUser(req.body,null,function(err,results){
     // console.log(results);
   });
-
+  res.redirect("/users/user_info");
   // console.log(data);
-  user.getUser(req.user[0].iduser,null,function(err,results){
-    res.render("user_info",{user:results});
-  });
+  // user.getUser(req.user[0].iduser,null,function(err,results){
+  //   res.render("user_info",{user:results});
+  // });
 });
 
 router.get('/logout',function(req,res){

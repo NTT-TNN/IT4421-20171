@@ -17,8 +17,8 @@ var updateAvatar = function(param1, param2, callback) {
 }
 
 var updateUser = function(param1, param2, callback) {
-  console.log(moment(param1.birthday).format("YYYY-MM-DD"));
-  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + moment(param1.birthday).format("YYYY-MM-DD") + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
+  // console.log(moment(param1.birthday).format("YYYY-MM-DD"));
+  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
   console.log(updateUserCommand);
   connection.query(updateUserCommand, function(error, result) {
     callback(null, result);

@@ -4,20 +4,26 @@ flagEdit=false;
 var table={};
 orders=[];
 
+
 $('#table_modal').hide().on('hide', function() {
-    $('#table_modal').modal('show')
+    $('#table_modal').modal('show');
 });
 
 function addTable(){
   tableNumber=document.getElementById("table_number").value;
-  // console.log(tableNumber);
-  table={
-    tableID:tableNumber,
-    status:0
+  if(tableNumber != ""){
+    console.log("ahihi");
+    $("#table").hide();
+    // console.log(tableNumber);
+    table={
+      tableID:tableNumber,
+      status:0
+    }
+    orders.push(table);
+    // console.log(orders);
+    document.getElementById("table_number").value="";
   }
-  orders.push(table);
-  // console.log(orders);
-  document.getElementById("table_number").value="";
+
 }
 
 
@@ -48,73 +54,81 @@ socket.on('connect', function() {
 })
 
 function addDoUong(i){
-  var ProductID= products[i].ProductID;
-  var ProductName= products[i].ProductName;
-  var ProductPrice=products[i].Price;
-  var number= parseInt(document.getElementById(ProductID).value);
-  // var number=1;
-  product={
-    ProductID: ProductID,
-    number:number,
-    ProductName:ProductName,
-    ProductPrice:ProductPrice
-  }
-  console.log(orders);
-  if(orders.length==0){
-    orders.push(product);
-  }else{
-    var flag=true;
-    for(var j=0;j<orders.length;++j){
+  var tbID = document.getElementById("table_number").value;
+  if(tbID != ""){
+    var ProductID= products[i].ProductID;
+    var ProductName= products[i].ProductName;
+    var ProductPrice=products[i].Price;
+    var number= parseInt(document.getElementById(ProductID).value);
+    // var number=1;
+    product={
+      ProductID: ProductID,
+      number:number,
+      ProductName:ProductName,
+      ProductPrice:ProductPrice
+    }
+    console.log(orders);
+    if(orders.length==0){
+      orders.push(product);
+    }else{
+      var flag=true;
+      for(var j=0;j<orders.length;++j){
 
-      if(orders[j].ProductID==ProductID){
-        orders[j].number+=number;
-        flag=false;
+        if(orders[j].ProductID==ProductID){
+          orders[j].number+=number;
+          flag=false;
+        }
+      }
+      if(flag==true){
+        orders.push(product);
       }
     }
-    if(flag==true){
-      orders.push(product);
-    }
-  }
-  html="";
-  total=0;
-  for(var j=1;j<orders.length;++j){
-
-    total+=orders[j].ProductPrice*orders[j].number;
-    html+=`<div class="row" id="doUong`+j+`">
-       <div class="col-md-1 center-margin">
-         1
-       </div>
-       <div class="col-md-4 center-margin">` + orders[j].ProductName +
-       `</div>
-       <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+orders[j].number+`'>
-       <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
-      `.000</div>
-      <div class="col-md-2 center-margin">
-       <img src="images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')">
-      </div>
-       <div class="col-md-1 center-margin">
-
-       </div>
-     </div>`;
-  }
-    html+=`<div class="row">
-       <div class="col-md-1 center-margin"></div>
-       <div class="col-md-4 center-margin"></div>
-       <div class="col-md-2 center-margin"></div>
-       <div class="col-md-2 center-margin"></div>
-      <div class="col-md-2 center-margin">
-        <h6 id="total">`+total+ `.000</h6>
-      </div>
-       <div class="col-md-1 center-margin">
-         <br>
-       </div>
-     </div>`;
-    document.getElementById("order_products").innerHTML = html;
     html="";
-    return true;
+    total=0;
+    for(var j=1;j<orders.length;++j){
+
+      total+=orders[j].ProductPrice*orders[j].number;
+      html+=`<div class="row" id="doUong`+j+`">
+         <div class="col-md-1 center-margin">
+           1
+         </div>
+         <div class="col-md-4 center-margin">` + orders[j].ProductName +
+         `</div>
+         <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+orders[j].number+`'>
+         <div class="col-md-2 center-margin">` + orders[j].ProductPrice+
+        `.000</div>
+        <div class="col-md-2 center-margin">
+         <img src="images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')">
+        </div>
+         <div class="col-md-1 center-margin">
+
+         </div>
+       </div>`;
+    }
+      html+=`<div class="row">
+         <div class="col-md-1 center-margin"></div>
+         <div class="col-md-4 center-margin"></div>
+         <div class="col-md-2 center-margin"></div>
+         <div class="col-md-2 center-margin"></div>
+        <div class="col-md-2 center-margin">
+          <h6 id="total">`+total+ `.000</h6>
+        </div>
+         <div class="col-md-1 center-margin">
+           <br>
+         </div>
+       </div>`;
+      document.getElementById("order_products").innerHTML = html;
+      html="";
+      return true;
+  }else {
+    toastr.error('Chưa điền số bàn','Error!',{timeOut: 20000});
+  }
+
 };
 
 function guiDonHang(){
+  $("#table").show();
+  console.log(orders);
   if(orders.length>1){ // Don hang ko rong
     if(flagEdit===true){ //Neu don hang duoc edit
       var x = $(".ordernumber");

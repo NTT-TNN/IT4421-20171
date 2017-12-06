@@ -12,8 +12,10 @@ function Authorization(req,res,next){
         // });
       }else if(req.user[0].type=="order"){
         res.redirect('/BoiBan');
-      }else{
+      }else if(req.user[0].type=="accountant"){
         res.redirect('/ThuNgan');
+      }else{
+        res.redirect('/Other');
       }
     }
     return next();
@@ -63,6 +65,20 @@ function isAccountant(req,res,next){
   }
 }
 
+function isOther(req,res,next){
+  if(req.isAuthenticated()){
+    // login=true;
+    console.log(req.user);
+    if(req.user!=undefined){
+      if(req.user[0].type=="other"){
+        return next();
+      }
+    res.redirect('/users/user_info');
+    }
+    res.redirect('/');
+  }
+}
+
 function Authentication (req,res,next){
   if(req.isAuthenticated()){
     // login=true;
@@ -84,6 +100,7 @@ module.exports ={
    isManager,
    isOrder,
    isAccountant,
+   isOther,
    Authentication,
    isLoggedIn
 };

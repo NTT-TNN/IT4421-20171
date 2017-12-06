@@ -1,3 +1,23 @@
+
+
+
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-left",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "3000",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 var displayEdit = function(id) {
   // var fullname,birthday,phonenumber,email,gender,type,address,password;
   console.log("id: ",id);
@@ -8,7 +28,7 @@ var displayEdit = function(id) {
       break;
     }
   }
-    //lay du lieu cua user co userid = id
+  console.log(allUsers[index].birthday1);
   fullname = allUsers[index].fullname;
   birthday = allUsers[index].birthday;
   phonenumber = allUsers[index].phonenumber;
@@ -21,7 +41,7 @@ var displayEdit = function(id) {
   document.getElementById("position"+type).setAttribute("selected","selected");
   document.getElementById(gender+"Edit").setAttribute("selected","selected");
   document.getElementById("nameEdit").value = fullname;
-  $("#birthdayEdit").val(moment(birthday).format("YYYY-MM-DD"));
+  $("#birthdayEdit").val(moment(new Date(birthday)).format("YYYY-MM-DD"));
   document.getElementById("emailEdit").value = email;
   document.getElementById("phoneNumberEdit").value = phonenumber;
   document.getElementById("addressEdit").value = address;
@@ -64,7 +84,8 @@ var displayEdit = function(id) {
       contentType: 'application/json',
       success: function(user) {
         allUsers[index].fullname = user[0].fullname;
-        allUsers[index].birthday = user[0].birthday1;
+        allUsers[index].birthday = user[0].birthday;
+        allUsers[index].birthday1 = user[0].birthday1;
         allUsers[index].phonenumber = user[0].phonenumber;
         allUsers[index].email = user[0].email;
         allUsers[index].gender = user[0].gender;
@@ -78,7 +99,7 @@ var displayEdit = function(id) {
         document.getElementById("email" + id).innerText = user[0].email;
         document.getElementById("phone" + id).innerText = user[0].phonenumber;
         document.getElementById("address" + id).innerText = user[0].address;
-        console.log("edit thành công");
+        toastr.success('Sửa thành công','Success!');
       }
     });
   });
@@ -86,8 +107,9 @@ var displayEdit = function(id) {
 
 var deleteUser = function(id){
   console.log(id);
-  $("#deleteConfirm_btn").click(function(){
+  $("#deleteConfirm_btn").unbind().click(function(){
     $("#"+id).remove();
+    toastr.success('Xóa nhân viên thành công','Success!');
     $.ajax({
       url: "/QuanLy/deleteUser",
       type: "POST",
@@ -99,6 +121,8 @@ var deleteUser = function(id){
         console.log("successful!")
       }
     });
+
+
   })
 }
 
@@ -178,6 +202,7 @@ var creatNewUser = function(user) {
   </div>
   </div>`;
   return html;
+
 }
 
 var resetAddModal =function(){
@@ -194,6 +219,23 @@ var resetAddModal =function(){
 var addEmployee =function(){
   var typeList = document.getElementById("positionListAdd");
   var sexList = document.getElementById("sexAdd");
+  var name = $("#nameAdd").val();
+  var birthday =$("#birthdayAdd").val();
+  var email =$("#emailAdd").val();
+  var phone = $("#phoneAdd").val()
+  var address =$("#addressAdd").val();
+  var password =$("#passwordAdd").val();
+  var sex = sexList.options[sexList.selectedIndex].text;
+  var type = typeList.options[typeList.selectedIndex].text;
+  var flag = false;
+  for(var i =0 ; i < allUsers.length ; i++){
+    if(allUsers[i].email == email){
+      flag = true;
+      break;
+    }
+  }
+
+
   var addedEmployee =
   {
     name: $("#nameAdd").val(),
@@ -206,19 +248,34 @@ var addEmployee =function(){
     type: typeList.options[typeList.selectedIndex].text
   }
 
-  $.ajax({
-    url: "/QuanLy/addUser",
-    type : "POST",
-    data: JSON.stringify(addedEmployee),
-    contentType: 'application/json',
-    success: function (user) {
-      var newUser = creatNewUser(user[0]);
-      $("#list-emp").append(newUser);
-      console.log("trc " + allUsers.length);
-      allUsers.push(user[0]);
-      console.log("sau " + allUsers.length);
-      resetAddModal();
+    if(name != "" && birthday != "" && sex != "" && email != "" && phone != "" && address != "" && password != "" && type !=""){
+      if(!flag){
+        $.ajax({
+          url: "/QuanLy/addUser",
+          type : "POST",
+          data: JSON.stringify(addedEmployee),
+          contentType: 'application/json',
+          success: function (user) {
+            var newUser = creatNewUser(user[0]);
+            $("#list-emp").append(newUser);
+            console.log("trc " + allUsers.length);
+            allUsers.push(user[0]);
+            console.log("sau " + allUsers.length);
+            resetAddModal();
+            toastr.success('Thêm nhân viên thành công','Success!');
+            // $("#emp-add").hide();
+            // $(".modal-backdrop").remove();
+          }
+            }
+          );
+      }else {
+          toastr.error('Email đã tồn tại','ERROR!',{timeOut: 2000});
+      }
+    }else {
+      toastr.error('Yêu cầu nhập đủ thông tin','ERROR!',{timeOut: 2000});
     }
-  }
-);
+
+
+
+
 }

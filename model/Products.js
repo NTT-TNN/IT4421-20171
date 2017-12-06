@@ -64,14 +64,14 @@ function editProduct(param1,product, callback){
 
 function deleteProduct(product, callback) {
     // console.log(id);
-    var editStatement = `DELETE FROM products
-                    WHERE ProductID = "${product.ProductID}"`
-    connection.query(editStatement, (error, result) => { // query tra lai ham callback 2 bien error, result
-        if (error) {
-            console.log("sql delete error! :");
-            // callback('error');
-        }
-        else callback("delete successfull");
+    var editStatement ="DELETE FROM products WHERE ProductID = " + product;
+    var deleteOrderDt ="DELETE FROM orderdetails WHERE ProductID = " + product;
+    connection.query(deleteOrderDt , function(err,rs){
+      callback(err,rs);
+    });
+    console.log(editStatement);
+    connection.query(editStatement, function(error, result){ // query tra lai ham callback 2 bien error, result
+        callback(error,result);
     })
 }
 
