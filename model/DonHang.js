@@ -115,7 +115,6 @@ var changeStatus = function(order_id, employeeID, callback){
       console.log(res);
       callback(null,res);
     });
-
 }
 
 module.exports = {
