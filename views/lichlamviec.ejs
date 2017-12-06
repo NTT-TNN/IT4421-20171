@@ -33,22 +33,30 @@ var month = date.getMonth()+1;%>
           <td>
             <%=user[0].fullname %>
           </td>
-          <%
-          for(var day=1; day<= 31 ; day++) {
-            var count = 0;
-            for(var index = 0; index < days.length ; index++){
-              if(day == days[index].data){%>
-                <td>
-                  <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled checked>
-                </td>
-                <%break; }else{
-                  count++;
-                }
-                if (count == days.length){%>
+          <%if(days.length == 0){
+            for(var day=1; day<= 31 ; day++) {%>
+              <td>
+                <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+              </td>
+            <%}
+          }else{
+            for(var day=1; day<= 31 ; day++) {
+              var count = 0;
+              for(var index = 0; index < days.length ; index++){
+                if(day == days[index].data){%>
                   <td>
-                    <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                    <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled checked>
                   </td>
-                  <%}}}
+                  <%break; }else{
+                    count++;
+                  }
+                  if (count == days.length){%>
+                    <td>
+                      <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                    </td>
+                    <%}}}
+                  }
+
                   if(total.length == 0){%>
                     <td id="total-worked-day">
                       0

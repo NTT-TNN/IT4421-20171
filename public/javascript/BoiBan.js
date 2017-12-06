@@ -13,8 +13,7 @@ function addTable(){
   // console.log(tableNumber);
   table={
     tableID:tableNumber,
-    status:0,
-    iduser: user[0].iduser
+    status:0
   }
   orders.push(table);
   // console.log(orders);

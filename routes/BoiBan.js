@@ -45,10 +45,4 @@ router.get("/searchProduct" , function(req,res){
     });
   });
 
-  router.post("/order",function(req,res){
-    DonHang.insertOrder(req.body,function(order,order_detail){
-      res.send(order,order_detail);
-    })
-  });
-
 module.exports = router;

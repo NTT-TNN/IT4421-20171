@@ -1,6 +1,13 @@
+// var mysql = require('mysql');
+// var moment = require('moment');
+// var connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "akonakon",
+//   database: "test_it4421"
+// });
 var DonHang = require("../model/DonHang.js");
-var express = require('express');
-var router = express.Router();
+
 
 module.exports = function(io) {
   var order = [];
@@ -18,14 +25,23 @@ module.exports = function(io) {
     });
 
     socket.on("order",function(data){
+      new_order = [];
       // console.log(data.cafe +" " + data.suachua);
       // console.log('to id: ', banhang[0]);
       console.log("don hang chuyen sang", data);
-      DonHang.insertOrder(data, function(new_order, new_order_detail){
-        console.log("new_order: ",new_order);
-        console.log("new_order_detail:",new_order_detail);
+      DonHang.insertOrder(data,function(err,res){
+        DonHang.getOrder(res.insertId,function(list_products,info){
+          id={
+            order_id: res.insertId
+          }
+          new_order.push(id);
+          new_order.push(info);
+          new_order.push(list_products);
+          console.log(new_order);
+          io.emit("order",new_order);
+        })
       });
-      io.emit("order",data);
+
     });
     //...
     socket.on('disconnect', function() {

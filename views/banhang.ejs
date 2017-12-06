@@ -19,8 +19,8 @@
               <div class="container-fluid orders" id ="chuaxacnhan">
                 <%for (var i = 0; i< list_ids.length; i++){
                   if(list_ids[i].Status == 0){%>
-                    <div class="note">
-                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail<%=list_ids[i].OrderID%>">
+                    <div class="note" id="note<%=list_ids[i].OrderID%>">
+                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#New_order_detail<%=list_ids[i].OrderID%>">
                         <span style="font-size:50px;">
                           <%=list_ids[i].OrderID%>
                         </span>
@@ -40,7 +40,7 @@
                 <div class="container-fluid bills" id="chuathanhtoan">
                   <%for (var i = 0; i< list_ids.length; i++){
                     if(list_ids[i].Status == 1){%>
-                      <div class="note">
+                      <div class="note" id="note<%=list_ids[i].OrderID%>">
                         <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail<%=list_ids[i].OrderID%>">
                           <span style="font-size:50px;">
                             <%=list_ids[i].OrderID%>
@@ -90,7 +90,7 @@
       <div id="order_list_waitting">
         <%for(var i = 0; i< list_ids.length; i++){
           if(list_ids[i].Status == 0){%>
-            <div class="modal fade" id="Order_detail<%=list_ids[i].OrderID%>" role="dialog">
+            <div class="modal fade" id="New_order_detail<%=list_ids[i].OrderID%>" role="dialog">
               <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -116,7 +116,7 @@
                           <br>
                         </div>
                       </div>
-                      <div id="order_products">
+                      <div id="order_products<%=list_ids[i].OrderID%>">
                         <%for(var j=0; j< list_orders.length; j++){
                           if(list_orders[j].OrderID == list_ids[i].OrderID){%>
                             <div class="row">
@@ -155,7 +155,7 @@
                     </div>
                     <div class="modal-footer">
                       <div class="container-fluid text-center">
-                        <button onclick = "changeStt(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                        <button onclick = "changeStatus(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
                       </div>
                     </div>
                   </div>
@@ -194,7 +194,7 @@
                               <br>
                             </div>
                           </div>
-                          <div id="order_products">
+                          <div id="order_products<%=list_ids[i].OrderID%>">
                             <%for(var j=0; j< list_orders.length; j++){
                               if(list_orders[j].OrderID == list_ids[i].OrderID){%>
                                 <div class="row">
@@ -233,7 +233,7 @@
                         </div>
                         <div class="modal-footer">
                           <div class="container-fluid text-center">
-                            <button onclick = "thanhToan(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Thanh toán</button>
+                            <button onclick = "changeStatus(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Thanh toán</button>
                           </div>
                         </div>
                       </div>
@@ -270,7 +270,7 @@
                                 <br>
                               </div>
                             </div>
-                            <div id="order_products">
+                            <div id="order_products<%=list_ids[i].OrderID%>">
                               <%for(var j=0; j< list_orders.length; j++){
                                 if(list_orders[j].OrderID == list_ids[i].OrderID){%>
                                   <div class="row">

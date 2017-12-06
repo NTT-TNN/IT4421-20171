@@ -7,7 +7,7 @@ var router = express.Router()
 
 router.get("/",authen.isAccountant,function(req,res){
   user.getUser(req.user[0].iduser,null,function(err,user){
-    DonHang.getOrder(function(list_orders, list_ids){
+    DonHang.getOrders(function(list_orders, list_ids){
       console.log(list_orders);
       console.log(list_ids);
       res.render("banhang",{
@@ -26,5 +26,21 @@ router.post("/thanhToan",function(req,res){
       console.log(" da chay ok");
   });
 });
+
+router.post("/changeStatus",function(req,res){
+  console.log(req.body);
+  DonHang.changeStatus(req.body.order_id,req.body.iduser,function(err,result){
+    DonHang.getOrder(req.body.order_id,function(list_products,info){
+      var data = [];
+      id={
+        order_id: req.body.order_id
+      }
+      data.push(id);
+      data.push(info);
+      data.push(list_products);
+      res.send(data);
+    })
+  })
+})
 
 module.exports = router;
