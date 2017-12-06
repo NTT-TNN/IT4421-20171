@@ -1,86 +1,4 @@
-<<<<<<< HEAD
-var getEmployeeById = function (id) {
-  var fullname, birthday, phonenumber, email, gender, type, address, password;
-  var i = 0;
-  for (i = 0; i < allUsers.length; i++) {
-    if (allUsers[i].iduser == id) {
-      // fullname = allUsers[i].fullname;
-      // birthday = allUsers[i].birthday;
-      // phonenumber = allUsers[i].phonenumber;
-      // email = allUsers[i].email;
-      // gender = allUsers[i].gender;
-      // type = allUsers[i].type;
-      // address = allUsers[i].address;
-      // password = allUsers[i].password;
-      break;
-    }
-  }
-  return allUsers[i];
-}
-var displayEdit = function (id) {
 
-  let user = getEmployeeById(parseInt(id));
-  document.getElementById("position" + user.type).setAttribute("selected", "selected");
-  document.getElementById("nameEdit").value = user.fullname;
-  document.getElementById("birthdayEdit").value = user.birthday;
-  document.getElementById("sexEdit").value = user.gender;
-  document.getElementById("typeEdit").value = user.type;
-  document.getElementById("emailEdit").value = user.email;
-  document.getElementById("phoneNumberEdit").value = user.phonenumber;
-  document.getElementById("addressEdit").value = user.address;
-  document.getElementById("passwordEdit").value = user.password;
-  $("#editUser").unbind().on('click', function () {
-    // user = getEmployeeById(id)
-    console.log(user.iduser);
-    let listType = document.getElementById("positionList");
-    user.fullname = document.getElementById("nameEdit").value;
-    user.birthday = document.getElementById("birthdayEdit").value;
-    user.gender = document.getElementById("sexEdit").value;
-    user.type = listType.options[listType.selectedIndex].text;
-    user.email = document.getElementById("emailEdit").value;
-    user.phonenumber = document.getElementById("phoneNumberEdit").value;
-    user.address = document.getElementById("addressEdit").value;
-    user.password = document.getElementById("passwordEdit").value
-    // user = {
-    //   iduser: id,
-    //   fullname: nameEdit,
-    //   birthday: birthdayEdit,
-    //   password: passEdit,
-    //   phonenumber: phoneNumberEdit,
-    //   email: emailEdit,
-    //   gender: sexEdit,
-    //   type: typeEdit,
-    //   address: addressEdit
-    // };
-    // for (var i = 0; i < allUsers.length; i++) {
-    //   if(allUsers[i].iduser == id){
-    //     allUsers[i].fullname = nameEdit;
-    //     allUsers[i].birthday = birthdayEdit;
-    //     allUsers[i].phonenumber = phoneNumberEdit;
-    //     allUsers[i].email = emailEdit;
-    //     allUsers[i].gender = sexEdit;
-    //     allUsers[i].type = typeEdit;
-    //     allUsers[i].address = addressEdit;
-    //     allUsers[i].password = passwordEdit;
-    //     console.log("edit thanh cong");
-    //     break;
-    //   }
-    // }
-    // document.getElementById("name" + id).innerText = user.fullname;
-    $(`#user${user.iduser} #name`)[0].innerText = user.fullname;
-    // document.getElementById("birthday" + id).innerText = user.birthday;
-    $(`#user${user.iduser} #birthday`)[0].innerText = user.birthday;
-    // document.getElementById("sex" + id).innerText = user.gender;
-    $(`#user${user.iduser} #sex`)[0].innerText = user.gender;
-    // document.getElementById("type" + id).innerText = user.type;
-    $(`#user${user.iduser} #type`)[0].innerText = user.type;
-    // document.getElementById("email" + id).innerText = user.email;
-    $(`#user${user.iduser} #email`)[0].innerText = user.email;
-    // document.getElementById("phone" + id).innerText = user.phonenumber;
-    $(`#user${user.iduser} #phone`)[0].innerText = user.phonenumber;
-    // document.getElementById("address" + id).innerText = user.address;
-    $(`#user${user.iduser} #address`)[0].innerText = user.address;
-=======
 var displayEdit = function(id) {
   // var fullname,birthday,phonenumber,email,gender,type,address,password;
   console.log("id: ",id);
@@ -140,31 +58,13 @@ var displayEdit = function(id) {
           break;
         }
       }
->>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+
     $.ajax({
       url: "/QuanLy/editUser",
       type: "POST",
       data: JSON.stringify(user),
       contentType: 'application/json',
-<<<<<<< HEAD
-      success: function () {
-        // document.getElementById("name" + id).innerText = user.fullname;
-        // $(`#user${user.iduser} #name`)[0].innerText = user.fullname;
-        // // document.getElementById("birthday" + id).innerText = user.birthday;
-        // $(`#user${user.iduser} #birthday`)[0].innerText = user.birthday;
-        // // document.getElementById("sex" + id).innerText = user.gender;
-        // $(`#user${user.iduser} #sex`)[0].innerText = "user.gender";
-        // // document.getElementById("type" + id).innerText = user.type;
-        // $(`#user${user.iduser} #type`)[0].innerText = user.type;
-        // // document.getElementById("email" + id).innerText = user.email;
-        // $(`#user${user.iduser} #email`)[0].innerText = user.email;
-        // // document.getElementById("phone" + id).innerText = user.phonenumber;
-        // $(`#user${user.iduser} #phone`)[0].innerText = user.phonenumber;
-        // // document.getElementById("address" + id).innerText = user.address;
-        // $(`#user${user.iduser} #address`)[0].innerText = user.address;
-        // // $("#results").append(html);
-        console.log("edit thành công")
-=======
+
       success: function(user) {
         allUsers[index].fullname = user[0].fullname;
         allUsers[index].birthday = user[0].birthday1;
@@ -182,7 +82,6 @@ var displayEdit = function(id) {
         document.getElementById("phone" + id).innerText = user[0].phonenumber;
         document.getElementById("address" + id).innerText = user[0].address;
         console.log("edit thành công");
->>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
       }
     });
   });
@@ -225,13 +124,10 @@ var creatNewUser = function (user) {
   <div class="icon">
   <i class="fa fa-birthday-cake" aria-hidden="true"></i>
   </div>
-<<<<<<< HEAD
-  <p id="birthday">
-  `+ user.birthday + `
-=======
+
   <p id="birthday`+user.iduser+`">
   `+user.birthday1+`
->>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+
   </p>
   </div>
   <div class="item sex">
@@ -306,18 +202,7 @@ var addEmployee = function () {
   var typeList = document.getElementById("positionListAdd");
   var sexList = document.getElementById("sexAdd");
   var addedEmployee =
-<<<<<<< HEAD
-    {
-      name: $("#nameAdd").val(),
-      birthday: $("#birthdayAdd").val(),
-      sex: $("#sexAdd").val(),
-      email: $("#emailAdd").val(),
-      phone: $("#phoneAdd").val(),
-      address: $("#addressAdd").val(),
-      password: $("#passwordAdd").val(),
-      type: typeList.options[typeList.selectedIndex].text
-    }
-=======
+
   {
     name: $("#nameAdd").val(),
     birthday: $("#birthdayAdd").val(),
@@ -328,7 +213,7 @@ var addEmployee = function () {
     password: $("#passwordAdd").val(),
     type: typeList.options[typeList.selectedIndex].text
   }
->>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+
 
   $.ajax({
     url: "/QuanLy/addUser",
@@ -346,11 +231,8 @@ var addEmployee = function () {
       resetAddModal();
     }
   }
-<<<<<<< HEAD
+
   );
 
 }
-=======
-);
-}
->>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+
