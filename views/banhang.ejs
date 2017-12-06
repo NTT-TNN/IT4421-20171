@@ -1,0 +1,338 @@
+<%- include head.ejs %>
+<h4 style="display:center;" id="bh<%=user[0].iduser%>">Hello <%=user[0].fullname%></h4>
+<body>
+  <div class="menu" style="margin-top: 60px;">
+    <div class="container-fluid" >
+      <div class="row">
+        <div class="col-md-3">
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Orders')" id="defaultOpen">New Orders</button>
+            <button class="tablinks" onclick="openCity(event, 'Unpaid_Bills_List')">Waiting Order List</button>
+            <button class="tablinks" onclick="openCity(event, 'All')">All Orders</button>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div id="Orders" class="tabcontent">
+            <!-- ============ Oders Section  ============= -->
+            <div id="orders">
+              <!-- hien thi danh sach order chua xac nhan-->
+              <div class="container-fluid orders" id ="chuaxacnhan">
+                <%for (var i = 0; i< list_ids.length; i++){
+                  if(list_ids[i].Status == 0){%>
+                    <div class="note" id="note<%=list_ids[i].OrderID%>">
+                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#New_order_detail<%=list_ids[i].OrderID%>">
+                        <span style="font-size:50px;">
+                          <%=list_ids[i].OrderID%>
+                        </span>
+                      </div>
+                    </div>
+                  <%}}%>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div id="Unpaid_Bills_List" class="tabcontent">
+              <!-- ============ Waiting_Order_List Section  ============= -->
+              <div>
+                <!-- hien thi danh sach order cho thanh toan -->
+                <div class="container-fluid bills" id="chuathanhtoan">
+                  <%for (var i = 0; i< list_ids.length; i++){
+                    if(list_ids[i].Status == 1){%>
+                      <div class="note" id="note<%=list_ids[i].OrderID%>">
+                        <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail<%=list_ids[i].OrderID%>">
+                          <span style="font-size:50px;">
+                            <%=list_ids[i].OrderID%>
+                          </span>
+                        </div>
+                      </div>
+                    <%}}%>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div id="All" class="tabcontent">
+                <!-- ============ Other Section  ============= -->
+
+                <!-- hien thi danh sach tat ca cac order -->
+                <div class="container-fluid all_bills" id="all">
+                  <%for (var i = 0; i< list_ids.length; i++){%>
+                    <div class="note">
+                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Bill_detail<%=list_ids[i].OrderID%>">
+                        <span style="font-size:50px;">
+                          <%=list_ids[i].OrderID%>
+                        </span>
+                      </div>
+                    </div>
+                  <%}%>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="sub_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="#">Team 9</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#">TOP</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+          </div>
+        </div>
+      </footer>
+
+      <div id="order_list_waitting">
+        <%for(var i = 0; i< list_ids.length; i++){
+          if(list_ids[i].Status == 0){%>
+            <div class="modal fade" id="New_order_detail<%=list_ids[i].OrderID%>" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header" style="bacorders.lengthground-color:#2196F3">
+                    <h4 class="modal-title">TABLE: <%=list_ids[i].TableID%></h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid" style="text-align: center;">
+                      <div class="row">
+                        <div class="col-md-5 center-margin">
+                          PRODUCT
+                        </div>
+                        <div class="col-md-2 center-margin">
+                          <h6>NUMBER</h6>
+                        </div>
+                        <div class="col-md-2 center-margin">
+                          <h6>PRICE</h6>
+                        </div>
+                        <div class="col-md-2 center-margin">
+                          <h6>TOTAL</h6>
+                        </div>
+                        <div class="col-md-1 center-margin">
+                          <br>
+                        </div>
+                      </div>
+                      <div id="order_products<%=list_ids[i].OrderID%>">
+                        <%for(var j=0; j< list_orders.length; j++){
+                          if(list_orders[j].OrderID == list_ids[i].OrderID){%>
+                            <div class="row">
+                              <div class="col-md-5 center-margin">
+                                <%=list_orders[j].ProductName%>
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <%=list_orders[j].Quantity%>
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <%=list_orders[j].Price%>$
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <h6></h6>
+                              </div>
+                              <div class="col-md-1 center-margin">
+                                <br>
+                              </div>
+                            </div>
+                            <%}
+                          }%>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-1 center-margin"></div>
+                        <div class="col-md-4 center-margin"></div>
+                        <div class="col-md-2 center-margin"></div>
+                        <div class="col-md-2 center-margin"></div>
+                        <div class="col-md-2 center-margin">
+                          <h6><%=list_ids[i].Total%>$</h6>
+                        </div>
+                        <div class="col-md-1 center-margin">
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="container-fluid text-center">
+                        <button onclick = "changeStatus(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Xác nhận</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%}
+            }%>
+          </div>
+
+          <div id="unpaid_bills">
+            <%for(var i = 0; i< list_ids.length; i++){
+              if(list_ids[i].Status == 1){%>
+                <div class="modal fade" id="Order_detail<%=list_ids[i].OrderID%>" role="dialog">
+                  <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header" style="bacorders.lengthground-color:#2196F3">
+                        <h4 class="modal-title">TABLE: <%=list_ids[i].TableID%></h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="container-fluid" style="text-align: center;">
+                          <div class="row">
+                            <div class="col-md-5 center-margin">
+                              PRODUCT
+                            </div>
+                            <div class="col-md-2 center-margin">
+                              <h6>NUMBER</h6>
+                            </div>
+                            <div class="col-md-2 center-margin">
+                              <h6>PRICE</h6>
+                            </div>
+                            <div class="col-md-2 center-margin">
+                              <h6>TOTAL</h6>
+                            </div>
+                            <div class="col-md-1 center-margin">
+                              <br>
+                            </div>
+                          </div>
+                          <div id="order_products<%=list_ids[i].OrderID%>">
+                            <%for(var j=0; j< list_orders.length; j++){
+                              if(list_orders[j].OrderID == list_ids[i].OrderID){%>
+                                <div class="row">
+                                  <div class="col-md-5 center-margin">
+                                    <%=list_orders[j].ProductName%>
+                                  </div>
+                                  <div class="col-md-2 center-margin">
+                                    <%=list_orders[j].Quantity%>
+                                  </div>
+                                  <div class="col-md-2 center-margin">
+                                    <%=list_orders[j].Price%>$
+                                  </div>
+                                  <div class="col-md-2 center-margin">
+                                    <h6></h6>
+                                  </div>
+                                  <div class="col-md-1 center-margin">
+                                    <br>
+                                  </div>
+                                </div>
+                                <%}
+                              }%>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-1 center-margin"></div>
+                            <div class="col-md-4 center-margin"></div>
+                            <div class="col-md-2 center-margin"></div>
+                            <div class="col-md-2 center-margin"></div>
+                            <div class="col-md-2 center-margin">
+                              <h6><%=list_ids[i].Total%>$</h6>
+                            </div>
+                            <div class="col-md-1 center-margin">
+                              <br>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <div class="container-fluid text-center">
+                            <button onclick = "changeStatus(<%=list_ids[i].OrderID%>)" type="button" data-dismiss="modal" style="position:inherit"class="btn btn-primary mr-auto">Thanh toán</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <%}
+                }%>
+              </div>
+              <div id="all_bills_modal">
+                <%for(var i = 0; i< list_ids.length; i++){%>
+                  <div class="modal fade" id="Bill_detail<%=list_ids[i].OrderID%>" role="dialog">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header" style="bacorders.lengthground-color:#2196F3">
+                          <h4 class="modal-title">TABLE: <%=list_ids[i].TableID%></h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container-fluid" style="text-align: center;">
+                            <div class="row">
+                              <div class="col-md-5 center-margin">
+                                PRODUCT
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <h6>NUMBER</h6>
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <h6>PRICE</h6>
+                              </div>
+                              <div class="col-md-2 center-margin">
+                                <h6>TOTAL</h6>
+                              </div>
+                              <div class="col-md-1 center-margin">
+                                <br>
+                              </div>
+                            </div>
+                            <div id="order_products<%=list_ids[i].OrderID%>">
+                              <%for(var j=0; j< list_orders.length; j++){
+                                if(list_orders[j].OrderID == list_ids[i].OrderID){%>
+                                  <div class="row">
+                                    <div class="col-md-5 center-margin">
+                                      <%=list_orders[j].ProductName%>
+                                    </div>
+                                    <div class="col-md-2 center-margin">
+                                      <%=list_orders[j].Quantity%>
+                                    </div>
+                                    <div class="col-md-2 center-margin">
+                                      <%=list_orders[j].Price%>$
+                                    </div>
+                                    <div class="col-md-2 center-margin">
+                                      <h6></h6>
+                                    </div>
+                                    <div class="col-md-1 center-margin">
+                                      <br>
+                                    </div>
+                                  </div>
+                                  <%}
+                                }%>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-1 center-margin"></div>
+                              <div class="col-md-4 center-margin"></div>
+                              <div class="col-md-2 center-margin"></div>
+                              <div class="col-md-2 center-margin"></div>
+                              <div class="col-md-2 center-margin">
+                                <h6><%=list_ids[i].Total%>$</h6>
+                              </div>
+                              <div class="col-md-1 center-margin">
+                                <br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <%}%>
+                  </div>
+                  <script src="javascript/ThuNgan.js" ></script>
+                </body>
+
+                <script>
+                var user = JSON.parse('<%-JSON.stringify(user)%>');
+
+                function openCity(evt, cityName) {
+                  var i, tabcontent, tablinks;
+                  tabcontent = document.getElementsByClassName("tabcontent");
+                  for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                  }
+                  tablinks = document.getElementsByClassName("tablinks");
+                  for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                  }
+                  document.getElementById(cityName).style.display = "block";
+                  evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+                </script>
+                </html>

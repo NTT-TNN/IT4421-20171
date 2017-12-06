@@ -1,0 +1,11 @@
+.hidden{
+   display:none;
+   position: sticky;
+}
+.show{
+   display:block;
+}
+
+.orderNumber{
+  border-color: #FF9800;
+}

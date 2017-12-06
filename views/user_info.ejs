@@ -1,0 +1,148 @@
+<%- include head.ejs %>
+
+<body>
+
+  <div class="container info">
+
+	<div class="row">
+      <!-- left column -->
+
+      <div class="col-md-3" style="margin-top: 100px;">
+        <div class="text-center">
+          <img src="<%= user[0].urlavatar %>" class="avatar img-circle" alt="avatar" style="width:100px;height:100px" id="imageAvatar">
+          <h6>Click Into The Image To Upload a different photo...</h6>
+
+          <form enctype="multipart/form-data" action="/users/uploadsAvatar" method= "post">
+            <input  id="iduser" name="iduser" hidden="true" readonly type="text" value='<%= user[0].iduser %>'>
+            <input type="file" name="avatar" style="display : none" onchange="readURL(this)" id="fileImage">
+            <input id="upload-btn" type="submit"  class="btn btn-info" value="Upload" name="submit" style="position: relative;">
+          </form>
+        </div>
+      </div>
+
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!-- <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a>
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div> -->
+        <h3>PERSONAL INFOMATION</h3>
+
+        <form class="" action="/users/user_info" method="post">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">ID:</label>
+            <div class="col-lg-8">
+              <input  id="iduser" name="iduser" class="form-control" readonly type="text" value='<%= user[0].iduser %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Full Name:</label>
+            <div class="col-lg-8">
+              <input  id="name" name="name" class="form-control" readonly type="text" value='<%= user[0].fullname %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Sex:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="gender"readonly type="text" value='<%= user[0].gender %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Birthday:</label>
+            <div class="col-lg-8">
+              <input class="form-control" name="birthday" readonly type="text" value='<%=user[0].birthday1 %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Email:</label>
+            <div class="col-md-8">
+              <input id="email" class="form-control" name="email" readonly type="text" value='<%= user[0].email %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Phone Number:</label>
+            <div class="col-md-8">
+              <input id="phone" class="form-control" readonly type="text" name="phone" value='<%= user[0].phonenumber %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Position:</label>
+            <div class="col-md-8">
+              <input class="form-control" name="position" readonly type="text" value='<%= user[0].type %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Address:</label>
+            <div class="col-md-8">
+              <input id="address" class="form-control" name="diachi" readonly type="text" value='<%= user[0].address %>'>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <div id="btn-edit">
+                <button type="button" class="btn btn-primary mr-auto" id="edit" onclick="editInfo()">Edit</button>
+                <button type="submit" class="btn btn-primary mr-auto" id="ok" >OK</button>
+                <button type="button" type="reset" class="btn btn-primary mr-auto" id="cancel"><a href="http://localhost:8000/users/user_info">Cancel</a></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+</div>
+<hr>
+
+  <footer class="sub_footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+        <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+        <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="text/javascript">
+
+
+  function editInfo(){
+    var edit = $("#edit");
+    var ok = $("#ok");
+    var cancel = $("#cancel");
+    var name = $("#name");
+    var phone = $("#phone");
+    var email = $("#email");
+    var address = $("#address");
+    edit.css("display","none");
+    ok.css("display","block");
+    cancel.css("display","block");
+    phone.attr("readonly", false).addClass("form-control");
+    phone.css("background-color","white");
+    name.attr("readonly", false).addClass("form-control");
+    name.css("background-color","white");
+    email.attr("readonly", false).addClass("form-control");
+    email.css("background-color","white");
+    address.attr("readonly", false).addClass("form-control");
+    address.css("background-color","white");
+  }
+
+  $("#imageAvatar").click(function(){
+    $("#fileImage").click();
+  });
+
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        $('#imageAvatar')
+          .attr('src', e.target.result)
+      };
+      console.log(input.files[0]);
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  </script>
+</body>

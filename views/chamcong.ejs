@@ -1,0 +1,92 @@
+<%- include head.ejs %>
+<% var d = new Date();
+var date = d.getDate();
+var month = d.getMonth()+1;
+var year = d.getFullYear();
+var number = new Date(year, month, 0).getDate();%>
+<form  action="/QuanLy/createTimekeeping" method="post">
+  <div class="schedule">
+    <div class="container-fluid" id="title-schedule">
+      <h2>CHẤM CÔNG THÁNG <%=month%> CHO NHÂN VIÊN</h2>
+    </div>
+    <div class="container-fluid">
+      <table class="table table-bordered" name="worked-schedule">
+        <thead>
+          <tr>
+            <th scope="col">Mã nhân viên</th>
+            <th scope="col">Họ tên</th>
+            <% for(var day=1; day<= number ; day++) {%>
+              <th scope="col"><%=day%></th>
+              <% }%>
+              <th scope="col">Số ngày làm</th>
+            </tr>
+          </thead>
+          <% for(var i=0; i< allUsers.length ; i++) {%>
+            <tr class = "gradeX" align="center">
+              <td><%=allUsers[i].iduser %></td>
+              <td><%=allUsers[i].fullname %></td>
+              <%
+              if(timekeeping.length == 0){
+                for(var day=1; day<= number ; day++){%>
+                  <td>
+                    <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                  </td>
+                <%}%>
+                  <td>0</td>
+              <%}else{
+                for(var day=1; day<= number ; day++) {
+                  var count = 0;
+                  for(var index = 0; index < timekeeping.length ; index++){
+                    if(timekeeping[index].iduser == allUsers[i].iduser && day == timekeeping[index].data){
+                      if(day >= date){%>
+                        <td>
+                          <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" checked>
+                        </td>
+                      <%}else{%>
+                        <td>
+                          <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" disabled checked>
+                        </td>
+                      <%}%>
+                      <%break; }else{
+                        count++;
+                      }
+                      if (count == timekeeping.length){
+                        if(day >= date){%>
+                          <td>
+                            <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>">
+                          </td>
+                        <%}else{%>
+                          <td>
+                            <input name="<%=allUsers[i].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                          </td>
+                        <%}}}}
+                    var count = 0;
+                    for(var j=0; j< total.length ; j++){
+                      if(allUsers[i].iduser == total[j].iduser){%>
+                        <td><%=total[j].numOfDays %></td>
+                      <%break;}else{
+                        count++;
+                      }
+                      if(count == total.length){%>
+                        <td>0</td>
+                      <%}}%>
+                </tr>
+              <% }}%>
+            </table>
+          </div>
+        </div>
+        <div class="submit-btn">
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+
+      <!-- ============ Footer Section  ============= -->
+      <footer class="sub_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+            <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+          </div>
+        </div>
+      </footer>

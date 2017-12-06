@@ -1,0 +1,411 @@
+<%- include head.ejs %>
+<div class="modal fade" id="ConfirmFormDelete" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form>
+        <div class="modal-header" style="background-color:#2196F3">
+          <h4 class="modal-title">Bạn có muốn xóa?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="deleteConfirm_btn" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+            Xác nhận
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal edit_emp_detail -->
+<%for(var i=0; i< allUsers.length ; i++){%>
+  <div class="modal fade" id="edit_emp_detail" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Profile</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid" id="emp-info">
+            <div class="name-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Họ và tên:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="nameEdit" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="birthday-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Ngày sinh:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="birthdayEdit" type="date" value="">
+                </div>
+              </div>
+            </div>
+            <div class="sex-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Giới tính:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <select class="select-option" id="sexList">
+                      <option value="1" id="maleEdit">male</option>
+                      <option value="2" id="femaleEdit">female</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+            <div class="position-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Chức vụ:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <select class="select-option" id="positionList">
+
+                      <!-- <option value="1" id="positionmanager">manager</option> -->
+                      <option value="2" id="positionaccountant">accountant</option>
+                      <option value="3" id="positionorder">order</option>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="email-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Email:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="emailEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="phone-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Số điện thoại:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="phoneNumberEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="address-modal">
+                <div class="row">
+                  <div class="col-md-4 center-margin">
+                    <h6>Địa chỉ:</h6>
+                  </div>
+                  <div class="col-md-8 center-margin">
+                    <input class="form-control" id="addressEdit" type="text" value="">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Mật Khẩu:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="passwordEdit" type="password" value="">
+                </div>
+              </div>
+            </div>
+          </div>
+<<<<<<< HEAD
+        </div>
+        <div class="modal-footer">
+          <div class="container-fluid text-center">
+            <button type="button" class="btn btn-primary mr-auto" onclick="" id="editUser" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-primary mr-auto" onclick=""  data-toggle="modal" href="#table_modal" data-dismiss="modal">
+              Cancel
+            </button>
+            
+=======
+          <div class="modal-footer">
+            <div class="container-fluid text-center">
+              <button type="button" class="btn btn-primary mr-auto" id="editUser" data-dismiss="modal">OK</button>
+              <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+                Cancel
+              </button>
+            </div>
+>>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%}%>
+
+<!-- End modal edit_emp_detail -->
+
+<!-- Modal add -->
+<div class="modal fade" id="emp-add" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Profile</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid" id="emp-add-info">
+          <div class="name-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Họ và tên:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="nameAdd" type="text" value="">
+              </div>
+            </div>
+          </div>
+          <div class="birthday-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Ngày sinh:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="birthdayAdd" type="date" >
+              </div>
+            </div>
+          </div>
+          <div class="sex-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Giới tính:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <!-- <input class="form-control" id="sexAdd" type="text" value=""> -->
+                <select class="select-option" id="sexAdd">
+                    <option value="1" id="male">male</option>
+                    <option value="2" id="female">female</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+          <div class="position-modal">
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Chức vụ:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <select id="positionListAdd" class="select-option">
+                    <!-- <option value="1" id="positionAddmanager">manager</option> -->
+                    <option value="2" id="positionAddaccountant">accountant</option>
+                    <option value="3" id="positionAddorder">order</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="email-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Email:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="emailAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="phone-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Số điện thoại:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="phoneAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="address-modal">
+              <div class="row">
+                <div class="col-md-4 center-margin">
+                  <h6>Địa chỉ:</h6>
+                </div>
+                <div class="col-md-8 center-margin">
+                  <input class="form-control" id="addressAdd" type="text" value="">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 center-margin">
+                <h6>Mật Khẩu:</h6>
+              </div>
+              <div class="col-md-8 center-margin">
+                <input class="form-control" id="passwordAdd" type="password" value="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="container-fluid text-center">
+            <button type="button" class="btn btn-primary mr-auto" onclick="addEmployee()" id="addUser" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-primary mr-auto" onclick="" data-toggle="modal" href="#table_modal" data-dismiss="modal">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End modal add -->
+
+  <div class="main">
+    <div class="searching-area container">
+      <form method="get" action="/QuanLy/TKNV">
+        <div class="input-group" id="text-area-searching">
+          <span class="input-group-btn">
+
+            <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+          <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên, chức vụ,..." />
+          <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
+          <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
+        </div>
+
+        <div id="add-emp">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#emp-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    <div class="content-qlnv">
+      <!-- Title -->
+      <div class="title-qlnv">
+        <h3>DANH SÁCH NHÂN VIÊN</h3>
+      </div>
+      <!-- List of employees -->
+      <div class="list-employees" id="list-emp">
+        <!-- employee 1 -->
+        <% for(var i=0; i< allUsers.length ; i++) {%>
+          <div class="employee" id="user<%=allUsers[i].iduser %>">
+            <div class="container emp-content">
+              <div class="col-md-2 img-emp">
+                <img src="<%=allUsers[i].urlavatar %>" alt="">
+              </div>
+              <div class="col-md-10 emp-description">
+                <div class="emp-body">
+                  <div class="title-emp">
+                    <h2 id="name"><%=allUsers[i].fullname %></h2>
+                  </div>
+                  <div class="description container-fluid">
+                    <div class="col-md-6">
+                      <div class="item birthday">
+                        <div class="icon">
+                          <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+                        </div>
+<<<<<<< HEAD
+                        <p id="birthday">
+                          <%=allUsers[i].birthday %>
+=======
+                        <p id="birthday<%=allUsers[i].iduser %>">
+                          <%=allUsers[i].birthday1 %>
+>>>>>>> 6a08519f86961cb44e942fd8fcf00b8316789375
+                        </p>
+                      </div>
+                      <div class="item sex">
+                        <div class="icon">
+                          <i class="fa fa-mars" aria-hidden="true"></i>
+                          <i class="fa fa-venus" aria-hidden="true"></i>
+                        </div>
+                        <p id="sex">
+                          <%=allUsers[i].gender %>
+                        </p>
+                      </div>
+                      <div class="item position">
+                        <div class="icon">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                        <p id="type">
+                          <%=allUsers[i].type %>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="item email">
+                        <div class="icon">
+                          <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </div>
+                        <p id="email">
+                          <%=allUsers[i].email %>
+                        </p>
+                      </div>
+                      <div class="item phone">
+                        <div class="icon">
+                          <i class="fa fa-mobile" aria-hidden="true"></i>
+                        </div>
+                        <p id="phone">
+                          <%=allUsers[i].phonenumber %>
+                        </p>
+                      </div>
+                      <div class="item address">
+                        <div class="icon">
+                          <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </div>
+                        <p id="address">
+                          <%=allUsers[i].address %>
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="emp-bottom">
+                    <button type="button" data-toggle="modal" data-target="#edit_emp_detail" class="btn btn-primary mr-auto edit" onclick="displayEdit('<%- allUsers[i].iduser%>')">Edit</button>
+                    <button type="button" data-toggle="modal" class="btn btn-primary mr-auto delete" onclick="deleteUser('<%=allUsers[i].iduser%>')" data-target="#ConfirmFormDelete">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }%>
+
+        </div>
+      </div>
+
+
+      <footer class="sub_footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p>
+            </div>
+            <div class="col-md-4">
+              <p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p>
+            </div>
+            <div class="col-md-4">
+              <p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <script>
+      var allUsers = JSON.parse('<%-JSON.stringify(allUsers)%>');
+      var position = JSON.parse('<%-JSON.stringify(position)%>');
+
+      </script>
+      <script src="js/moment.min.js" charset="utf-8"></script>
+      <script src ="js/typeahead.min.js"></script>
+      <script src="javascript/QuanLyNhanVien.js" ></script>
+      <script>
+      $("#btn-search").click(function() {
+        $("#inputsearch").click();
+      });
+
+      $(document).ready(function(){
+        $('input.typeahead').typeahead({
+          name: 'typeahead',
+          remote: 'http://localhost:8000/QuanLy/searchUser?key=%QUERY',
+          limit: 10
+        });
+      });
+      </script>
+
+    </div>
