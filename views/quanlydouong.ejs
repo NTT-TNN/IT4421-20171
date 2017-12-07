@@ -38,7 +38,7 @@
             <img class="group list-group-image" id="AddUrl_images" src="<%= " ../images/default.jpg " %> " alt="" style="height:170px;" />
           </p>
           <p style="text-align: center;">
-            <input type="file" name="productImage" id="choseimage" style="display:none;" onchange="readURL(this);" />
+            <input type="file" name="productImage" id="choseimage" style="display:none;" accept="image/*" onchange="readURL(this);" />
             <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="addChange" onclick="">Change</button>
           </p>
         </div>
@@ -89,7 +89,7 @@
             </div>
             <p style="text-align: center;">
               <img class="group list-group-image" id="Url_images" alt="" style="height:170px; width: auto;"/>
-              <input type="file" name="editProductImage" id="editimage" style="display:none;" onchange="readURL1(this);" />
+              <input type="file" name="editProductImage" id="editimage" style="display:none;" accept="image/*" onchange="readURL1(this);" />
             </p>
             <p style="text-align: center;">
               <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="editUrl_images">Change</button>
@@ -316,6 +316,14 @@
                 console.log(input.files[0]);
                 reader.readAsDataURL(input.files[0]);
               }
+              var fileName = document.getElementById("choseimage").value;
+              var idxDot = fileName.lastIndexOf(".") + 1;
+              var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+              if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+                  //TO DO
+              }else{
+                  alert("Only Image are allowed!");
+              }
             }
 
             function readURL1(input) {
@@ -328,21 +336,29 @@
                 console.log(input.files[0]);
                 reader.readAsDataURL(input.files[0]);
               }
+              var fileName = document.getElementById("editimage").value;
+              var idxDot = fileName.lastIndexOf(".") + 1;
+              var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+              if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+                  //TO DO
+              }else{
+                  alert("Only Image are allowed!");
+              }
             }
             </script>
 
 
-            <script src="javascript/WFunction_QuanLyDoUong.js"></script>
-            <script src="js/bootstrap.min.js"></script>
-            <script src="js/jquery.flexslider.min.js"></script>
-            <script src="js/jquery.hoverdir.js"></script>
-            <script src="js/jquery.mixitup.min.js"></script>
-            <script src="js/jQuery.scrollSpeed.js"></script>
-            <script src="js/jquery.validate.js"></script>
-            <script src="js/owl.carousel.min.js"></script>
-            <script src="js/script.js"></script>
-            <script src="js/wow.min.js"></script>
-            <script src ="js/typeahead.min.js"></script>
+            <script src="../javascript/WFunction_QuanLyDoUong.js"></script>
+            <script src="../js/bootstrap.min.js"></script>
+            <script src="../js/jquery.flexslider.min.js"></script>
+            <script src="../js/jquery.hoverdir.js"></script>
+            <script src="../js/jquery.mixitup.min.js"></script>
+            <script src="../js/jQuery.scrollSpeed.js"></script>
+            <script src="../js/jquery.validate.js"></script>
+            <script src="../js/owl.carousel.min.js"></script>
+            <script src="../js/script.js"></script>
+            <script src="../js/wow.min.js"></script>
+            <script src ="../js/typeahead.min.js"></script>
             <script>
             $("#btn-search").click(function() {
               $("#inputsearch").click();

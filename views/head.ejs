@@ -5,10 +5,8 @@
   <meta charset="UTF-8">
   <title>A+ Coffee</title>
   <script src = "/socket.io/socket.io.js"></script>
-  <script src = "jquery-3.2.1.min.js"></script>
-
+  <script src = "../jquery-3.2.1.min.js"></script>
   <link rel="shortcut icon" type="image/png" href="../images/icon/favicon.png"/>
-
   <link rel="stylesheet" href="../css/bootstrap-grid.css">
   <link rel="stylesheet" href="../css/bootstrap-grid.css.map">
   <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
@@ -97,7 +95,7 @@
             <a id="LLV" class="font-menu" href="/users/LichLamViec">LỊCH LÀM VIỆC</a>
         <% } %>
         <a id="PRO" class="font-menu" href="/users/user_info">PROFILE</a>
-        <a class="font-menu" href="/users/logout">LOG OUT</a>
+        <a class="font-menu" href="/users/logout" id ="logout">LOG OUT</a>
   <%if (user[0].type == "order") { %>
         <button class="coffee-btn" data-toggle="modal" data-target="#Order_detail">
           <span>
@@ -108,3 +106,8 @@
       </div>
     </div>
   </div>
+  <script>
+  $("#logout").click(function(){
+    sessionStorage.clear( "cart" );
+  });
+  </script>

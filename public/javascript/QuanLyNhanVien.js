@@ -117,8 +117,8 @@ var deleteUser = function(id){
         userid: id
       }),
       contentType: 'application/json',
-      success: function() {
-        console.log("successful!")
+      success: function(data) {
+        console.log(data);
       }
     });
 

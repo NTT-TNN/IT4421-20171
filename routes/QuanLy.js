@@ -149,6 +149,7 @@ router.post("/deleteUser",function(req,res){
   console.log("id xoa " +req.body.userid);
   user.deleteUser(req.body.userid,function(err,result){
     console.log("delete thanh cong");
+    res.send("ok");
   });
 });
 
