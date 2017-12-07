@@ -3,6 +3,8 @@ var multer  = require('multer');
 var user = require("../model/user.js");
 var passport=require('passport');
 var authen = require("../routes/authen.js");
+var schedule = require("../model/Schedule.js");
+var timekeeping = require("../model/Timekeeping.js");
 // var bodyParser = require('../model/body-parser')
 var router = express.Router()
 router.use(express.static("public"));
@@ -19,11 +21,11 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
   if (!req.file) {
     console.log("No file received");
-    return res.send({
-      success: false
-    });
+    return res.redirect("/users/user_info");
 
   } else {
     const host = req.host;
@@ -43,56 +45,53 @@ router.post('/uploadsAvatar', upload.single('avatar'), (req, res) => {
   }
 });
 
-router.get('/',authen.isLoggedIn, function(req, res, next) {
-  console.log(req.user[0].iduser);
-  user.getUSer(req.user[0].iduser,null,function(err,results){
-    // console.log(results);
-    console.log(results);
-    res.render("user_info",{user:results});
-  });
-});
-
 router.get("/user_info",authen.isLoggedIn,function (req,res) {
-    console.log(req.user[0].iduser);
-    user.getUSer(req.user[0].iduser,null,function(err,results){
-      console.log(results);
+    // console.log(req.user[0].iduser);
+    user.getUser(req.user[0].iduser,null,function(err,results){
+      // console.log(results);
       res.render("user_info",{user:results});
     });
 
 });
 
+router.get("/LichLamViec",authen.isLoggedIn,function (req,res) {
+    // console.log(req.user[0].iduser);
+    user.getUser(req.user[0].iduser,null,function(err,user){
+      schedule.getSchedule(req.user[0].iduser,function(err,days){
+        timekeeping.getTotalWorkedDay(req.user[0].iduser,function(err,total){
+          console.log(total);
+          res.render("lichlamviec",{
+            user: user,
+            days: days,
+            total: total
+          });
+        });
+      });
+    });
+
+});
+
 router.post('/login',passport.authenticate('local-login',{
-  successRedirect: '/users/',
+  successRedirect: '/users/user_info',
   failureRedirect: '/',
   failureFlash: true,
 }))
 
 
 router.post('/user_info', function(req, res) {
-  // console.log(req.body);
-  data = {
-    fullname: req.body.name,
-    gender: req.body.gender,
-    birthday: req.body.birthday,
-    email: req.body.email,
-    phonenumber: req.body.phone,
-    type: req.body.position,
-    add: req.body.diachi
-  };
   console.log(req.body);
   user.updateUser(req.body,null,function(err,results){
     // console.log(results);
   });
-
+  res.redirect("/users/user_info");
   // console.log(data);
-  user.getUSer(req.user[0].iduser,null,function(err,results){
-    res.render("user_info",{user:results});
-  });
+  // user.getUser(req.user[0].iduser,null,function(err,results){
+  //   res.render("user_info",{user:results});
+  // });
 });
 
 router.get('/logout',function(req,res){
   req.logout();
-  // login=false;
   res.redirect('/');
 })
 

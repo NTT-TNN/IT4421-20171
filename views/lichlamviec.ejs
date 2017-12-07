@@ -1,0 +1,89 @@
+<%- include head.ejs %>
+
+<% var date = new Date();
+var month = date.getMonth()+1;%>
+<div class="schedule">
+  <div class="container-fluid" id="title-schedule">
+    <h2>Lịch làm việc tháng <%=month%></h2>
+  </div>
+  <div class="container-fluid">
+    <table class="table table-bordered" name="worked-schedule">
+      <thead>
+        <tr>
+          <th scope="col">
+            Mã nhân viên
+          </th>
+          <th scope="col">
+            Họ tên
+          </th>
+          <% for(var day=1; day<= 31 ; day++) {%>
+            <th scope="col">
+              <%=day%>
+            </th>
+            <% }%>
+            <th scope="col">
+              Số ngày đã làm
+            </th>
+          </tr>
+        </thead>
+        <tr class = "gradeX" align="center">
+          <td>
+            <%=user[0].iduser %>
+          </td>
+          <td>
+            <%=user[0].fullname %>
+          </td>
+          <%if(days.length == 0){
+            for(var day=1; day<= 31 ; day++) {%>
+              <td>
+                <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+              </td>
+            <%}
+          }else{
+            for(var day=1; day<= 31 ; day++) {
+              var count = 0;
+              for(var index = 0; index < days.length ; index++){
+                if(day == days[index].data){%>
+                  <td>
+                    <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled checked>
+                  </td>
+                  <%break; }else{
+                    count++;
+                  }
+                  if (count == days.length){%>
+                    <td>
+                      <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                    </td>
+                    <%}}}
+                  }
+
+                  if(total.length == 0){%>
+                    <td id="total-worked-day">
+                      0
+                    </td>
+                  <%}else{%>
+                    <td id="total-worked-day">
+                      <%=total[0].numOfDays%>
+                    </td>
+                  <%}%>
+
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- ============ Footer Section  ============= -->
+          <footer class="sub_footer">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
+                <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
+                <div class="col-md-4"><p class="sub-footer-text text-center">Built With Care By <a href="#" target="_blank">Us</a></p></div>
+              </div>
+            </div>
+          </footer>
+
+
+          <script type="text/javascript">
+          var days = JSON.parse('<%-JSON.stringify(days)%>');
+          console.log(days);
+          </script>
