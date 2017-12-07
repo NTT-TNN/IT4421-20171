@@ -14,7 +14,7 @@
 
           <form enctype="multipart/form-data" action="/users/uploadsAvatar" method= "post">
             <input  id="iduser" name="iduser" hidden="true" readonly type="text" value='<%= user[0].iduser %>'>
-            <input type="file" name="avatar" style="display : none" onchange="readURL(this)" id="fileImage">
+            <input type="file" accept="image/*" name="avatar" style="display : none" onchange="readURL(this)" id="fileImage">
             <input id="upload-btn" type="submit"  class="btn btn-info" value="Upload" name="submit" style="position: relative;">
           </form>
         </div>
@@ -142,7 +142,14 @@
       console.log(input.files[0]);
       reader.readAsDataURL(input.files[0]);
     }
+    var fileName = document.getElementById("fileImage").value;
+    var idxDot = fileName.lastIndexOf(".") + 1;
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+        //TO DO
+    }else{
+        alert("Only Image are allowed!");
+    }
   }
-
   </script>
 </body>

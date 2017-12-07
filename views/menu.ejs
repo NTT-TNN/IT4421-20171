@@ -11,15 +11,13 @@
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header" >
-            <h4 class="modal-title">Order details</h4>
+            <h4 class="modal-title">Table:</h4>
+            <input class="" id = "modal_table" readonly value='' style="border: none;background: #2196f3;text-align: center;font-size: 18px;">
           </div>
           <div class="modal-body">
               <div class="container-fluid" >
                 <div class="row">
-                  <div class="col-md-1 center-margin">
-                    <h6>TABLE</h6>
-                  </div>
-                  <div class="col-md-4 center-margin">
+                  <div class="col-md-5 center-margin">
                     PRODUCT
                   </div>
                   <div class="col-md-2 center-margin">
@@ -42,7 +40,8 @@
           </div>
           <div class="modal-footer">
             <div class="container-fluid text-center">
-              <button type="button" class="btn btn-primary mr-auto" onclick="editOrder()">Edit Order</button>
+              <button type="button" class="btn btn-primary mr-auto" onclick="editOrder()" id="editBTN">Edit Order</button>
+              <button type="button" class="btn btn-primary mr-auto" id="OKedit" style="display:none;">OK</button>
               <button type="button" class="btn btn-primary mr-auto"onclick="guiDonHang()"
               data-toggle="modal" href="#table_modal" data-dismiss="modal">
                 Send order
@@ -61,14 +60,13 @@
         <form method="get" action="/BoiBan/TKSP" >
           <div class="input-group" id="text-area-searching">
             <span class="input-group-btn">
+              <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
             </span>
             <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên,thể loại" />
-            <input type="submit" name="submit" value="TimKiem" id="inputsearch"  />
+            <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
+            <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
           </div>
         </form>
-
-
-
       </div>
 
       <!-- ============ Menu Section  ============= -->
@@ -315,6 +313,17 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+    $("#btn-search").click(function() {
+      $("#inputsearch").click();
+    });
+
+    $(document).ready(function(){
+      $('input.typeahead').typeahead({
+        name: 'typeahead',
+        remote: 'http://localhost:8000/QuanLy/searchProduct?key=%QUERY',
+        limit: 10
+      });
+    });
 
     document.getElementById("defaultOpen").click();
     </script>
