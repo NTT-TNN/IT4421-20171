@@ -8,12 +8,14 @@ var router = express.Router()
 router.get("/",authen.isAccountant,function(req,res){
   user.getUser(req.user[0].iduser,null,function(err,user){
     DonHang.getOrders(function(list_orders, list_ids){
-      console.log(list_orders);
-      console.log(list_ids);
-      res.render("banhang",{
-        user:user,
-        list_orders: list_orders,
-        list_ids: list_ids
+      DonHang.currentOrder(function(current_orders, current_ids){
+        res.render("banhang",{
+          user:user,
+          list_orders: list_orders,
+          list_ids: list_ids,
+          current_orders: current_orders,
+          current_ids: current_ids
+        });
       });
     });
   });

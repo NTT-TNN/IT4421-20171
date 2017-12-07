@@ -142,6 +142,8 @@ function changeAddPicture(id){
 
     // $("#"+id).atrr("scr", )
 }
+
+
 // function displayDeleteForm(){
 
 // }

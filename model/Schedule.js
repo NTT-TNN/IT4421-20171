@@ -1,5 +1,10 @@
 var mysql = require('mysql');
-const connection = require('./sql.js')
+var connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+  password: "19051996",
+    database: "test_it4421"
+});
 
 var createSchedule = function (iduser, date, callback) {
     var current_date = new Date();

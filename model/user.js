@@ -1,8 +1,12 @@
 var mysql = require('mysql');
 var moment = require('moment');
 var md5 = require('md5');
-const connection = require('./sql.js')
-
+var connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "19051996",
+  database: "test_it4421"
+});
 
 var updateAvatar = function(param1, param2, callback) {
   updateAvatarCommand = "UPDATE user SET urlavatar = '" + escape(param1) + "' WHERE iduser=" + param2 + ";";
@@ -13,8 +17,8 @@ var updateAvatar = function(param1, param2, callback) {
 }
 
 var updateUser = function(param1, param2, callback) {
-  console.log(moment(param1.birthday).format("YYYY-MM-DD"));
-  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', gender = '" + param1.gender + "',birthday = '" + moment(param1.birthday).format("YYYY-MM-DD") + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "',type ='" + param1.position + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
+  // console.log(moment(param1.birthday).format("YYYY-MM-DD"));
+  var updateUserCommand = "UPDATE user SET fullname = '" + param1.name + "', email ='" + param1.email + "',phonenumber = '" + param1.phone + "', address = '" + param1.diachi + "' WHERE iduser =" + param1.iduser + ";";
   console.log(updateUserCommand);
   connection.query(updateUserCommand, function(error, result) {
     callback(null, result);

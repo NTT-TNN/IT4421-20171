@@ -344,6 +344,18 @@
             <script src="js/wow.min.js"></script>
             <script src ="js/typeahead.min.js"></script>
             <script>
+            $("#btn-search").click(function() {
+              $("#inputsearch").click();
+            });
+
+            $(document).ready(function(){
+              $('input.typeahead').typeahead({
+                name: 'typeahead',
+                remote: 'http://localhost:8000/QuanLy/searchProduct?key=%QUERY',
+                limit: 10
+              });
+            });
+
             function openCity(evt, cityName) {
               var i, tabcontent, tablinks;
               tabcontent = document.getElementsByClassName("tabcontent");
@@ -363,17 +375,7 @@
             </script>
 
             <script>
-            $("#btn-search").click(function() {
-              $("#inputsearch").click();
-            });
 
-            $(document).ready(function(){
-              $('input.typeahead').typeahead({
-                name: 'typeahead',
-                remote: 'http://localhost:8000/QuanLy/searchProduct?key=%QUERY',
-                limit: 10
-              });
-            });
             </script>
 
           </body>

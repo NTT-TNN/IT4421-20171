@@ -1,7 +1,11 @@
 var mysql = require('mysql');
 var moment = require('moment');
-
-const connection = require('./sql.js')
+var connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "19051996",
+  database: "test_it4421"
+});
 
 var insertDonHang = function(order, callback) {
   var datetime = moment(new Date()).format("YYYY-MM-DD");
@@ -102,7 +106,7 @@ var getOrder = function(order_id,callback){
 }
 
 var changeStatus = function(order_id, employeeID, callback){
-    var statement1 = "UPDATE test_it4421.`order` SET `Status`=(`Status`+1),EmployeeID = "+employeeID+" WHERE OrderID="+order_id+";";
+    var statement1 = "UPDATE test_it4421.`order` SET `Status`=(`Status`+1),EmployeeID = "+employeeID+",OrderDate = current_date() WHERE OrderID="+order_id+";";
     console.log(statement1);
     connection.query(statement1,function(err1,res){
       if(err1){
@@ -113,11 +117,24 @@ var changeStatus = function(order_id, employeeID, callback){
     });
 }
 
+var currentOrder = function(callback){
+  var statement1 = "select orderdetails.OrderID,ProductName,Price,Quantity  from `order`, orderdetails, products where `order`.OrderID = orderdetails.OrderID and products.ProductID = orderdetails.ProductID and status = 2 and OrderDate = current_date()";
+  connection.query(statement1,function(err, current_orders) {
+    if(err) throw error;
+    var statement2 = "select orderdetails.OrderID, TableID, Status, Total  from `order`, orderdetails, products where `order`.OrderID = orderdetails.OrderID and products.ProductID = orderdetails.ProductID and Status = 2 and OrderDate = current_date() group by OrderID"
+    connection.query(statement2,function(err2, current_ids){
+      if(err2) throw error;
+      callback(current_orders,current_ids);
+    });
+  });
+}
+
 module.exports = {
   insertDonHang,
   getNumberProducts,
   getOrder,
   getOrders,
   insertOrder,
-  changeStatus
+  changeStatus,
+  currentOrder
 };

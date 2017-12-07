@@ -1,6 +1,11 @@
 var mysql = require('mysql');
 var moment = require('moment');
-const connection = require('./sql.js')
+var connection = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "19051996",
+  database: "test_it4421"
+});
 
 var getTimekeeping = function(callback){
   var current_date = new Date();

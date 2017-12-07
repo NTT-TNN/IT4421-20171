@@ -57,18 +57,20 @@
     </div>
     <div class="main" >
       <!-- ============ Search ============== -->
-      <div class="searching-area-product">
+      <!-- <div class="searching-area-product">
         <form method="get" action="/BoiBan/TKSP" >
           <div class="input-group" id="text-area-searching">
             <span class="input-group-btn">
-              <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
             </span>
             <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên,thể loại" />
-            <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
-            <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
+            <input type="submit" name="submit" value="TimKiem" id="inputsearch"  />
           </div>
-        </form>
-      </div>
+        </form> -->
+
+
+
+      <!-- </div> -->
+
       <!-- ============ Menu Section  ============= -->
       <div class="menu">
         <div class="container-fluid">
@@ -91,7 +93,7 @@
                         <% if( products[i].Categories_CategoryID == 1 ){ %>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
-                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <img  class="group list-group-image" src="../<%= products[i].Url_images %> " alt="" />
                               <div class="caption">
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
@@ -140,7 +142,7 @@
                         <% if( products[i].Categories_CategoryID == 2 ){ %>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
-                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <img  class="group list-group-image" src="../<%= products[i].Url_images %> " alt="" />
                               <div class="caption">
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
@@ -192,7 +194,7 @@
                         <% if( products[i].Categories_CategoryID != 1 && products[i].Categories_CategoryID != 2 ){ %>
                         <div class="item  col-xs-4 col-lg-4">
                           <div class="thumbnail">
-                              <img  class="group list-group-image" src="<%= products[i].Url_images %> " alt="" />
+                              <img  class="group list-group-image" src="../<%= products[i].Url_images %> " alt="" />
                               <div class="caption">
                                   <h4 class="group inner list-group-item-heading" id="cafe01">
                                       <%= products[i].ProductName %></h4>
@@ -295,6 +297,7 @@
     <script  src="js/jssor.utils.js"> </script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/script.js"></script>
+    
     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
     <script src="js/wow.min.js"></script>
     <script src ="js/typeahead.min.js"></script>
@@ -316,19 +319,6 @@
     document.getElementById("defaultOpen").click();
     </script>
 
-    <script>
-    $("#btn-search").click(function() {
-      $("#inputsearch").click();
-    });
-
-    $(document).ready(function(){
-      $('input.typeahead').typeahead({
-        name: 'typeahead',
-        remote: 'http://localhost:8000/BoiBan/searchProduct?key=%QUERY',
-        limit: 10
-      });
-    });
-    </script>
 
   </body>
   </html>
