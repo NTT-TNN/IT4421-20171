@@ -13,19 +13,23 @@ $('#table_modal').hide().on('hide', function() {
 function addTable(){
   tableNumber= document.getElementById("table_number").value;
   if(tableNumber != ""){
-    $("#number_table").val(parseInt(tableNumber));
-    console.log("ahihi");
-    $("#table").hide();
-    // console.log(tableNumber);
-    table={
-      tableID:tableNumber,
-      status:0
+    if(tableNumber > 0){
+      $("#number_table").val(parseInt(tableNumber));
+      console.log("ahihi");
+      $("#table").hide();
+      // console.log(tableNumber);
+      table={
+        tableID:tableNumber,
+        status:0
+      }
+      var orders =[];
+      orders.push(table);
+      var jsonOrder = JSON.stringify(orders);
+      sessionStorage.setItem( "cart", jsonOrder);
+      document.getElementById("table_number").value="";
+    }else{
+      toastr.error('Số bàn nhập sai','Error!',{timeOut: 2000});
     }
-    var orders =[];
-    orders.push(table);
-    var jsonOrder = JSON.stringify(orders);
-    sessionStorage.setItem( "cart", jsonOrder);
-    document.getElementById("table_number").value="";
   }
 
 }
@@ -108,64 +112,66 @@ function addDoUong(i){
     if(cartObj[0].tableID != null){
       if(document.getElementById(products[i].ProductID).value != ""){
         if(flagEdit==false){
-          var ProductID= products[i].ProductID;
-          var ProductName= products[i].ProductName;
-          var ProductPrice=products[i].Price;
-          var number= parseInt(document.getElementById(ProductID).value);
-          // var number=1;
-          product={
-            ProductID: ProductID,
-            number:number,
-            ProductName:ProductName,
-            ProductPrice:ProductPrice
-          }
-
-          var flag=true;
-          for(var j=1;j<cartObj.length;++j){
-            if(cartObj[j].ProductID==ProductID){
-              cartObj[j].number+=number;
-              sessionStorage.setItem("cart",JSON.stringify(cartObj));
-              flag=false;
+          if(document.getElementById(products[i].ProductID).value > 0){
+            var ProductID= products[i].ProductID;
+            var ProductName= products[i].ProductName;
+            var ProductPrice=products[i].Price;
+            var number= parseInt(document.getElementById(ProductID).value);
+            // var number=1;
+            product={
+              ProductID: ProductID,
+              number:number,
+              ProductName:ProductName,
+              ProductPrice:ProductPrice
             }
-          }
-          if(flag==true){
-            cartObj.push(product);
-            sessionStorage.setItem("cart",JSON.stringify(cartObj));
-          }
-
-
-          html="";
-          total=0;
-          for(var j=1;j<cartObj.length;++j){
-            total+=cartObj[j].ProductPrice*cartObj[j].number;
-            html+=`<div class="row" id="doUong`+j+`">
-            <div class="col-md-5 center-margin">` + cartObj[j].ProductName +
-            `</div>
-            <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
-            <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
-            `$</div>
+            var flag=true;
+            for(var j=1;j<cartObj.length;++j){
+              if(cartObj[j].ProductID==ProductID){
+                cartObj[j].number+=number;
+                sessionStorage.setItem("cart",JSON.stringify(cartObj));
+                flag=false;
+              }
+            }
+            if(flag==true){
+              cartObj.push(product);
+              sessionStorage.setItem("cart",JSON.stringify(cartObj));
+            }
+            html="";
+            total=0;
+            for(var j=1;j<cartObj.length;++j){
+              total+=cartObj[j].ProductPrice*cartObj[j].number;
+              html+=`<div class="row" id="doUong`+j+`">
+              <div class="col-md-5 center-margin">` + cartObj[j].ProductName +
+              `</div>
+              <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
+              <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
+              `$</div>
+              <div class="col-md-2 center-margin">
+              <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class = "destroydouong">
+              </div>
+              <div class="col-md-1 center-margin">
+              </div>
+              </div>`;
+            }
+            html+=`<div class="row">
+            <div class="col-md-1 center-margin"></div>
+            <div class="col-md-4 center-margin"></div>
+            <div class="col-md-2 center-margin"></div>
+            <div class="col-md-2 center-margin"></div>
             <div class="col-md-2 center-margin">
-            <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class = "destroydouong">
+            <h6 id="total">`+total+ `$</h6>
             </div>
             <div class="col-md-1 center-margin">
+            <br>
             </div>
             </div>`;
+            document.getElementById("order_products").innerHTML = html;
+            html="";
+            return true;
+          }else{
+            toastr.error('Số lượng nhập sai','Error!',{timeOut: 2000});
           }
-          html+=`<div class="row">
-          <div class="col-md-1 center-margin"></div>
-          <div class="col-md-4 center-margin"></div>
-          <div class="col-md-2 center-margin"></div>
-          <div class="col-md-2 center-margin"></div>
-          <div class="col-md-2 center-margin">
-          <h6 id="total">`+total+ `$</h6>
-          </div>
-          <div class="col-md-1 center-margin">
-          <br>
-          </div>
-          </div>`;
-          document.getElementById("order_products").innerHTML = html;
-          html="";
-          return true;
+
         }else{
           toastr.error('Chưa sửa xong đơn hàng','Error!',{timeOut: 2000});
         }
