@@ -44,7 +44,8 @@
         </div>
         <div class="modal-footer">
           <div class="container-fluid text-center">
-            <input type="submit" style="position:inherit" class="btn btn-info btn-primary mr-auto" name="submit" value="Save" />
+            <button type="button" style="position:inherit" class="btn btn-primary mr-auto" id="save-btn" onclick="">Save</button>
+            <input id="save-input" style="display:none" type="submit" style="position:inherit" class="btn btn-info btn-primary mr-auto" name="submit" value="Save" />
           </div>
         </div>
 
@@ -132,7 +133,7 @@
         <span class="input-group-btn">
           <button id="btn-search" class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
         </span>
-        <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên,thể loại" />
+        <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên" />
         <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
         <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
       </div>
@@ -172,6 +173,9 @@
                               <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
                                 <%= products[i].ProductName %>
                               </h4>
+                              <p class="group inner list-group-item-text">
+                                  <%= products[i].descriptions %>
+                              </p>
                               <div>
                                 <p class="lead" id="price<%=products[i].ProductID %>">
                                   $
@@ -214,6 +218,9 @@
                                   <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
                                     <%= products[i].ProductName %>
                                   </h4>
+                                  <p class="group inner list-group-item-text">
+                                      <%= products[i].descriptions %>
+                                  </p>
                                   <div>
                                     <p class="lead" id="price<%=products[i].ProductID %>">
                                       $
@@ -257,6 +264,9 @@
                                       <h4 class="group inner list-group-item-heading" id="cafe<%=products[i].ProductID %>">
                                         <%= products[i].ProductName %>
                                       </h4>
+                                      <p class="group inner list-group-item-text">
+                                          <%= products[i].descriptions %>
+                                      </p>
                                       <div>
                                         <p class="lead" id="price<%=products[i].ProductID %>">
                                           $

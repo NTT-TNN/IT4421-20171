@@ -51,7 +51,7 @@ if(sessionStorage.length == 0){
     `</div>
     <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
     <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
-    `.000</div>
+    `$</div>
     <div class="col-md-2 center-margin ">
     <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class="destroydouong">
     </div>
@@ -66,7 +66,7 @@ if(sessionStorage.length == 0){
   <div class="col-md-2 center-margin"></div>
   <div class="col-md-2 center-margin"></div>
   <div class="col-md-2 center-margin">
-  <h6 id="total">`+total+ `.000</h6>
+  <h6 id="total">`+total+ `$</h6>
   </div>
   <div class="col-md-1 center-margin">
   <br>
@@ -107,64 +107,68 @@ function addDoUong(i){
     var cartObj = JSON.parse(cartValue);
     if(cartObj[0].tableID != null){
       if(document.getElementById(products[i].ProductID).value != ""){
-        var ProductID= products[i].ProductID;
-        var ProductName= products[i].ProductName;
-        var ProductPrice=products[i].Price;
-        var number= parseInt(document.getElementById(ProductID).value);
-        // var number=1;
-        product={
-          ProductID: ProductID,
-          number:number,
-          ProductName:ProductName,
-          ProductPrice:ProductPrice
-        }
-
-        var flag=true;
-        for(var j=1;j<cartObj.length;++j){
-          if(cartObj[j].ProductID==ProductID){
-            cartObj[j].number+=number;
-            sessionStorage.setItem("cart",JSON.stringify(cartObj));
-            flag=false;
+        if(flagEdit==false){
+          var ProductID= products[i].ProductID;
+          var ProductName= products[i].ProductName;
+          var ProductPrice=products[i].Price;
+          var number= parseInt(document.getElementById(ProductID).value);
+          // var number=1;
+          product={
+            ProductID: ProductID,
+            number:number,
+            ProductName:ProductName,
+            ProductPrice:ProductPrice
           }
-        }
-        if(flag==true){
-          cartObj.push(product);
-          sessionStorage.setItem("cart",JSON.stringify(cartObj));
-        }
+
+          var flag=true;
+          for(var j=1;j<cartObj.length;++j){
+            if(cartObj[j].ProductID==ProductID){
+              cartObj[j].number+=number;
+              sessionStorage.setItem("cart",JSON.stringify(cartObj));
+              flag=false;
+            }
+          }
+          if(flag==true){
+            cartObj.push(product);
+            sessionStorage.setItem("cart",JSON.stringify(cartObj));
+          }
 
 
-        html="";
-        total=0;
-        for(var j=1;j<cartObj.length;++j){
-          total+=cartObj[j].ProductPrice*cartObj[j].number;
-          html+=`<div class="row" id="doUong`+j+`">
-          <div class="col-md-5 center-margin">` + cartObj[j].ProductName +
-          `</div>
-          <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
-          <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
-          `.000</div>
+          html="";
+          total=0;
+          for(var j=1;j<cartObj.length;++j){
+            total+=cartObj[j].ProductPrice*cartObj[j].number;
+            html+=`<div class="row" id="doUong`+j+`">
+            <div class="col-md-5 center-margin">` + cartObj[j].ProductName +
+            `</div>
+            <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
+            <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
+            `$</div>
+            <div class="col-md-2 center-margin">
+            <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class = "destroydouong">
+            </div>
+            <div class="col-md-1 center-margin">
+            </div>
+            </div>`;
+          }
+          html+=`<div class="row">
+          <div class="col-md-1 center-margin"></div>
+          <div class="col-md-4 center-margin"></div>
+          <div class="col-md-2 center-margin"></div>
+          <div class="col-md-2 center-margin"></div>
           <div class="col-md-2 center-margin">
-          <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class = "destroydouong">
+          <h6 id="total">`+total+ `$</h6>
           </div>
           <div class="col-md-1 center-margin">
+          <br>
           </div>
           </div>`;
+          document.getElementById("order_products").innerHTML = html;
+          html="";
+          return true;
+        }else{
+          toastr.error('Chưa sửa xong đơn hàng','Error!',{timeOut: 2000});
         }
-        html+=`<div class="row">
-        <div class="col-md-1 center-margin"></div>
-        <div class="col-md-4 center-margin"></div>
-        <div class="col-md-2 center-margin"></div>
-        <div class="col-md-2 center-margin"></div>
-        <div class="col-md-2 center-margin">
-        <h6 id="total">`+total+ `.000</h6>
-        </div>
-        <div class="col-md-1 center-margin">
-        <br>
-        </div>
-        </div>`;
-        document.getElementById("order_products").innerHTML = html;
-        html="";
-        return true;
       }else {
         toastr.error('Chưa có số lượng','Error!',{timeOut: 2000});
       }
@@ -211,8 +215,8 @@ function guiDonHang(){
 }
 
 function editOrder(){
-  // flagEdit=true;
   if(($("#number_table").val() != "") || ($("#number_table").val() == "" && sessionStorage.length != 0) ){
+    flagEdit=true;
     var y= $(".ordernumber");
     y.attr({readonly: false,type :"number",min:1}).addClass("form-control");
     $("#number_table").attr({readonly: false,type :"number",min:1}).addClass("form-control");
@@ -224,6 +228,7 @@ function editOrder(){
     $("#editBTN").hide();
     $("#OKedit").show();
     $("#OKedit").click(function(){
+      flagEdit = false;
       $(".destroydouong").show();
       // var x = $(".ordernumber");
 
@@ -242,7 +247,7 @@ function editOrder(){
       for(var j=1;j<cartObj.length;++j){
         total1+=cartObj[j].ProductPrice*cartObj[j].number;
       }
-      $("#total").text(total1+".000");
+      $("#total").text(total1+"$");
       total = total1;
     });
   }
@@ -252,7 +257,7 @@ function removeDoUong(i){
   var cartValue = sessionStorage.getItem( "cart" );
   var cartObj = JSON.parse(cartValue);
   total -= cartObj[i].number*cartObj[i].ProductPrice;
-  var htmlTotal=total+".000"
+  var htmlTotal=total+"$"
   $("#total").html(htmlTotal);
   cartObj.splice(i, 1);
   sessionStorage.setItem("cart",JSON.stringify(cartObj));
@@ -270,7 +275,7 @@ function removeDoUong(i){
     `</div>
     <input class="col-md-2 center-margin ordernumber" readonly style="border: none;"value='`+cartObj[j].number+`'>
     <div class="col-md-2 center-margin">` + cartObj[j].ProductPrice+
-    `.000</div>
+    `$</div>
     <div class="col-md-2 center-margin ">
     <img src="../images/icon/error.png" alt="" onclick="removeDoUong('`+j+`')" class ="destroydouong" >
     </div>
@@ -285,7 +290,7 @@ function removeDoUong(i){
   <div class="col-md-2 center-margin"></div>
   <div class="col-md-2 center-margin"></div>
   <div class="col-md-2 center-margin">
-  <h6 id="total">`+total+ `.000</h6>
+  <h6 id="total">`+total+ `$</h6>
   </div>
   <div class="col-md-1 center-margin">
   <br>

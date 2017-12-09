@@ -1,28 +1,30 @@
 <%- include head.ejs %>
 <h4 style="display:center;" id="bh<%=user[0].iduser%>">Hello <%=user[0].fullname%></h4>
-<body>
+<body style="background-color: #e8e8e8; padding: 16px;">
   <div class="menu" style="margin-top: 60px;">
     <div class="container-fluid" >
       <div class="row">
         <div class="col-md-3">
           <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'Orders')" id="defaultOpen">New Orders</button>
-            <button class="tablinks" onclick="openCity(event, 'Unpaid_Bills_List')">Waiting Order List</button>
-            <button class="tablinks" onclick="openCity(event, 'All')">All Orders</button>
+            <button class="tablinks" onclick="openCity(event, 'Unpaid_Bills_List')">Pending Orders</button>
+            <button class="tablinks" onclick="openCity(event, 'All')">Paid Orders</button>
           </div>
         </div>
         <div class="col-md-9">
           <div id="Orders" class="tabcontent">
-            <!-- ============ Oders Section  ============= -->
+            <!-- ============ New Orders Section  ============= -->
             <div id="orders">
               <!-- hien thi danh sach order chua xac nhan-->
-              <div class="container-fluid orders" id ="chuaxacnhan">
+              <div class="row orders" id ="chuaxacnhan">
                 <%for (var i = 0; i< list_ids.length; i++){
                   if(list_ids[i].Status == 0){%>
-                    <div class="note" id="note<%=list_ids[i].OrderID%>">
-                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#New_order_detail<%=list_ids[i].OrderID%>">
+                    <div class="note col-md-4" id="note<%=list_ids[i].OrderID%>">
+                      <div class="note-inner"  data-toggle="modal" data-target="#New_order_detail<%=list_ids[i].OrderID%>">
                         <span style="font-size:50px;">
-                          <%=list_ids[i].OrderID%>
+                          Table: <%=list_ids[i].TableID%><br>
+                          <h3>ID: <%=list_ids[i].OrderID%></h3>
+
                         </span>
                       </div>
                     </div>
@@ -34,16 +36,18 @@
             </div>
 
             <div id="Unpaid_Bills_List" class="tabcontent">
-              <!-- ============ Waiting_Order_List Section  ============= -->
+              <!-- ============ Pending Orders Section  ============= -->
               <div>
                 <!-- hien thi danh sach order cho thanh toan -->
-                <div class="container-fluid bills" id="chuathanhtoan">
+                <div class="row bills" id="chuathanhtoan">
                   <%for (var i = 0; i< list_ids.length; i++){
                     if(list_ids[i].Status == 1){%>
-                      <div class="note" id="note<%=list_ids[i].OrderID%>">
-                        <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Order_detail<%=list_ids[i].OrderID%>">
+                      <div class="note col-md-4" id="note<%=list_ids[i].OrderID%>">
+                        <div class="note-inner"  data-toggle="modal" data-target="#Order_detail<%=list_ids[i].OrderID%>">
                           <span style="font-size:50px;">
-                            <%=list_ids[i].OrderID%>
+                            Table: <%=list_ids[i].TableID%><br>
+                            <h3>ID: <%=list_ids[i].OrderID%></h3>
+
                           </span>
                         </div>
                       </div>
@@ -55,15 +59,16 @@
               </div>
 
               <div id="All" class="tabcontent">
-                <!-- ============ Other Section  ============= -->
+                <!-- ============ Paid Orders Section  ============= -->
 
                 <!-- hien thi danh sach tat ca cac order -->
-                <div class="container-fluid all_bills" id="all">
+                <div class="row all_bills" id="all">
                   <%for (var i = 0; i< current_ids.length; i++){%>
-                    <div class="note">
-                      <div class="note-inner" style="height: 100px;width:100px" data-toggle="modal" data-target="#Bill_detail<%=current_ids[i].OrderID%>">
+                    <div class="note col-md-4">
+                      <div class="note-inner"  data-toggle="modal" data-target="#Bill_detail<%=current_ids[i].OrderID%>">
                         <span style="font-size:50px;">
-                          <%=current_ids[i].OrderID%>
+                          Table: <%=current_ids[i].TableID%><br>
+                          <h3>ID: <%=current_ids[i].OrderID%></h3>
                         </span>
                       </div>
                     </div>

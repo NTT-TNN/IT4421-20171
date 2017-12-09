@@ -1,4 +1,27 @@
-
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-left",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "3000",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+$("#save-btn").click(function() {
+  if($("#AddProductName").val() == "" || $("#AddProductDescription").val() == "" || $("#AddProductPrice").val() == "" || $('#AddUrl_images').attr('src') == ""){
+      toastr.error('Chưa đủ thông tin sản phẩm','Error!',{timeOut: 2000});
+  }else{
+    $("#save-input").click();
+  }
+});
 function displayEditForm(id){
     var index,description,category,url,name,price;
     for (i = 0; i < products.length; i++) {
@@ -81,44 +104,44 @@ function createProductHTML(product){
         </div>
     </div>`
 }
-function addProduct(){
-    var addedProduct =
-    {
-        ProductName: $("#AddProductName").val(),
-        Description: $("#AddProductDescription").val(),
-        Price: $("#AddProductPrice").val(),
-        Url_images: $('#AddUrl_images').attr('src'),
-    }
-
-    console.log(products);
-    $.ajax({
-        url: "/QuanLy/add",
-        type : "POST",
-        data: JSON.stringify(addedProduct),
-        contentType: 'application/json',
-        success: function (addProduct) {
-            console.log(addProduct);
-            var newProducthtml = createProductHTML(addProduct)
-            $("#productsForm").append(newProducthtml);
-            products.push(addProduct);
-            console.log("successful!");
-            console.log(products);
-        }
-    });
-
-}
-function editProduct(update_product){
-    $.ajax({
-        url: "/QuanLy/edit",
-        type: "POST",
-        data: update_product,
-        contentType: 'application/json',
-        success: function () {
-            // $("#results").append(html);
-            console.log("successful!")
-        }
-    });
-}
+// function addProduct(){
+//     var addedProduct =
+//     {
+//         ProductName: $("#AddProductName").val(),
+//         Description: $("#AddProductDescription").val(),
+//         Price: $("#AddProductPrice").val(),
+//         Url_images: $('#AddUrl_images').attr('src'),
+//     }
+//
+//     console.log(products);
+//     $.ajax({
+//         url: "/QuanLy/add",
+//         type : "POST",
+//         data: JSON.stringify(addedProduct),
+//         contentType: 'application/json',
+//         success: function (addProduct) {
+//             console.log(addProduct);
+//             var newProducthtml = createProductHTML(addProduct)
+//             $("#productsForm").append(newProducthtml);
+//             products.push(addProduct);
+//             console.log("successful!");
+//             console.log(products);
+//         }
+//     });
+//
+// }
+// function editProduct(update_product){
+//     $.ajax({
+//         url: "/QuanLy/edit",
+//         type: "POST",
+//         data: update_product,
+//         contentType: 'application/json',
+//         success: function () {
+//             // $("#results").append(html);
+//             console.log("successful!")
+//         }
+//     });
+// }
 function displayDeleteConfirmForm(id){
     console.log(id);
     $("#deleteConfirm_btn").click(function () {
@@ -138,18 +161,3 @@ function deleteProduct(id){
         }
     });
 }
-function changeAddPicture(id){
-
-    // $("#"+id).atrr("scr", )
-}
-
-
-// function displayDeleteForm(){
-
-// }
-// function display(){
-
-// }
-// function displayConfirm(){
-
-// }

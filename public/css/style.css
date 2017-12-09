@@ -1,5 +1,16 @@
+
+.list-group-item-heading{
+  text-transform: uppercase;
+}
+.lead{
+  margin-top: 30px;
+}
 .note{
       display: inline-block;
+}
+.note-inner{
+  height: 150px;
+  width: 250px;
 }
 .select-option{
   width: 150px;
@@ -29,6 +40,7 @@ float: left;
 }
 .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
   border: 1px solid #30aabd;
+  text-align: center;
 }
 th{
   background: #2196f3;
@@ -67,8 +79,8 @@ th{
   margin-left: 178px;
 }
 .thumbnail img{
-  height: 180px;
-  width: 270px;
+  height: 200px;
+  width: 100%;
 }
 #positionList{
   width: 150px;
@@ -176,7 +188,7 @@ th{
 }
 .content-qlnv{
   margin: auto;
-  background: white;
+  background: #f5f5f5;
   width: 1024px;
   padding-bottom: 40px;
 }
@@ -207,7 +219,7 @@ th{
 }
 .item p{
   display: inline-block;
-  margin-left: 20px;
+
 }
 .icon{
   display: inline-block;
@@ -404,14 +416,16 @@ div.tab button.active {
 .center-margin{
   margin: auto;
 }
-<<<<<<< HEAD:public/css/style.css
+
 /* fluid 5 columns */
 .grid-sizer,
 .grid-item {
   width: 20%;
 }
 /* 2 columns */
-.grid-item--width2 { width: 40%; }
+.grid-item--width2 {
+  width: 40%;
+}
 
 .bs-example{
   font-family: sans-serif;
@@ -462,6 +476,69 @@ div.tab button.active {
   margin: 0;
 }
 
+  .notes {
+    margin: 0 auto;
+  }
+  .note {
+    text-align:center;
+    /*width: 100%;*/
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  @media screen and (min-width: 560px) {
+    .note {
+      width: 50%;
+    }
+  }
+  @media screen and (min-width: 816px) {
+    .note {
+      width: 33.3%;
+    }
+  }
+  @media screen and (min-width: 1072px) {
+    .note {
+      width: 25%;
+    }
+  }
+  .note-inner {
+    background-color: #2196f333;
+    min-height: 4em;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+    transition: box-shadow 0.2s;
+  }
+  .note:hover .note-inner {
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+  }
+  .big-add {
+    background-color: #F44336;
+    color: #fff;
+    padding: 0;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    border: none;
+    box-shadow: none;
+    width: 56px;
+    height: 56px;
+    padding: 16px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    cursor: pointer;
+  }
+  .big-add i {
+    font-size: 24px;
+    line-height: 24px;
+  }
 
-=======
->>>>>>> tuanAnh:A+ Coffee/css/style.css
+  .hidden{
+     display:none;
+     position: sticky;
+  }
+  .show{
+     display:block;
+  }
+
+  .orderNumber{
+    border-color: #FF9800;
+  }

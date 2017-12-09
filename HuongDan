@@ -1,0 +1,22 @@
+Các bước sử dụng chương trình:
+- Copy toàn bộ dữ liệu trong file A+Coffee.sql để tạo cơ sở dữ liệu
+- Đổi tên  cơ sở dữ liệu và password trong tất cả các file sql trong folder model 
+- Bật terminal:
+	1, npm install
+	2, node app.js
+- Bật browser, gõ địa chỉ: localhost:8000
+- Đăng nhập vào hệ thống để sử dụng các chức năng của từng tác nhân:
+	+ Tên đăng nhập: manager@gmail.com
+	  Password: 1
+	  Tác nhân: Quản lý
+	+ Tên đăng nhập: accountant@gmail.com
+	  Password: 1
+	  Tác nhân: Thu ngân
+	+ Tên đăng nhập: order@gmail.com
+	  Password: 1
+	  Tác nhân: Bồi bàn
+	+ Tên đăng nhập: other@gmail.com
+	  Password: 1
+	  Tác nhân: Nhân viên khác
+*Lưu ý:	Khi sử dụng nhiều tác nhân cùng một lúc, cần đăng nhập vào các tab ẩn danh khác nhau
+
