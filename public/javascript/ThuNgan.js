@@ -118,7 +118,7 @@ socket.on("order", function(new_order) {
   //hien thi o muc All
   var $all, $bill;
   $all = $(".all_bills");
-  $bill = `<div class="note" >
+  $bill = `<div class="note col-md-4" >
   <div class="note-inner"  data-toggle="modal" data-target="#Bill_detail` + new_order[0].order_id + `"><span style="font-size:50px;">Table: `+new_order[1][0].TableID+`<br><h4>ID: ` + new_order[0].order_id + `</h4></span>
   </div>
   </div>`;

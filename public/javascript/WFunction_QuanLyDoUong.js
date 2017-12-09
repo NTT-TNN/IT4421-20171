@@ -15,6 +15,13 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
+$("#save-edit").click(function() {
+  if($("#ProductName").val() == "" || $("#Description").val() == "" || $("#editProductPrice").val() == "" || $('#Url_images').attr('src') == ""){
+      toastr.error('Chưa đủ thông tin sản phẩm','Error!',{timeOut: 2000});
+  }else{
+    $("#edit-product").click();
+  }
+});
 $("#save-btn").click(function() {
   if($("#AddProductName").val() == "" || $("#AddProductDescription").val() == "" || $("#AddProductPrice").val() == "" || $('#AddUrl_images').attr('src') == ""){
       toastr.error('Chưa đủ thông tin sản phẩm','Error!',{timeOut: 2000});
