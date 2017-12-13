@@ -3,7 +3,11 @@ var moment = require('moment');
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
+<<<<<<< HEAD
     password: "thao123@",
+=======
+    password: "akonakon",
+>>>>>>> master
     database: "test_it4421"
 });
 

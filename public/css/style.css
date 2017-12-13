@@ -23,7 +23,7 @@ float: left;
 .searching-area-product{
   padding: 0px 0 50px 0;
   margin-bottom: 40px;
-  margin-left: 250px;
+      width: 1024px;
 }
 .index{
   display: inline-block;
@@ -136,7 +136,7 @@ th{
 }
 #add-emp{
   display: inline-flex;
-  width: 4%;
+  /*width: 4%;*/
   float: right;
 }
 #text-searching{

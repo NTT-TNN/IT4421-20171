@@ -359,20 +359,8 @@
       </div>
 
 
-      <footer class="sub_footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p>
-            </div>
-            <div class="col-md-4">
-              <p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p>
-            </div>
-            <div class="col-md-4">
-            </div>
-          </div>
-        </div>
-      </footer>
+      <%- include footer.ejs %>
+
       <script>
       var allUsers = JSON.parse('<%-JSON.stringify(allUsers)%>');
       var position = JSON.parse('<%-JSON.stringify(position)%>');
