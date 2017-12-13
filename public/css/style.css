@@ -21,8 +21,9 @@ color: white;
 float: left;
 }
 .searching-area-product{
+  padding: 0px 0 50px 0;
   margin-bottom: 40px;
-  margin-left: 350px;
+  margin-left: 250px;
 }
 .index{
   display: inline-block;
@@ -275,7 +276,7 @@ th{
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#009680
+
 .main {
   margin-top: 79px; /* Add a top margin to avoid content overlay */
 }
@@ -331,7 +332,7 @@ th{
 }
 
 .sub_footer{
-  /*margin-top: 150px;*/
+  margin-top: 150px;
   height: 60px;
 }
 
