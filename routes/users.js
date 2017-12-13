@@ -59,12 +59,16 @@ router.get("/LichLamViec",authen.isLoggedIn,function (req,res) {
     user.getUser(req.user[0].iduser,null,function(err,user){
       schedule.getSchedule(req.user[0].iduser,function(err,days){
         timekeeping.getTotalWorkedDay(req.user[0].iduser,function(err,total){
-          console.log(total);
-          res.render("lichlamviec",{
-            user: user,
-            days: days,
-            total: total
+          timekeeping.getTimekeepingByID(req.user[0].iduser,function(err,worked_day){
+            res.render("lichlamviec",{
+              user: user,
+              days: days,
+              total: total,
+              worked_day: worked_day
+            });
           });
+          // console.log(total);
+
         });
       });
     });

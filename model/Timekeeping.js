@@ -3,7 +3,7 @@ var moment = require('moment');
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "thao123",
+  password: "akonakon",
   database: "test_it4421"
 });
 
@@ -14,6 +14,18 @@ var getTimekeeping = function(callback){
   var statement = "Select iduser, day(worked_day) as data from timekeeping where month(worked_day)="+month+" and year(worked_day)="+year;
   console.log(statement);
   connection.query(statement, function(error, result) {
+    callback(null, result);
+  });
+}
+
+var getTimekeepingByID = function(iduser,callback){
+  var current_date = new Date();
+  var month = current_date.getMonth()+1;
+  var year = current_date.getFullYear();
+  var statement = "Select day(worked_day) as data from timekeeping where month(worked_day)="+month+" and year(worked_day)="+year+" and iduser="+iduser;
+  console.log(statement);
+  connection.query(statement, function(error, result) {
+    console.log("nhung ngay lam: ",result);
     callback(null, result);
   });
 }
@@ -78,5 +90,6 @@ module.exports = {
   deleteTimekeeping,
   createTimekeeping,
   getTotalWorkedDay,
-  getAllTotalWorkedDay
+  getAllTotalWorkedDay,
+  getTimekeepingByID
 };

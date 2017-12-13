@@ -21,9 +21,7 @@ var month = date.getMonth()+1;%>
               <%=day%>
             </th>
             <% }%>
-            <th scope="col">
-              Số ngày đã làm
-            </th>
+
           </tr>
         </thead>
         <tr class = "gradeX" align="center">
@@ -62,15 +60,83 @@ var month = date.getMonth()+1;%>
                       0
                     </td>
                   <%}else{%>
-                    <td id="total-worked-day">
-                      <%=total[0].numOfDays%>
-                    </td>
+
                   <%}%>
 
                 </tr>
               </table>
             </div>
           </div>
+
+          <div class="schedule">
+            <div class="container-fluid" id="title-schedule">
+              <h2>Chấm công tháng <%=month%></h2>
+            </div>
+            <div class="container-fluid">
+              <table class="table table-bordered" name="worked-schedule">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      Mã NV
+                    </th>
+                    <th scope="col">
+                      Họ tên
+                    </th>
+                    <% for(var day=1; day<= 31 ; day++) {%>
+                      <th scope="col">
+                        <%=day%>
+                      </th>
+                      <% }%>
+                      <th scope="col">
+                        Số ngày đã làm
+                      </th>
+                    </tr>
+                  </thead>
+                  <tr class = "gradeX" align="center">
+                    <td>
+                      <%=user[0].iduser %>
+                    </td>
+                    <td>
+                      <%=user[0].fullname %>
+                    </td>
+                    <%if(worked_day.length == 0){
+                      for(var day=1; day<= 31 ; day++) {%>
+                        <td>
+                          <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                        </td>
+                      <%}
+                    }else{
+                      for(var day=1; day<= 31 ; day++) {
+                        var count = 0;
+                        for(var index = 0; index < worked_day.length ; index++){
+                          if(day == worked_day[index].data){%>
+                            <td>
+                              <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled checked>
+                            </td>
+                            <%break; }else{
+                              count++;
+                            }
+                            if (count == worked_day.length){%>
+                              <td>
+                                <input name="<%=user[0].iduser %>" type="checkbox" value="<%=day%>" disabled>
+                              </td>
+                              <%}}}
+                            }
+
+                            if(total.length == 0){%>
+                              <td id="total-worked-day">
+                                0
+                              </td>
+                            <%}else{%>
+                              <td id="total-worked-day">
+                                <%=total[0].numOfDays%>
+                              </td>
+                            <%}%>
+
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
           <!-- ============ Footer Section  ============= -->
           <%- include footer.ejs %>
 
@@ -79,4 +145,6 @@ var month = date.getMonth()+1;%>
           <script type="text/javascript">
           var days = JSON.parse('<%-JSON.stringify(days)%>');
           console.log(days);
+          var worked_day = JSON.parse('<%-JSON.stringify(worked_day)%>');
+          console.log(worked_day);
           </script>
