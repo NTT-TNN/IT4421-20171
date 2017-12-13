@@ -241,16 +241,7 @@
       </div>
 
       <!-- ============ Footer Section  ============= -->
-      <footer class="sub_footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
-            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
-
-          </div>
-        </div>
-      </footer>
-
+      <%- include footer.ejs %>
 
     </div>
 
@@ -259,11 +250,12 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-          <form>
+          <form id="myform">
             <div class="modal-header">
               <h4 class="modal-title">Nhập số bàn</h4>
             </div>
             <div class="modal-body">
+              <label for="field"></label>
               <input type="number" class="form-control" id="table_number" min="1" max="100" step="1" placeholder="Số bàn">
             </div>
             <div class="modal-footer">
@@ -299,7 +291,22 @@
     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
     <script src="../js/wow.min.js"></script>
     <script src ="../js/typeahead.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script>
+    jQuery.validator.setDefaults({
+      debug: true,
+      success: "valid"
+    });
+    $( "#myform" ).validate({
+      rules: {
+        field: {
+          required: true,
+          range: [13, 23]
+        }
+      }
+    });
+
     function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");

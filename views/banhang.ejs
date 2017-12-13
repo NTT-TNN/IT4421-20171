@@ -82,14 +82,7 @@
         </div>
       </div>
       <!-- Footer -->
-      <footer class="sub_footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="#">Team 9</a></p></div>
-            <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#">TOP</a></p></div>
-          </div>
-        </div>
-      </footer>
+      <%- include footer.ejs %>
 
       <div id="order_list_waitting">
         <%for(var i = 0; i< list_ids.length; i++){
@@ -319,24 +312,24 @@
                   <script src="../javascript/ThuNgan.js" ></script>
                 </body>
 
-                <script>
-                var user = JSON.parse('<%-JSON.stringify(user)%>');
+  <script>
+  var user = JSON.parse('<%-JSON.stringify(user)%>');
 
-                function openCity(evt, cityName) {
-                  var i, tabcontent, tablinks;
-                  tabcontent = document.getElementsByClassName("tabcontent");
-                  for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                  }
-                  tablinks = document.getElementsByClassName("tablinks");
-                  for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                  }
-                  document.getElementById(cityName).style.display = "block";
-                  evt.currentTarget.className += " active";
-                }
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
 
-                // Get the element with id="defaultOpen" and click on it
-                document.getElementById("defaultOpen").click();
-                </script>
-                </html>
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  </script>
+</html>

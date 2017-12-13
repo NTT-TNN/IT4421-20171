@@ -137,6 +137,11 @@
         <input class="typeahead tt-query" spellcheck="false" autocomplete="off" name="typeahead" type="text" placeholder="Tìm kiếm theo tên" />
         <!-- <input id="text-searching" type="text" name="datasearch" class="form-control" placeholder="Tìm kiếm theo tên, chức vụ,..."> -->
         <input type="submit" name="submit" value="TimKiem" id="inputsearch" style="display: none;" />
+        <div id="add-emp">
+         <span class="input-group-btn">
+           <button class="btn btn-secondary" type="button" data-toggle="modal" data-target="#emp-add"><i class="fa fa-plus" aria-hidden="true"></i></button>
+         </span>
+       </div>
       </div>
     </form>
   </div>
@@ -295,16 +300,7 @@
               </div>
 
               <!-- ============ Footer Section  ============= -->
-              <footer class="sub_footer">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4"><p class="sub-footer-text text-center">&copy; A+ Coffee 2017, Theme by <a href="https://themewagon.com/">Team 9</a></p></div>
-                    <div class="col-md-4"><p class="sub-footer-text text-center">Back to <a href="#top">TOP</a></p></div>
-
-                  </div>
-                </div>
-              </footer>
-
+              <%- include footer.ejs %>
 
             </div>
             <script>
