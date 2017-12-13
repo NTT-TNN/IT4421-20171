@@ -6,7 +6,6 @@ var connection = mysql.createConnection({
   password: "thao123@",
   database: "test_it4421"
 });
-
 var insertDonHang = function(order, callback) {
   var datetime = moment(new Date()).format("YYYY-MM-DD");
   console.log(datetime);
