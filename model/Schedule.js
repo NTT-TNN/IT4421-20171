@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "akonakon",
-    database: "test_it4421"
+  host: "localhost",
+  user: "root",
+  password: "thao123",
+  database: "test_it4421"
 });
 
 var createSchedule = function (iduser, date, callback) {
