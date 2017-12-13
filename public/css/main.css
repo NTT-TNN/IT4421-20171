@@ -279,8 +279,8 @@ INTRO CONTAINER
     background-size: cover;
     background-position: 70% 50%;
 }
- .featured.background_content{
-    background: url('../images/featured.jpg') no-repeat center center;
+ .featu#CDDC39.background_content{
+    background: url('../images/featu#CDDC39.jpg') no-repeat center center;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -410,7 +410,10 @@ SECOND FOOTER CONTENT
 =========================*/
 
 footer.sub_footer {
-    background-color: rgb(33, 150, 243);
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    background-color: #009680;
     padding: 20px;
 }
 
@@ -420,7 +423,7 @@ p.sub-footer-text{
 }
 
 p.sub-footer-text a{
-    color: red;
+    color: #CDDC39;
     text-decoration: none;
 }
 
@@ -861,4 +864,15 @@ MEDIA QUERIE DESKTOP
     .social_icons li a {
         font-size: 30px;
     }
+}
+
+#upload-btn{
+  background-color: #009680;
+}
+
+#edit{
+  background-color: #009680;
+}
+.tab-bar{
+  height: 305px;
 }
