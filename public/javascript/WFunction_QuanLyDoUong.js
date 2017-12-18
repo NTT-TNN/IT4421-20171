@@ -16,7 +16,8 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 $("#save-edit").click(function() {
-  if($("#ProductName").val() == "" || $("#Description").val() == "" || $("#editProductPrice").val() == null || $('#Url_images').attr('src') == ""  ){
+  if($("#ProductName").val() == "" || $("#Description").val() == "" || !$("#Price").val() || $('#Url_images').attr('src') == ""  ){
+
       toastr.error('Thông tin sản phẩm chưa đủ hoặc giá chưa đúng','Error!',{timeOut: 2000});
   }else{
     $("#edit-product").click();

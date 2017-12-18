@@ -23,7 +23,7 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-var socket = io('http://localhost:8000');
+var socket = io('https://22365f4b.ngrok.io');
 socket.on('connect', function() {
   socket.emit('name', {
     name: 'banhang'
