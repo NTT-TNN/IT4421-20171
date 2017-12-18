@@ -11,7 +11,7 @@ $('#table_modal').hide().on('hide', function() {
 
 
 function addTable(){
-  tableNumber= document.getElementById("table_number").value;
+  tableNumber = document.getElementById("table_number").value;
   if(tableNumber != ""){
     if(tableNumber > 0){
       $("#number_table").val(parseInt(tableNumber));
@@ -206,13 +206,20 @@ function guiDonHang(){
         toastr.success('Gửi đơn hàng thành công','Success!');
         document.getElementById("order_products").innerHTML = html;
         $("#number_table").val("");
-
+        if(flagEdit == true){
+          flagEdit = false;
+          $("#editBTN").show();
+          $("#OKedit").hide();
+          $(".destroydouong").show();
+          // var x = $(".ordernumber");
+          $("#number_table").attr("readonly", true).removeClass("form-control");
+          $("#number_table").css("background","#2196f3");
+        }
       }else { // Don hang rong
         toastr.error('Đơn hàng rỗng','Error!',{timeOut: 2000});
       }
     }else{
       toastr.error('Chưa điền số bàn','Error!',{timeOut: 2000});
-
     }
   }else{
     toastr.error('Đơn hàng rỗng','Error!',{timeOut: 2000});
@@ -223,7 +230,7 @@ function guiDonHang(){
 function editOrder(){
   if(($("#number_table").val() != "") || ($("#number_table").val() == "" && sessionStorage.length != 0) ){
     flagEdit=true;
-    var y= $(".ordernumber");
+    var y = $(".ordernumber");
     y.attr({readonly: false,type :"number",min:1}).addClass("form-control");
     $("#number_table").attr({readonly: false,type :"number",min:1}).addClass("form-control");
     $("#number_table").css("background","white");
@@ -233,28 +240,41 @@ function editOrder(){
     $(".destroydouong").hide();
     $("#editBTN").hide();
     $("#OKedit").show();
+
     $("#OKedit").click(function(){
-      flagEdit = false;
-      $(".destroydouong").show();
-      // var x = $(".ordernumber");
-
-      $("#number_table").attr("readonly", true).removeClass("form-control");
-      $("#number_table").css("background","#2196f3");
-      y.attr("readonly", true).removeClass("form-control");
-
-      cartObj[0].tableID = parseInt($("#number_table").val());
+      var flagNumber = 0;
       y.each(function(i){
-        cartObj[i+1].number=this.value;
-      })
-      sessionStorage.setItem("cart",JSON.stringify(cartObj));
-      $("#editBTN").show();
-      $("#OKedit").hide();
-      var total1=0;
-      for(var j=1;j<cartObj.length;++j){
-        total1+=cartObj[j].ProductPrice*cartObj[j].number;
+        if(this.value <= 0){
+          flagNumber++;
+        };
+      });
+      console.log(flagNumber);
+      if($("#number_table").val() > 0 && flagNumber==0){
+        flagEdit = false;
+        $(".destroydouong").show();
+        // var x = $(".ordernumber");
+
+        $("#number_table").attr("readonly", true).removeClass("form-control");
+        $("#number_table").css("background","#2196f3");
+        y.attr("readonly", true).removeClass("form-control");
+
+        cartObj[0].tableID = parseInt($("#number_table").val());
+        y.each(function(i){
+          cartObj[i+1].number=this.value;
+        })
+        sessionStorage.setItem("cart",JSON.stringify(cartObj));
+        $("#editBTN").show();
+        $("#OKedit").hide();
+        var total1=0;
+        for(var j=1;j<cartObj.length;++j){
+          total1+=cartObj[j].ProductPrice*cartObj[j].number;
+        }
+        $("#total").text(total1+"$");
+        total = total1;
+      }else{
+        toastr.error('Chỉnh sửa không hợp lệ','Error!',{timeOut: 1000});
       }
-      $("#total").text(total1+"$");
-      total = total1;
+
     });
   }
 }

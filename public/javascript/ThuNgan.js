@@ -297,7 +297,7 @@ var changeStatus = function(order_id){
 
         $("#unpaid_bills").append(modal);
         toastr.success('Xác nhận thành công','Success!');
-      }else if(data[1][0].Status == 2){
+      }else{
         $(".note").remove("#note"+data[0].order_id);
 
         var $bill, $bills;
