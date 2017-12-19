@@ -23,7 +23,7 @@ $("#save-edit").click(function() {
   }
 });
 $("#save-btn").click(function() {
-  if($("#AddProductName").val() == "" || $("#AddProductDescription").val() == "" || $("#AddProductPrice").val() == "" || $('#AddUrl_images').attr('src') == "" ){
+  if($("#AddProductName").val() == "" || $("#AddProductDescription").val() == "" || $("#AddProductPrice").val() == "" || $('#AddUrl_images').attr('src') == "../images/default.jpg" ){
       toastr.error('Thông tin sản phẩm chưa đủ hoặc giá chưa đúng','Error!',{timeOut: 2000});
   }else{
     $("#save-input").click();

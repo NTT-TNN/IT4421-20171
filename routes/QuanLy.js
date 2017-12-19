@@ -225,7 +225,7 @@ router.post("/add", upload.single('productImage'), function(req, res) {
   console.log(req.file);
   if (!req.file) {
     console.log("No file received");
-    return res.send({
+    res.send({
       success: false
     });
   } else {
