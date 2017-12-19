@@ -56,51 +56,58 @@ var displayEdit = function(id) {
     phoneNumberEdit = document.getElementById("phoneNumberEdit").value;
     addressEdit = document.getElementById("addressEdit").value;
     passwordEdit = document.getElementById("passwordEdit").value;
-    user = {
-      iduser: id,
-      fullname: nameEdit,
-      birthday: birthdayEdit,
-      password: passwordEdit,
-      phonenumber: phoneNumberEdit,
-      email: emailEdit,
-      gender: sexEdit,
-      type: typeEdit,
-      address: addressEdit
-    };
-    console.log("user: "+user.iduser);
-      var index;
-      for(var i = 0 ; i<allUsers.length;i++){
-        if (allUsers[i].iduser == id) {
-          index = i;
-          break;
+    if(nameEdit && birthdayEdit && typeEdit && emailEdit && phoneNumberEdit && addressEdit){
+      user = {
+        iduser: id,
+        fullname: nameEdit,
+        birthday: birthdayEdit,
+        password: passwordEdit,
+        phonenumber: phoneNumberEdit,
+        email: emailEdit,
+        gender: sexEdit,
+        type: typeEdit,
+        address: addressEdit
+      };
+      console.log("user: "+user.iduser);
+        var index;
+        for(var i = 0 ; i<allUsers.length;i++){
+          if (allUsers[i].iduser == id) {
+            index = i;
+            break;
+          }
         }
-      }
-    $.ajax({
-      url: "/QuanLy/editUser",
-      type: "POST",
-      data: JSON.stringify(user),
-      contentType: 'application/json',
-      success: function(user) {
-        allUsers[index].fullname = user[0].fullname;
-        allUsers[index].birthday = user[0].birthday;
-        allUsers[index].birthday1 = user[0].birthday1;
-        allUsers[index].phonenumber = user[0].phonenumber;
-        allUsers[index].email = user[0].email;
-        allUsers[index].gender = user[0].gender;
-        allUsers[index].type = user[0].type;
-        allUsers[index].address = user[0].address;
-        allUsers[index].password = user[0].password;
-        document.getElementById("name" + id).innerText = user[0].fullname;
-        $("#birthday" + id).text(user[0].birthday1);
-        document.getElementById("sex" + id).innerText = user[0].gender;
-        document.getElementById("type" + id).innerText = user[0].type;
-        document.getElementById("email" + id).innerText = user[0].email;
-        document.getElementById("phone" + id).innerText = user[0].phonenumber;
-        document.getElementById("address" + id).innerText = user[0].address;
-        toastr.success('Sửa thành công','Success!');
-      }
-    });
+      $.ajax({
+        url: "/QuanLy/editUser",
+        type: "POST",
+        data: JSON.stringify(user),
+        contentType: 'application/json',
+        success: function(user) {
+          allUsers[index].fullname = user[0].fullname;
+          allUsers[index].birthday = user[0].birthday;
+          allUsers[index].birthday1 = user[0].birthday1;
+          allUsers[index].phonenumber = user[0].phonenumber;
+          allUsers[index].email = user[0].email;
+          allUsers[index].gender = user[0].gender;
+          allUsers[index].type = user[0].type;
+          allUsers[index].address = user[0].address;
+          allUsers[index].password = user[0].password;
+          document.getElementById("name" + id).innerText = user[0].fullname;
+          $("#birthday" + id).text(user[0].birthday1);
+          document.getElementById("sex" + id).innerText = user[0].gender;
+          document.getElementById("type" + id).innerText = user[0].type;
+          document.getElementById("email" + id).innerText = user[0].email;
+          document.getElementById("phone" + id).innerText = user[0].phonenumber;
+          document.getElementById("address" + id).innerText = user[0].address;
+          toastr.success('Sửa thành công','Success!');
+        }
+      });
+      
+    }else{
+      toastr.error('Thông tin nhân viên chưa đủ hoặc giá chưa đúng','Error!',{timeOut: 2000});
+      return;
+    }
   });
+    
 }
 
 var deleteUser = function(id){
