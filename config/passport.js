@@ -50,9 +50,9 @@ passport.use('local-login', new LocalStrategy({
          return done(err);
      if(user!=""){
        console.log(user[0].type);
-       return done(null, user,req.flash('loginMessage', 'Login success'));
+       return done(null, user,req.flash('loginMessage', 'Wrong password'));
      }
-     return done(null, false, req.flash('loginMessage', 'Wrong password.'));
+     return done(null, false, req.flash('loginMessage', 'Wrong Email'));
    });
  }));
 };

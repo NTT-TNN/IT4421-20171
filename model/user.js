@@ -1,12 +1,8 @@
 var mysql = require('mysql');
 var moment = require('moment');
 var md5 = require('md5');
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "thao123@",
-  database: "test_it4421"
-});
+var config = require('./config')
+var connection = mysql.createConnection(config.config);
 
 var updateAvatar = function(param1, param2, callback) {
   updateAvatarCommand = "UPDATE user SET urlavatar = '" + escape(param1) + "' WHERE iduser=" + param2 + ";";

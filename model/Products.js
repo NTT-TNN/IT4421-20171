@@ -1,10 +1,15 @@
 var mysql = require('mysql');
+<<<<<<< HEAD
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "thao123@",
     database: "test_it4421"
 });
+=======
+var config = require('./config')
+var connection = mysql.createConnection(config.config);
+>>>>>>> master
 var getProducts = function (param1, param2, callback) {
     connection.query('SELECT * FROM products', function (error, result) {
         // console.log(result)
