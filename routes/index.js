@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
   }
 
   res.render('index',{
-    message:req.flash('loginMessage'),
+    message:"req.flash('loginMessage')",
     type:null,
     id:null,
     username:null,
