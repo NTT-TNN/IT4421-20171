@@ -112,8 +112,7 @@ function addDoUong(i){
     if(cartObj[0].tableID != null){
       if(document.getElementById(products[i].ProductID).value != ""){
         if(flagEdit==false){
-          alert(typeof(document.getElementById(products[i].ProductID).value))
-          if(document.getElementById(products[i].ProductID).value > 0){
+          if(document.getElementById(products[i].ProductID).value > 0 && document.getElementById(products[i].ProductID).value.indexOf('.')==-1){
             var ProductID= products[i].ProductID;
             var ProductName= products[i].ProductName;
             var ProductPrice=products[i].Price;
