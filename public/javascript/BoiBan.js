@@ -99,7 +99,7 @@ toastr.options = {
 }
 
 html="";
-var socket = io("https://22365f4b.ngrok.io");
+var socket = io("https://ccbd6e7f.ngrok.io");
 socket.on('connect', function() {
   console.log('hello');
   socket.emit('name', {name: 'order'});
