@@ -1,11 +1,8 @@
 var mysql = require('mysql');
 var moment = require('moment');
-var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "akonakon",
-  database: "test_it4421"
-});
+var config = require('./config')
+var connection = mysql.createConnection(config.config);
+
 var insertDonHang = function(order, callback) {
   var datetime = moment(new Date()).format("YYYY-MM-DD");
   console.log(datetime);

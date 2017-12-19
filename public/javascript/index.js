@@ -1,9 +1,31 @@
 $(document).ready(function () {
+    
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-left",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "3000",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
+    $("#login_button").click(function() {
+        if($("#signin-password").val() == "" || $("#signin-email").val() == "" ){
+            toastr.error('Điền đầy đủ các trường như email,password','Error!',{timeOut: 2000});
+        }else{
+          $("#login").click();
+        }
+      });
 
-    //------------------------------------//
-    //Navbar//
-    //------------------------------------//
     var menu = $('.navbar');
     $(window).bind('scroll', function (e) {
         if ($(window).scrollTop() > 140) {
@@ -18,18 +40,13 @@ $(document).ready(function () {
     });
 
 
-    //------------------------------------//
-    //Scroll To//
-    //------------------------------------//
     $(".scroll").click(function (event) {
         event.preventDefault();
         $('html,body').animate({scrollTop: $(this.hash).offset().top}, 800);
 
     });
 
-    //------------------------------------//
-    //Wow Animation//
-    //------------------------------------//
+
     wow = new WOW(
         {
             boxClass: 'wow',      // animated element css class (default is wow)
@@ -39,17 +56,6 @@ $(document).ready(function () {
         }
     );
     wow.init();
-
-
-
-    /***************MODAL*******************/
-    // $('.btn-signin').on('click', function (e) {
-    //     e.preventDefault();
-    //     // $('#loginModal').modal('show').find('.modal-body').load($(this).attr('href'));
-    //     var url = $(this).attr('href');
-    //     $('.modal-body').html('<iframe width="100%" height="100%" frameborder="0" scrolling="no" allowtransparency="true" src="' + url + '"></iframe>');
-    //     console.log(234567);
-    // });
 
 
     var formModal = $('.cd-user-modal'),
@@ -99,8 +105,7 @@ $(document).ready(function () {
 
         ( 'password' == passwordField.attr('type') ) ? passwordField.attr('type', 'text') : passwordField.attr('type', 'password');
         ( 'Hide' == togglePass.text() ) ? togglePass.text('Show') : togglePass.text('Hide');
-        //focus and move cursor to the end of input field
-        // passwordField.putCursorAtEnd();
+
     });
 
     //show forgot-password form
@@ -151,3 +156,5 @@ $(document).ready(function () {
         formSignup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
     });
 });
+
+

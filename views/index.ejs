@@ -26,18 +26,11 @@
     <link rel="stylesheet" href="../css/custom_index.css">
 
     <script src="../js/modernizr-2.7.1.js"></script>
-
+    
 </head>
 
 <body>
-  <script type="text/javascript">
-     user_name="<%= username %>";
-     type="<%= type %>";
-     id="<%= id %>";
-    console.log("name",user_name);
-    console.log("type",type);
-    console.log("id",id);
-  </script>
+  
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -102,16 +95,11 @@
     <div class="scroll"></div>
 </div>
 
-
 <!-- Modal -->
-<div class="cd-user-modal"> <!-- this is the entire modal form, including the background -->
-    <div class="cd-user-modal-container"> <!-- this is the container wrapper -->
-        <!-- <ul class="cd-switcher">
-            <li><a href="#0">Sign in</a></li>
-            <li><a href="#0">New account</a></li>
-        </ul> -->
+<div class="cd-user-modal"> 
+    <div class="cd-user-modal-container"> 
 
-        <div id="cd-login"> <!-- log in form -->
+        <div id="cd-login">
             <form class="cd-form" action="/users/login" method="post">
                 <p class="fieldset">
                     <label class="image-replace cd-email" for="signin-email">E-mail</label>
@@ -128,16 +116,13 @@
 
 
                 <p class="fieldset">
-                    <button class="full-width" type="submit" value="Login"> Login </button>
+                    <button  type="button" class="full-width btn btn-info" style="position:inherit;height:50px" id="login_button" onclick="">Login</button>
+                        
+                    <button class="full-width" style="position:inherit;display:none" type="submit" value="Login" id="login"></button>
                 </p>
-                <!-- <p class="fieldset" style="backgroudcolor:#1DA1F2">
-                    <a class="btn btn-block btn-social btn-facebook" href="/users/auth/twitter" >
-                        <span class="fa fa-twitter"></span> Sign in with Twitter
-                    </a>
-                </p> -->
             </form>
 
-        </div> <!-- cd-login -->
+        </div> 
 
 
 
@@ -150,6 +135,36 @@
 <script src="../js/wow.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script src="../javascript/index.js"></script>
-
+<link href="../css/toastr.min.css" rel="stylesheet"/>
+<script src="../js/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = {
+          "closeButton": false,
+          "debug": false,
+          "newestOnTop": false,
+          "progressBar": false,
+          "positionClass": "toast-top-left",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "3000",
+          "hideDuration": "1000",
+          "timeOut": "5000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "fadeIn",
+          "hideMethod": "fadeOut"
+      }
+       message="<%= message %>";
+       type="<%= type %>";
+       id="<%= id %>";
+       if(message){
+            toastr.error("Sai thông tin đăng nhập",'Error!',{timeOut: 2000});
+       }
+       
+      console.log("name",message);
+      console.log("type",type);
+      console.log("id",id);
+    </script>
 </body>
 </html>
