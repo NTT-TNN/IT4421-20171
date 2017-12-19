@@ -244,7 +244,7 @@ function editOrder(){
     $("#OKedit").click(function(){
       var flagNumber = 0;
       y.each(function(i){
-        if(this.value <= 0){
+        if(this.value <= 0 || (this.value.indexOf('.')!=-1)){
           flagNumber++;
         };
       });
