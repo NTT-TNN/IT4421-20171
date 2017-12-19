@@ -8,9 +8,8 @@ router.get('/', function(req, res, next) {
   if(req.user!=undefined){
     console.log(req.user);
   }
-  console.log(req.flash('loginMessage'))
+
   res.render('index',{
-    
     message:req.flash('loginMessage'),
     type:null,
     id:null,
